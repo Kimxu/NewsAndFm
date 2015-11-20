@@ -1,7 +1,8 @@
 package kimxu.newsandfm;
 
 import org.litepal.LitePalApplication;
-import org.litepal.tablemanager.Connector;
+
+import kimxu.newsandfm.utils.DbUtils;
 
 /**
  * Application基类
@@ -12,8 +13,7 @@ public class KBaseApplication extends LitePalApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        //数据库
-        Connector.getDatabase();
-        //LitePalApplication.initialize(this);
+        DbUtils.initDateBase();
+    //LitePalApplication.initialize(this);
     }
 }
