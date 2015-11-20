@@ -1,17 +1,15 @@
 package kimxu.newsandfm.utils;
 
-import android.database.sqlite.SQLiteDatabase;
-
 import org.litepal.tablemanager.Connector;
 
 /**
- * 数据库类
- * Created by xuzhiguo on 15/11/19.
+ * 数据库管理类
+ * Created by xuzhiguo on 15/11/20.
  */
 public class DbUtils {
 
-    private DbUtils(){
-        SQLiteDatabase db = Connector.getDatabase();
+    public static void initDateBase(){
+        //数据库
+        Connector.getDatabase();
     }
-
 }
