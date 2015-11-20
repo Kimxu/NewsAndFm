@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    app:title=" ">
+
+    <ImageView
+        android:id="@+id/nf_toolbar_center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/nf_account_defult" />
+
+    <FrameLayout
+        android:id="@+id/nf_toolbar_fl"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/nf_toolbar_fm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/nav_1"
+                android:textColor="@color/nf_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/nf_toolbar_news"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/nav_2"
+                android:textColor="@color/nf_white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/nf_toolbar_cursor"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:scaleType="matrix"
+            android:layout_gravity="bottom"
+            android:background="@null"
+            android:src="@drawable/nf_cursor" />
+    </FrameLayout>
+</android.support.v7.widget.Toolbar>

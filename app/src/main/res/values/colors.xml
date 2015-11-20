@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="nf_white">#fff</color>
+    <color name="nf_gray">#CCCCCC</color>
+
+    <color name="nf_toolbar_selected">@color/nf_white</color>
+    <color name="nf_toolbar_unselected">@color/nf_gray</color>
+</resources>

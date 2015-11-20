@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/nf_toolbar"
+        layout="@layout/app_main_toolbar" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/nf_main_pager"
+        android:layout_below="@+id/nf_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>
