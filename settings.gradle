@@ -1,1 +1,1 @@
-include ':app', ':api', ':core', ':utils', ':dao', ':adapter', ':test', ':widget'
+include ':app', ':api', ':core', ':utils', ':dao', ':adapter', ':test'

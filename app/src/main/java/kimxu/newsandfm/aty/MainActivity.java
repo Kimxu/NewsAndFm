@@ -1,6 +1,8 @@
 package kimxu.newsandfm.aty;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
@@ -10,7 +12,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -23,11 +24,11 @@ import kimxu.core.net.model.CQueuedRequest;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.frag.FMFragment;
 import kimxu.newsandfm.frag.NewsFragment;
+import kimxu.utils.L;
 import kimxu.utils.ScreenUtils;
 import kimxu.utils.T;
 
 public class MainActivity extends KBaseActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
     private ViewPager mPager;
     private FrameLayout mFrameLayout;
     private float mFrameWidth;
@@ -52,7 +53,8 @@ public class MainActivity extends KBaseActivity {
         initView();
         initNav();
         initFrag();
-        mHttpService.sendWeiNews("10",mHttpHandler,1);
+        mHttpService.sendWeiNews("10", mHttpHandler, 1);
+        getMetaData();
     }
 
     @Override
@@ -64,16 +66,16 @@ public class MainActivity extends KBaseActivity {
     protected void handleSuccessMessage(Message msg) {
         CQueuedRequest qr = new CQueuedRequest(msg.obj);
 
-        switch (qr.requestId){
+        switch (qr.requestId) {
             case 1:
                 T.showToast(getApplicationContext(), "接收成功");
-               Log.i("tag",(String)qr.result);
+                L.i((String) qr.result);
                 break;
         }
     }
 
     private void initFrag() {
-        mWindowWidth= ScreenUtils.getScreenWidth(mActivity);
+        mWindowWidth = ScreenUtils.getScreenWidth(mActivity);
         mFrags = new ArrayList<>();
         FMFragment fmFragment = FMFragment.newInstance("", "");
         NewsFragment newsFragment = NewsFragment.newInstance("", "");
@@ -97,11 +99,10 @@ public class MainActivity extends KBaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus&&mFrameWidth==0){
+        if (hasFocus && mFrameWidth == 0) {
             mFrameWidth = mFrameLayout.getWidth();
             mOffset = (mFrameWidth / NAVS_LENGTH - mCursorWidth) / 2;
             updateCurrentTab(startPage, true);
-            Log.e(TAG, mFrameWidth + "");
         }
     }
 
@@ -117,6 +118,7 @@ public class MainActivity extends KBaseActivity {
     private boolean handleIntent() {
         Intent intent = getIntent();
         if (intent != null) {
+
             startPage = intent.getIntExtra("startPage", 0);
             return true;
         } else {
@@ -164,19 +166,18 @@ public class MainActivity extends KBaseActivity {
         @Override
         public void onPageSelected(int currentTab) {
             updateCurrentTab(currentTab, false);
-            Log.i("yyh", currentTab + "");
+
         }
     }
 
     private void updateCursorMatrix(int position, int offset) {
-        Log.e(TAG,offset+"offset");
-        Log.e(TAG,(mWindowWidth-mFrameWidth)/2+"ooo");
+
         Matrix matrix = new Matrix();
         //这里滑动的是根据屏幕的宽度。需要进行缩放
-        if (mFrameWidth!=0)
-        offset =(int)((mFrameWidth/mWindowWidth)*offset);
+        if (mFrameWidth != 0)
+            offset = (int) ((mFrameWidth / mWindowWidth) * offset);
         matrix.postTranslate(mOffset + mFrameWidth / NAVS_LENGTH * position
-                + offset/ NAVS_LENGTH , 0);
+                + offset / NAVS_LENGTH, 0);
         mCursor.setImageMatrix(matrix);
     }
 
@@ -196,5 +197,17 @@ public class MainActivity extends KBaseActivity {
                     * index, 0);
             mCursor.setImageMatrix(matrix);
         }
+    }
+
+    private void getMetaData(){
+        try {
+            ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
+            String version = info.metaData.getString("version", "debug");
+            T.showToast(mActivity, "当前版本："+version);
+            //new Info().testDb(mActivity);
+        }catch(Exception e){
+            finish();
+        }
+
     }
 }

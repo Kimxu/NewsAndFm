@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kimxu.newsandfm.frag.NewsFragment">
-
     <ListView
-        android:id="@+id/nf_frag_listview"
+        android:id="@+id/nf_newsFrag_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
+    <kimxu.newsandfm.widget.HintView
+        android:visibility="gone"
+        android:background="@color/nf_white"
+        android:id="@+id/nf_newsFrag_hintView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>

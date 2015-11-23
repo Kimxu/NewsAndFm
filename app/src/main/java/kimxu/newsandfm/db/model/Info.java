@@ -1,17 +1,20 @@
 package kimxu.newsandfm.db.model;
 
+import android.app.Activity;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
 import kimxu.utils.L;
+import kimxu.utils.T;
 
 /**
  * db操作方法
  * Created by xuzhiguo on 15/11/19.
  */
 public class Info {
-    private void testDb() {
+    public void testDb(Activity mActivity) {
         Album album = new Album();
         album.setName("album");
         album.setPrice(10.99f);
@@ -30,10 +33,12 @@ public class Info {
         List<Song> allSongs = DataSupport.findAll(Song.class);
         for (Song songs: allSongs) {
             L.d(songs.getName() + "");
+            T.showToast(mActivity,songs.getName() + "");
         }
         List<Album> allAlbums = DataSupport.findAll(Album.class);
         for (Album albums: allAlbums) {
             L.d(albums.getName() + "");
+            T.showToast(mActivity, albums.getName() + "");
         }
     }
 }

@@ -16,7 +16,6 @@
             <option value="$PROJECT_DIR$/dao" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/utils" />
-            <option value="$PROJECT_DIR$/widget" />
           </set>
         </option>
       </GradleProjectSettings>

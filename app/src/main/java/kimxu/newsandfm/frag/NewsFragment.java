@@ -19,6 +19,7 @@ import kimxu.newsandfm.adapter.factory.LoadMoreListItemFactory;
 import kimxu.newsandfm.adapter.factory.UserListItemFactory;
 import kimxu.newsandfm.model.Game;
 import kimxu.newsandfm.model.User;
+import kimxu.newsandfm.widget.HintView;
 
 /**
  * 新闻
@@ -33,6 +34,8 @@ public class NewsFragment extends KBaseFragment implements AbstractLoadMoreListI
     private AssemblyAdapter mAdapter;
     private int size = 20;
     private int nextStart;
+
+    private HintView mHintView;
 
     @Override
     protected void handleErrorMessage(Message msg) {
@@ -77,7 +80,15 @@ public class NewsFragment extends KBaseFragment implements AbstractLoadMoreListI
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mListView = (ListView) view.findViewById(R.id.nf_frag_listview);
+        mListView = (ListView) view.findViewById(R.id.nf_newsFrag_listView);
+        mHintView= (HintView) view.findViewById(R.id.nf_newsFrag_hintView);
+        //mHintView.empty("数据加载错误哦~").show();
+//        mHintView.netError(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        }).message("网络异常了啊").show();
         loadData();
 
     }
