@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -14,21 +13,23 @@ import kimxu.core.net.HttpConfig;
 import kimxu.core.net.HttpHandler;
 import kimxu.core.net.HttpService;
 import kimxu.core.net.IHandleMessage;
+import kimxu.mvp.databind.DataBindActivity;
+import kimxu.mvp.view.IDelegate;
 import kimxu.newsandfm.R;
-import kimxu.utils.T;
+import kimxu.utils.Ts;
 
-public abstract class KBaseActivity extends AppCompatActivity implements IHandleMessage {
+public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivity<T> implements IHandleMessage {
     protected KBaseActivity mActivity;
     protected HttpService mHttpService;
     protected HttpHandler mHttpHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mActivity = this;
         mHttpService = HttpService.getInstance(this);
         mHttpHandler = new HttpHandler(this);
         setStatusBar();
+        super.onCreate(savedInstanceState);
     }
 
     private void setStatusBar() {
@@ -64,7 +65,7 @@ public abstract class KBaseActivity extends AppCompatActivity implements IHandle
                 handleSuccessMessage(msg);
                 break;
             default:
-                T.showToast(getApplicationContext(), "网络错误");
+                Ts.showToast(getApplicationContext(), "网络错误");
                 break;
         }
     }

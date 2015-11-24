@@ -3,19 +3,20 @@ package kimxu.newsandfm.frag;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 
 import kimxu.core.net.HttpConfig;
 import kimxu.core.net.HttpHandler;
 import kimxu.core.net.HttpService;
 import kimxu.core.net.IHandleMessage;
-import kimxu.utils.T;
+import kimxu.mvp.databind.DataBindFragment;
+import kimxu.mvp.view.IDelegate;
+import kimxu.utils.Ts;
 
 /**
  * Fragment基类
  * Created by xuzhiguo on 15/11/18.
  */
-public abstract class KBaseFragment extends Fragment implements IHandleMessage{
+public abstract class KBaseFragment<T extends IDelegate> extends DataBindFragment<T> implements IHandleMessage{
 
     protected Activity mActivity;
     protected KBaseFragment mFragment;
@@ -35,18 +36,18 @@ public abstract class KBaseFragment extends Fragment implements IHandleMessage{
                 handleSuccessMessage(msg);
                 break;
             default:
-                T.showToast(getActivity(), "网络错误");
+                Ts.showToast(getActivity(), "网络错误");
                 break;
         }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mActivity = getActivity();
         mFragment = this;
         mHttpService = HttpService.getInstance(mActivity);
         mHttpHandler = new HttpHandler(this);
+        super.onCreate(savedInstanceState);
     }
 
     protected abstract void handleErrorMessage(Message msg);

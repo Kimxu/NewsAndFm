@@ -13,8 +13,8 @@ import android.widget.Toast;
  * Toast工具类
  * Created by xuzhiguo on 15/11/18.
  */
-public class T {
-    private T() {
+public class Ts {
+    private Ts() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }

@@ -2,11 +2,8 @@ package kimxu.newsandfm.frag;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import kimxu.newsandfm.R;
+import kimxu.mvp.databind.DataBinder;
 
 /**
  * Fm电台
@@ -49,9 +46,19 @@ public class FMFragment extends KBaseFragment {
     }
 
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fm, container, false);
+    protected void bindEvenListener() {
+
+    }
+
+    @Override
+    protected Class getDelegateClass() {
+        return FMFDelegate.class;
+    }
+
+    @Override
+    public DataBinder getDataBinder() {
+        return null;
     }
 }

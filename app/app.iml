@@ -120,5 +120,6 @@
     <orderEntry type="module" module-name="adapter" exported="" />
     <orderEntry type="module" module-name="dao" exported="" />
     <orderEntry type="module" module-name="utils" exported="" />
+    <orderEntry type="module" module-name="mvp" exported="" />
   </component>
 </module>

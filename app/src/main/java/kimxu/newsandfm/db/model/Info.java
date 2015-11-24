@@ -7,7 +7,7 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 import kimxu.utils.L;
-import kimxu.utils.T;
+import kimxu.utils.Ts;
 
 /**
  * db操作方法
@@ -33,12 +33,12 @@ public class Info {
         List<Song> allSongs = DataSupport.findAll(Song.class);
         for (Song songs: allSongs) {
             L.d(songs.getName() + "");
-            T.showToast(mActivity,songs.getName() + "");
+            Ts.showToast(mActivity, songs.getName() + "");
         }
         List<Album> allAlbums = DataSupport.findAll(Album.class);
         for (Album albums: allAlbums) {
             L.d(albums.getName() + "");
-            T.showToast(mActivity, albums.getName() + "");
+            Ts.showToast(mActivity, albums.getName() + "");
         }
     }
 }

@@ -3,39 +3,32 @@ package kimxu.newsandfm.frag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import kimxu.adapter.AbstractLoadMoreListItemFactory;
 import kimxu.adapter.AssemblyAdapter;
+import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.adapter.factory.GameListItemFactory;
 import kimxu.newsandfm.adapter.factory.LoadMoreListItemFactory;
 import kimxu.newsandfm.adapter.factory.UserListItemFactory;
 import kimxu.newsandfm.model.Game;
 import kimxu.newsandfm.model.User;
-import kimxu.newsandfm.widget.HintView;
 
 /**
  * 新闻
  */
-public class NewsFragment extends KBaseFragment implements AbstractLoadMoreListItemFactory.EventListener {
+public class NewsFragment extends KBaseFragment<NewsFDelegate> implements AbstractLoadMoreListItemFactory.EventListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private ListView mListView;
     private AssemblyAdapter mAdapter;
     private int size = 20;
     private int nextStart;
-
-    private HintView mHintView;
 
     @Override
     protected void handleErrorMessage(Message msg) {
@@ -54,9 +47,7 @@ public class NewsFragment extends KBaseFragment implements AbstractLoadMoreListI
         fragment.setArguments(args);
         return fragment;
     }
-
     public NewsFragment() {
-
     }
 
     @Override
@@ -69,28 +60,19 @@ public class NewsFragment extends KBaseFragment implements AbstractLoadMoreListI
     }
 
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_news, container, false);
+    protected void bindEvenListener() {
+        loadData();
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mListView = (ListView) view.findViewById(R.id.nf_newsFrag_listView);
-        mHintView= (HintView) view.findViewById(R.id.nf_newsFrag_hintView);
-        //mHintView.empty("数据加载错误哦~").show();
-//        mHintView.netError(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        }).message("网络异常了啊").show();
-        loadData();
+    protected Class<NewsFDelegate> getDelegateClass() {
+        return NewsFDelegate.class;
+    }
 
+    @Override
+    public DataBinder getDataBinder() {
+        return null;
     }
 
     private void loadData(){
@@ -147,7 +129,7 @@ public class NewsFragment extends KBaseFragment implements AbstractLoadMoreListI
                     if(nextStart < 100){
                         mAdapter.enableLoadMore(new LoadMoreListItemFactory(NewsFragment.this));
                     }
-                    mListView.setAdapter(mAdapter);
+                    viewDelegate.getmListView().setAdapter(mAdapter);
                 }else{
                     mAdapter.loadMoreFinished();
                     if(nextStart == 100){

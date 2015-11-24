@@ -92,4 +92,5 @@ dependencies {
     compile project(':utils')
     compile project(':dao')
     compile project(':adapter')
+    compile project(':mvp')
 }
