@@ -19,6 +19,7 @@ public class CQueuedRequest {
         responseHttpCode = queuedRequest.responseHttpCode;
         requestType = queuedRequest.requestType;
         url = queuedRequest.url;
+        requestId=queuedRequest.requestId;
         result = queuedRequest.result;
         nameValuePairs = queuedRequest.nameValuePairs;
     }

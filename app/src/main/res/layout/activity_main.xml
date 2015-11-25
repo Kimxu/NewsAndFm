@@ -6,12 +6,12 @@
     android:fitsSystemWindows="true">
 
     <include
-        android:id="@+id/nf_toolbar"
+        android:id="@+id/tBar_atyMain"
         layout="@layout/app_main_toolbar" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/nf_main_pager"
-        android:layout_below="@+id/nf_toolbar"
+        android:id="@+id/vPager_atyMain_content"
+        android:layout_below="@+id/tBar_atyMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

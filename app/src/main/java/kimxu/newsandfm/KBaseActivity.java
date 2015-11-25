@@ -1,4 +1,4 @@
-package kimxu.newsandfm.aty;
+package kimxu.newsandfm;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -15,7 +15,6 @@ import kimxu.core.net.HttpService;
 import kimxu.core.net.IHandleMessage;
 import kimxu.mvp.databind.DataBindActivity;
 import kimxu.mvp.view.IDelegate;
-import kimxu.newsandfm.R;
 import kimxu.utils.Ts;
 
 public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivity<T> implements IHandleMessage {

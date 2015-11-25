@@ -1,8 +1,8 @@
-package kimxu.newsandfm.frag;
+package kimxu.newsandfm;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 
 import kimxu.core.net.HttpConfig;
 import kimxu.core.net.HttpHandler;
@@ -18,7 +18,7 @@ import kimxu.utils.Ts;
  */
 public abstract class KBaseFragment<T extends IDelegate> extends DataBindFragment<T> implements IHandleMessage{
 
-    protected Activity mActivity;
+    protected FragmentActivity mActivity;
     protected KBaseFragment mFragment;
 
     protected HttpService mHttpService;

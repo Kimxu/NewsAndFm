@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kimxu.newsandfm.frag.FMFragment">
+    android:background="@color/nf_gray"
+    tools:context="kimxu.newsandfm.frag.news.NewsChildFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lView_fragNewsChild_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello im David" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

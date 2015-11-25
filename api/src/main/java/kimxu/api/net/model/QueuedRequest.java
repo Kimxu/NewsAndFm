@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import org.apache.http.NameValuePair;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class QueuedRequest {
@@ -20,5 +21,6 @@ public class QueuedRequest {
     public List<NameValuePair> nameValuePairs;
     public Handler handler;
     public Object result;
+    public HashMap<String,String> httpHeader;
     public int retry = MAX_RETRY_TIMES;
 }

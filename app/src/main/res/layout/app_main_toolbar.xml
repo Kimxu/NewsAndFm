@@ -8,13 +8,13 @@
     app:title=" ">
 
     <ImageView
-        android:id="@+id/nf_toolbar_center"
+        android:id="@+id/iView_appMainToolBar_center"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/nf_account_defult" />
 
     <FrameLayout
-        android:id="@+id/nf_toolbar_fl"
+        android:id="@+id/fLyout_appMainToolBar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="40dp"
@@ -27,7 +27,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/nf_toolbar_fm"
+                android:id="@+id/tView_appMainToolBar_fm"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -37,7 +37,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/nf_toolbar_news"
+                android:id="@+id/tView_appMainToolBar_News"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/nf_toolbar_cursor"
+            android:id="@+id/iVew_appMainToolBar_cursor"
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:scaleType="matrix"

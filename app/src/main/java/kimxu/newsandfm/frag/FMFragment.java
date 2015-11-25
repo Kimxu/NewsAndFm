@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Message;
 
 import kimxu.mvp.databind.DataBinder;
+import kimxu.newsandfm.KBaseFragment;
 
 /**
  * Fm电台

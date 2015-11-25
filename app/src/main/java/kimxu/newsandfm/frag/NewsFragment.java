@@ -1,34 +1,25 @@
 package kimxu.newsandfm.frag;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import kimxu.adapter.AbstractLoadMoreListItemFactory;
-import kimxu.adapter.AssemblyAdapter;
 import kimxu.mvp.databind.DataBinder;
-import kimxu.newsandfm.R;
-import kimxu.newsandfm.adapter.factory.GameListItemFactory;
-import kimxu.newsandfm.adapter.factory.LoadMoreListItemFactory;
-import kimxu.newsandfm.adapter.factory.UserListItemFactory;
-import kimxu.newsandfm.model.Game;
-import kimxu.newsandfm.model.User;
+import kimxu.newsandfm.KBaseFragment;
 
 /**
  * 新闻
  */
-public class NewsFragment extends KBaseFragment<NewsFDelegate> implements AbstractLoadMoreListItemFactory.EventListener {
+public class NewsFragment extends KBaseFragment<NewsFDelegate> {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private AssemblyAdapter mAdapter;
-    private int size = 20;
-    private int nextStart;
 
     @Override
     protected void handleErrorMessage(Message msg) {
@@ -47,22 +38,15 @@ public class NewsFragment extends KBaseFragment<NewsFDelegate> implements Abstra
         fragment.setArguments(args);
         return fragment;
     }
-    public NewsFragment() {
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void bindEvenListener() {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
-
-
-    @Override
-    protected void bindEvenListener() {
-        loadData();
+        viewDelegate.setAdapter(new NfNewsFragAdapter(mActivity.getSupportFragmentManager()));
+        viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
     }
 
     @Override
@@ -75,75 +59,45 @@ public class NewsFragment extends KBaseFragment<NewsFDelegate> implements Abstra
         return null;
     }
 
-    private void loadData(){
-        new AsyncTask<String, String, List<Object>>(){
 
-            @Override
-            protected List<Object> doInBackground(String... params) {
-                int index = 0;
-                List<Object> dataList = new ArrayList<Object>(size);
-                boolean userStatus = true;
-                boolean gameStatus = true;
-                while (index < size){
-                    if(index % 2 == 0){
-                        User user = new User();
-                        user.headResId = R.mipmap.ic_launcher;
-                        user.name = "王大卫"+(index+nextStart+1);
-                        user.sex = userStatus?"男":"女";
-                        user.age = ""+(index+nextStart+1);
-                        user.job = "实施工程师";
-                        user.monthly = ""+9000+index+nextStart+1;
-                        dataList.add(user);
-                        userStatus = !userStatus;
-                    }else{
-                        Game game = new Game();
-                        game.iconResId = R.mipmap.ic_launcher;
-                        game.name = "英雄联盟"+(index+nextStart+1);
-                        game.like = gameStatus?"不喜欢":"喜欢";
-                        dataList.add(game);
-                        gameStatus = !gameStatus;
-                    }
-                    index++;
-                }
-                if(nextStart != 0){
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return dataList;
-            }
 
-            @Override
-            protected void onPostExecute(List<Object> objects) {
-                if(getActivity() == null){
-                    return;
-                }
+    class NfOnPageChangeListener implements ViewPager.OnPageChangeListener {
+        @Override
+        public void onPageScrollStateChanged(int state) {
 
-                nextStart += size;
-                if(mAdapter == null){
-                    mAdapter = new AssemblyAdapter(objects);
-                    mAdapter.addItemFactory(new UserListItemFactory(getActivity().getBaseContext()));
-                    mAdapter.addItemFactory(new GameListItemFactory(getActivity().getBaseContext()));
-                    if(nextStart < 100){
-                        mAdapter.enableLoadMore(new LoadMoreListItemFactory(NewsFragment.this));
-                    }
-                    viewDelegate.getmListView().setAdapter(mAdapter);
-                }else{
-                    mAdapter.loadMoreFinished();
-                    if(nextStart == 100){
-                        mAdapter.disableLoadMore();
-                    }
-                    mAdapter.append(objects);
-                }
-            }
-        }.execute("");
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int offset) {
+
+        }
+
+        @Override
+        public void onPageSelected(int currentTab) {
+            viewDelegate.updateBarStatus(mActivity,currentTab);
+
+        }
     }
+    class NfNewsFragAdapter extends FragmentStatePagerAdapter {
 
-    @Override
-    public void onLoadMore(AbstractLoadMoreListItemFactory.AdapterCallback adapterCallback) {
-        loadData();
+        public NfNewsFragAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int arg0) {
+            return viewDelegate.getFrags().get(arg0);
+        }
+
+        @Override
+        public int getCount() {
+            return viewDelegate.getFrags().size();
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+
+        }
     }
 }
 

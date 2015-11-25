@@ -10,7 +10,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -42,7 +42,7 @@ android {
             // 显示Log
             buildConfigField "boolean", "LOG_DEBUG", "true"
 
-            manifestPlaceholders = [version:"beta version"]
+            manifestPlaceholders = [version: "beta version"]
             versionNameSuffix "-debug"
             //是否进行混淆
             minifyEnabled false
@@ -54,7 +54,7 @@ android {
         release {
             // 不显示Log
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            manifestPlaceholders = [version:"final version"]
+            manifestPlaceholders = [version: "final version"]
             //是否进行混淆
             minifyEnabled true
             zipAlignEnabled true
@@ -85,12 +85,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:appcompat-v7:22.1.1'
     compile project(':core')
     compile project(':utils')
     compile project(':dao')
     compile project(':adapter')
     compile project(':mvp')
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:support-v4:22.2.1'
+
 }
