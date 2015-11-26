@@ -68,7 +68,8 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
-                        def fileName = "v${defaultConfig.versionName}_${variant.productFlavors[0].name}_${releaseTime()}.apk"
+                        //def fileName = "v${defaultConfig.versionName}_${variant.productFlavors[0].name}_${releaseTime()}.apk"
+                        def fileName ="v1.0_defaults_2015-11-25.apk"
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
                 }

@@ -1,6 +1,7 @@
 package kimxu.mvp.view;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 /**
  * 视图层代理的基类
+ * 默认Toolbar带有返回键，重写setSupportActionBar就可以取消
  * Created by xuzhiguo on 15/11/23.
  */
 public abstract class AppDelegate implements IDelegate{
@@ -24,6 +26,12 @@ public abstract class AppDelegate implements IDelegate{
         int rootLayoutId = getRootLayoutId();
         rootView = inflater.inflate(rootLayoutId, container, false);
 
+    }
+
+    @Override
+    public void setSupportActionBar(ActionBar actionBar) {
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

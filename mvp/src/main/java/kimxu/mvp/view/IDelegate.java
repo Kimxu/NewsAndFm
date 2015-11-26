@@ -1,6 +1,7 @@
 package kimxu.mvp.view;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,4 +22,6 @@ public interface IDelegate {
     View getRootView();
     /** 初始化视图*/
     void initWidget();
+    /** 设置toolbar*/
+    void setSupportActionBar(ActionBar actionBar);
 }

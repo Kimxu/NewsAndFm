@@ -30,6 +30,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //WebActivity.launch(this);
         handleIntent();
 
     }
@@ -76,7 +77,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
+        if (hasFocus&&mFrameWidth==0) {
             mFrameWidth = viewDelegate.getmFrameLayout().getWidth();
             mOffset = (mFrameWidth / NAVS_LENGTH - mCursorWidth) / 2;
             viewDelegate.updateCurrentTab(mActivity,startPage,true,mOffset, mFrameWidth);

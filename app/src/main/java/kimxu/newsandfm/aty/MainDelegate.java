@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Matrix;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -73,6 +74,10 @@ public class MainDelegate extends AppDelegate {
         mPager.setCurrentItem(index);
     }
 
+    @Override
+    public void setSupportActionBar(ActionBar actionBar) {
+
+    }
 
     @Override
     public Toolbar getToolbar() {

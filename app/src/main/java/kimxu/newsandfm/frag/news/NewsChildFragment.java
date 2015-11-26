@@ -12,6 +12,7 @@ import kimxu.core.net.model.CQueuedRequest;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseFragment;
 import kimxu.newsandfm.adapter.factory.NewsListItemFactory;
+import kimxu.newsandfm.aty.WebActivity;
 import kimxu.newsandfm.model.News;
 import kimxu.utils.L;
 import kimxu.utils.Ts;
@@ -90,6 +91,6 @@ public class NewsChildFragment extends KBaseFragment<NewsChildDelegate> implemen
     }
     @Override
     public void onClick(int position, News.ResultEntity news) {
-
+        WebActivity.launch(mActivity,news.getUrl());
     }
 }
