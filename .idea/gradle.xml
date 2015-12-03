@@ -18,6 +18,18 @@
             <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/adapter" />
+            <option value="$PROJECT_DIR$/api" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/dao" />
+            <option value="$PROJECT_DIR$/test" />
+            <option value="$PROJECT_DIR$/utils" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
