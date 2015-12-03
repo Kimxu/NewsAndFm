@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
+import kimxu.api.net.model.IRequest;
 import kimxu.api.net.model.QueuedRequest;
 import kimxu.api.net.utils.NetworkUtil;
 
@@ -357,6 +358,12 @@ public class HttpManager implements INet{
         Log.i("get request_url is ", qr.url);
         qr.nameValuePairs = null;
         qr.handler = handler;
+        download(qr);
+    }
+
+    @Override
+    public void addApiRequest(IRequest request) {
+        QueuedRequest qr = (QueuedRequest)request;
         download(qr);
     }
 }

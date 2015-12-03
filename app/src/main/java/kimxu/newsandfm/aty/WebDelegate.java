@@ -1,6 +1,7 @@
 package kimxu.newsandfm.aty;
 
 import android.support.v7.widget.Toolbar;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -28,6 +29,11 @@ public class WebDelegate extends AppDelegate {
 
     public void loadURL(String url){
         //打开网页时不调用系统浏览器， 而是在本WebView中显示
+
+        webView.loadUrl(url);
+    }
+
+    private void setWebViewAllConfig(){
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -35,7 +41,12 @@ public class WebDelegate extends AppDelegate {
                 return true;
             }
         });
-        webView.loadUrl(url);
+        //设置 缓存模式
+        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        // 开启 DOM storage API 功能
+        webView.getSettings().setDomStorageEnabled(true);
+
+
     }
     public boolean canGoBack(){
         return webView.canGoBack();

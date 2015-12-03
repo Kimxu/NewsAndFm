@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ public class MainDelegate extends AppDelegate {
     private ImageView mCursor;
     private TextView mToolFm;
     private TextView mToolNews;
+    private ImageView mCenter;
+
 
     private ArrayList<Fragment> mFrags;
     private TextView[] mNavs;
@@ -48,6 +51,7 @@ public class MainDelegate extends AppDelegate {
         mFrameLayout = get(R.id.fLyout_appMainToolBar);
         mToolFm = get(R.id.tView_appMainToolBar_fm);
         mToolNews = get(R.id.tView_appMainToolBar_News);
+        mCenter =get(R.id.iView_appMainToolBar_center);
         initFrags();
     }
 
@@ -64,6 +68,10 @@ public class MainDelegate extends AppDelegate {
         mNavs = new TextView[NAVS_LENGTH];
         mNavs[TAB_ID_FM] = mToolFm;
         mNavs[TAB_ID_NEWS] = mToolNews;
+    }
+
+    public void setCenterLisenter(View.OnClickListener lisenter){
+        mCenter.setOnClickListener(lisenter);
     }
 
     public FrameLayout getmFrameLayout() {

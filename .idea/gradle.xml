@@ -16,7 +16,6 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/dao" />
             <option value="$PROJECT_DIR$/mvp" />
-            <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
@@ -29,7 +28,6 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/dao" />
             <option value="$PROJECT_DIR$/mvp" />
-            <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>

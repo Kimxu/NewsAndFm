@@ -8,9 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.ViewGroup;
 
-import kimxu.core.net.model.CQueuedRequest;
+import kimxu.core.net.model.NfRequest;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseActivity;
 import kimxu.newsandfm.R;
@@ -51,6 +52,13 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         viewDelegate.setCurrentItem(MainDelegate.TAB_ID_FM);
         viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
         NAVS_LENGTH =viewDelegate.getNavs().length;
+
+        viewDelegate.setCenterLisenter(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                throw new RuntimeException("GGG");
+            }
+        });
     }
 
     @Override
@@ -65,7 +73,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
 
     @Override
     protected void handleSuccessMessage(Message msg) {
-        CQueuedRequest qr = new CQueuedRequest(msg.obj);
+        NfRequest qr = new NfRequest(msg.obj) ;
         switch (qr.requestId) {
             case 1:
                 Ts.showToast(getApplicationContext(), "接收成功");

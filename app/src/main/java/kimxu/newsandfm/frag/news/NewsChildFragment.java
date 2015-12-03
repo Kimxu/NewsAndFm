@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import com.google.gson.Gson;
 
 import kimxu.adapter.AssemblyAdapter;
-import kimxu.core.net.model.CQueuedRequest;
+import kimxu.core.net.model.NfRequest;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseFragment;
 import kimxu.newsandfm.adapter.factory.NewsListItemFactory;
@@ -77,7 +77,7 @@ public class NewsChildFragment extends KBaseFragment<NewsChildDelegate> implemen
     @Override
     protected void handleSuccessMessage(Message msg) {
         Ts.showToast(mActivity, "接收成功");
-        CQueuedRequest qr = new CQueuedRequest(msg.obj);
+        NfRequest qr = new NfRequest(msg.obj) ;
         switch (qr.requestId) {
             case RESONPOSE_SUCCESS:
                 L.i((String) qr.result);

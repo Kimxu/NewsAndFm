@@ -7,6 +7,8 @@ import org.apache.http.NameValuePair;
 import java.util.HashMap;
 import java.util.List;
 
+import kimxu.api.net.model.IRequest;
+
 /**
  * 网络请求接口
  * Created by xuzhiguo on 15/11/18.
@@ -49,4 +51,8 @@ public interface INet {
      * @param requestId 识别码
      */
     void addApiGetRequest(String apiHost, Handler handler ,int requestId);
+
+
+
+    void addApiRequest(IRequest request);
 }

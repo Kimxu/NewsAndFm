@@ -146,8 +146,6 @@ public class HttpService {
         httpManager.addApiGetRequest(url,
                 handler,headers, requestId);
     }
-
-
     /**
      * 一点资讯的头部请求
      * @return

@@ -7,7 +7,7 @@ import org.apache.http.NameValuePair;
 import java.util.HashMap;
 import java.util.List;
 
-public class QueuedRequest {
+public class QueuedRequest implements IRequest{
 
     private static final int MAX_RETRY_TIMES = 5;
     public static final int requestTypeApi = 1;

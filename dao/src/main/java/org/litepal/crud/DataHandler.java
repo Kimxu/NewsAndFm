@@ -462,10 +462,7 @@ abstract class DataHandler extends LitePalBase {
 	 * @return Affect all lines or not.
 	 */
 	protected boolean isAffectAllLines(Object... conditions) {
-		if (conditions != null && conditions.length == 0) {
-			return true;
-		}
-		return false;
+		return conditions != null && conditions.length == 0;
 	}
 
 	/**
@@ -883,10 +880,7 @@ abstract class DataHandler extends LitePalBase {
 	 */
 	private boolean isPrimitiveBooleanType(Field field) {
 		Class<?> fieldType = field.getType();
-		if ("boolean".equals(fieldType.getName())) {
-			return true;
-		}
-		return false;
+		return "boolean".equals(fieldType.getName());
 	}
 
 	/**
