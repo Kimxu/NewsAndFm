@@ -29,7 +29,7 @@ public class NewsChildFragment extends KBaseFragment<NewsChildDelegate> implemen
     private static String FROM_PAGER="FromPager";
     private  int mPager;
 
-    AssemblyAdapter mAdapter;
+    private AssemblyAdapter mAdapter;
 
     public static NewsChildFragment newInstance(int fromPager) {
         NewsChildFragment fragment = new NewsChildFragment();

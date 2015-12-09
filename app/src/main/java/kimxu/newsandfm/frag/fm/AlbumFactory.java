@@ -1,6 +1,7 @@
 package kimxu.newsandfm.frag.fm;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import java.lang.reflect.Field;
 
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
-import kimxu.core.net.model.discoverRecommend.EditorRecommendAlbums;
+import kimxu.core.net.model.discoverRecommend.List__;
 import kimxu.newsandfm.R;
 
 /**
@@ -19,9 +20,15 @@ import kimxu.newsandfm.R;
  * Created by xuzhiguo on 15/12/8.
  */
 public class AlbumFactory extends AssemblyItemFactory<AlbumFactory.FMListItem>{
+
+
+    public AlbumFactory(FragmentActivity mActivity) {
+
+    }
+
     @Override
-    public Class<EditorRecommendAlbums> getBeanClass() {
-        return EditorRecommendAlbums.class;
+    public Class<List__> getBeanClass() {
+        return List__.class;
     }
 
     @Override
@@ -29,13 +36,13 @@ public class AlbumFactory extends AssemblyItemFactory<AlbumFactory.FMListItem>{
         return new FMListItem(parent,this);
     }
 
-    public class FMListItem extends AssemblyItem<EditorRecommendAlbums,AlbumFactory> {
-        private final int alblumSize =3;
-        private TextView  txtTitle;
-        private TextView  txtMore;
+    public class FMListItem extends AssemblyItem<List__,AlbumFactory> {
+        private TextView txtTitle;
+        private TextView txtMore;
+        private final int alblumSize=3;
         private ImageView[] albumIcons;//三张图片，在不同的RelativeLayout里面
-        private TextView [] albumNames;//三个专辑标题
-        private TextView [] trackNames;//三个曲目名称
+        private TextView[] albumNames;//三个专辑标题
+        private TextView[] trackNames;//三个曲目名称
         public FMListItem(ViewGroup parent, AlbumFactory fmListFactory) {
             super(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_album, parent, false),fmListFactory);
         }
@@ -61,13 +68,15 @@ public class AlbumFactory extends AssemblyItemFactory<AlbumFactory.FMListItem>{
                 albumIcons[i].setOnClickListener(view->{
 
                 });
-
             }
         }
         @Override
-        protected void onSetData(int position, EditorRecommendAlbums album) {
+        protected void onSetData(int position, List__ album) {
 
-            //txtTitle.setText(album.title);
+
+            String title = album.getTitle();
+            txtTitle.setText(title);
+            //处理 "更多"
         }
         /**
          * 根据名称获取ID(反射)

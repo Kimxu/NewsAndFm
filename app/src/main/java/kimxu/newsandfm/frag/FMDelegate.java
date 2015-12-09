@@ -11,52 +11,44 @@ import java.util.List;
 
 import kimxu.mvp.view.AppDelegate;
 import kimxu.newsandfm.R;
-import kimxu.newsandfm.frag.news.NewsChildFragment;
+import kimxu.newsandfm.frag.fm.FMIndexFragment;
 
 /**
- * 新闻Fragment视图类
+ *
  * Created by xuzhiguo on 15/11/24.
  */
-public class NewsFDelegate extends AppDelegate {
-    private TextView tvKj;
-    private TextView tvSh;
-    private TextView tvDz;
+public class FMDelegate extends AppDelegate {
+    private TextView tvIndex;
+    private TextView tvLoad;
     private ViewPager vpContent;
     private List<Fragment> mFrags;
     private TextView[] mNavs;
-    private int NAVS_LENGTH = 3;
-    public static final int TAB_ID_DZ = 2;
-    public static final int TAB_ID_KL = 0;
-    public static final int TAB_ID_SH = 1;
-
+    private final int NAVS_LENGTH = 2;
+    public static final int TAB_ID_INDEX = 0;
+    public static final int TAB_ID_LOAD = 1;
     @Override
     public int getRootLayoutId() {
-        return R.layout.fragment_news;
+        return R.layout.fragment_fm;
     }
 
     @Override
     public void initWidget() {
-        super.initWidget();
-        tvKj = get(R.id.tView_fragNews_kj);
-        tvSh = get(R.id.tView_fragNews_sh);
-        tvDz = get(R.id.tView_fragNews_dz);
-        vpContent = get(R.id.vPager_fragNews_content);
+        tvIndex = get(R.id.tView_fragFM_index);
+        tvLoad = get(R.id.tView_fragFM_load);
+        vpContent = get(R.id.vPager_fragFM_content);
         initFrag();
     }
-
     private void initFrag() {
         mFrags = new ArrayList<>();
-        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_KJ));
-        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_SH));
-        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_DZ));
+        mFrags.add(FMIndexFragment.newInstance("",""));
+        mFrags.add(FMIndexFragment.newInstance("",""));
         initBar();
     }
 
     private void initBar() {
         mNavs = new TextView[NAVS_LENGTH];
-        mNavs[TAB_ID_DZ] = tvDz;
-        mNavs[TAB_ID_SH] = tvSh;
-        mNavs[TAB_ID_KL] = tvKj;
+        mNavs[TAB_ID_INDEX] = tvIndex;
+        mNavs[TAB_ID_LOAD] = tvLoad;
     }
 
 
@@ -83,6 +75,4 @@ public class NewsFDelegate extends AppDelegate {
             }
         }
     }
-
-
 }

@@ -14,7 +14,7 @@ import kimxu.newsandfm.KBaseFragment;
 /**
  * 新闻
  */
-public class NewsFragment extends KBaseFragment<NewsFDelegate> {
+public class NewsFragment extends KBaseFragment<NewsDelegate> {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -50,8 +50,8 @@ public class NewsFragment extends KBaseFragment<NewsFDelegate> {
     }
 
     @Override
-    protected Class<NewsFDelegate> getDelegateClass() {
-        return NewsFDelegate.class;
+    protected Class<NewsDelegate> getDelegateClass() {
+        return NewsDelegate.class;
     }
 
     @Override
