@@ -21,9 +21,12 @@ import org.apache.http.params.CoreProtocolPNames;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
+import kimxu.api.net.model.IRequest;
 import kimxu.api.net.model.QueuedRequest;
 import kimxu.api.net.utils.NetworkUtil;
 
@@ -73,6 +76,13 @@ public class HttpManager implements INet{
 
             if (r.requestType == QueuedRequest.requestTypeApi) {
                 HttpPost postRequest = new HttpPost(r.url);
+                if (r.httpHeader!=null){
+                    for (Map.Entry<String, String> entry : r.httpHeader.entrySet()) {
+                        String key = entry.getKey();
+                        String val = entry.getValue();
+                        postRequest.setHeader(key, val);
+                    }
+                }
                 postRequest.addHeader("Accept-Encoding", "gzip");
                 postRequest.getParams().setBooleanParameter(
                         CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
@@ -85,6 +95,13 @@ public class HttpManager implements INet{
                 request = postRequest;
             } else if (r.requestType == QueuedRequest.requestTypeLog) {
                 HttpPost postRequest = new HttpPost(r.url);
+                if (r.httpHeader!=null){
+                    for (Map.Entry<String, String> entry : r.httpHeader.entrySet()) {
+                        String key = entry.getKey();
+                        String val = entry.getValue();
+                        postRequest.setHeader(key, val);
+                    }
+                }
                 postRequest.getParams().setBooleanParameter(
                         CoreProtocolPNames.USE_EXPECT_CONTINUE, false);
                 try {
@@ -96,6 +113,13 @@ public class HttpManager implements INet{
                 request = postRequest;
             } else if (r.requestType == QueuedRequest.requestTypeGetApi) {
                 HttpGet getRequest = new HttpGet(r.url);
+                if (r.httpHeader!=null){
+                    for (Map.Entry<String, String> entry : r.httpHeader.entrySet()) {
+                        String key = entry.getKey();
+                        String val = entry.getValue();
+                        getRequest.setHeader(key, val);
+                    }
+                }
                 request = getRequest;
             }
 
@@ -293,11 +317,36 @@ public class HttpManager implements INet{
         qr.requestType = QueuedRequest.requestTypeApi;
         qr.requestId = requestId;
         qr.url = apiHost;
-        Log.i("request_url is ", qr.url);
+        Log.i("post request_url is ", qr.url);
         qr.nameValuePairs = nameValuePairs;
         qr.handler = handler;
         download(qr);
-        return;
+    }
+
+    @Override
+    public void addApiReqest(List<NameValuePair> nameValuePairs, String apiHost, Handler handler, HashMap<String, String> httpHeader, int requestId) {
+        QueuedRequest qr = new QueuedRequest();
+        qr.requestType = QueuedRequest.requestTypeApi;
+        qr.httpHeader=httpHeader;
+        qr.requestId = requestId;
+        qr.url = apiHost;
+        Log.i("post request_url is ", qr.url);
+        qr.nameValuePairs = nameValuePairs;
+        qr.handler = handler;
+        download(qr);
+    }
+
+    @Override
+    public void addApiGetRequest(String apiHost, Handler handler, HashMap<String,String> httpHeader, int requestId) {
+        QueuedRequest qr = new QueuedRequest();
+        qr.httpHeader =httpHeader;
+        qr.requestType = QueuedRequest.requestTypeGetApi;
+        qr.requestId = requestId;
+        qr.url = apiHost;
+        Log.i("get request_url is ", qr.url);
+        qr.nameValuePairs = null;
+        qr.handler = handler;
+        download(qr);
     }
 
     @Override
@@ -306,9 +355,15 @@ public class HttpManager implements INet{
         qr.requestType = QueuedRequest.requestTypeGetApi;
         qr.requestId = requestId;
         qr.url = apiHost;
+        Log.i("get request_url is ", qr.url);
         qr.nameValuePairs = null;
         qr.handler = handler;
         download(qr);
-        return;
+    }
+
+    @Override
+    public void addApiRequest(IRequest request) {
+        QueuedRequest qr = (QueuedRequest)request;
+        download(qr);
     }
 }
