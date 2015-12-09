@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
+import kimxu.core.net.model.discoverRecommend.SpecialColumn;
 import kimxu.newsandfm.R;
 
 /**
@@ -16,8 +17,8 @@ import kimxu.newsandfm.R;
 public class SpecialFactory extends AssemblyItemFactory<SpecialFactory.SpecialItem>{
 
     @Override
-    public Class<FMDiscovery.SpecialColumnEntity> getBeanClass() {
-        return FMDiscovery.SpecialColumnEntity.class;
+    public Class<SpecialColumn> getBeanClass() {
+        return SpecialColumn.class;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class SpecialFactory extends AssemblyItemFactory<SpecialFactory.SpecialIt
         return new SpecialItem(parent,this);
     }
 
-    public class SpecialItem extends AssemblyItem<FMDiscovery.SpecialColumnEntity,SpecialFactory>{
+    public class SpecialItem extends AssemblyItem<SpecialColumn,SpecialFactory>{
 
         protected SpecialItem(ViewGroup parent, SpecialFactory itemFactory) {
             super(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_special,parent,false), itemFactory);
@@ -42,7 +43,7 @@ public class SpecialFactory extends AssemblyItemFactory<SpecialFactory.SpecialIt
         }
 
         @Override
-        protected void onSetData(int position, FMDiscovery.SpecialColumnEntity specialView) {
+        protected void onSetData(int position, SpecialColumn special) {
 
         }
     }

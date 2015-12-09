@@ -1,5 +1,5 @@
 
-package kimxu.core.net.model.gson;
+package kimxu.core.net.model.discoverRecommend;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotRecommends {
+public class SpecialColumn {
 
     @SerializedName("ret")
     @Expose
@@ -15,9 +15,12 @@ public class HotRecommends {
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("hasMore")
+    @Expose
+    private boolean hasMore;
     @SerializedName("list")
     @Expose
-    private List<List___> list = new ArrayList<List___>();
+    private List<List_______> list = new ArrayList<List_______>();
 
     /**
      * 
@@ -58,9 +61,27 @@ public class HotRecommends {
     /**
      * 
      * @return
+     *     The hasMore
+     */
+    public boolean isHasMore() {
+        return hasMore;
+    }
+
+    /**
+     * 
+     * @param hasMore
+     *     The hasMore
+     */
+    public void setHasMore(boolean hasMore) {
+        this.hasMore = hasMore;
+    }
+
+    /**
+     * 
+     * @return
      *     The list
      */
-    public List<List___> getList() {
+    public List<List_______> getList() {
         return list;
     }
 
@@ -69,7 +90,7 @@ public class HotRecommends {
      * @param list
      *     The list
      */
-    public void setList(List<List___> list) {
+    public void setList(List<List_______> list) {
         this.list = list;
     }
 

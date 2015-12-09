@@ -3,7 +3,7 @@ package kimxu.core.net;
 import java.util.Map;
 
 import kimxu.core.net.model.Album;
-import kimxu.core.net.model.gson.Example;
+import kimxu.core.net.model.discoverRecommend.DiscoverRecommend;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -40,7 +40,7 @@ public class ApiService {
          * @return
          */
        @GET("/mobile/discovery/v1/recommends")
-       Observable<Example> getDiscoverRecommend(@QueryMap Map<String,String> map);
+       Observable<DiscoverRecommend> getDiscoverRecommend(@QueryMap Map<String,String> map);
     }
 
     public Observable<Album> getAlbum(String pager,Map<String,String> map){
@@ -51,7 +51,7 @@ public class ApiService {
         return apiManager.getAlbum(pager,map);
     }
     //http://mobile.ximalaya.com/mobile/discovery/v1/recommends?channel=and-f6&device=android&includeActivity=true&includeSpecial=true&scale=2&version=4.1.7.1
-    public Observable<Example> getDiscoverRecommend(Map<String,String> map){
+    public Observable<DiscoverRecommend> getDiscoverRecommend(Map<String,String> map){
         //?channel=and-f6&device=android&includeActivity=true&includeSpecial=true&scale=2&version=4.1.7.1
         map.put("channel","and-f6");
         map.put("device","android");

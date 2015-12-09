@@ -38,17 +38,10 @@ public class FMIndexFragment extends KBaseFragment<FMIndexDelegate> {
     @Override
     protected void bindEvenListener() {
         if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
 
-//
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//
-//            HashMap<String,String> map =new HashMap<>();
-//            map.put("channel","and-f6");
-//            mApiService.getDiscoverRecommend(map)
-//                    .observeOn(Schedulers.computation())
-//                    .subscribeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(fmDiscovery -> L.e(fmDiscovery.getMsg()+" okoko"),throwable -> L.e("error"));
+
         }
     }
     @Override

@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
+import kimxu.core.net.model.discoverRecommend.EditorRecommendAlbums;
 import kimxu.newsandfm.R;
 
 /**
@@ -19,8 +20,8 @@ import kimxu.newsandfm.R;
  */
 public class AlbumFactory extends AssemblyItemFactory<AlbumFactory.FMListItem>{
     @Override
-    public Class<?> getBeanClass() {
-        return FMDiscovery.EditorRecommendAlbumsEntity.class;
+    public Class<EditorRecommendAlbums> getBeanClass() {
+        return EditorRecommendAlbums.class;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class AlbumFactory extends AssemblyItemFactory<AlbumFactory.FMListItem>{
         return new FMListItem(parent,this);
     }
 
-    public class FMListItem extends AssemblyItem<FMDiscovery.EditorRecommendAlbumsEntity,AlbumFactory> {
+    public class FMListItem extends AssemblyItem<EditorRecommendAlbums,AlbumFactory> {
         private final int alblumSize =3;
         private TextView  txtTitle;
         private TextView  txtMore;
@@ -64,7 +65,7 @@ public class AlbumFactory extends AssemblyItemFactory<AlbumFactory.FMListItem>{
             }
         }
         @Override
-        protected void onSetData(int position, FMDiscovery.EditorRecommendAlbumsEntity album) {
+        protected void onSetData(int position, EditorRecommendAlbums album) {
 
             //txtTitle.setText(album.title);
         }

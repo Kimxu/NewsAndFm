@@ -1,5 +1,5 @@
 
-package kimxu.core.net.model.gson;
+package kimxu.core.net.model.discoverRecommend;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialColumn {
+public class DiscoveryColumns {
 
     @SerializedName("ret")
     @Expose
@@ -15,12 +15,12 @@ public class SpecialColumn {
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("hasMore")
-    @Expose
-    private boolean hasMore;
     @SerializedName("list")
     @Expose
-    private List<List_______> list = new ArrayList<List_______>();
+    private List<List_> list = new ArrayList<List_>();
+    @SerializedName("locationInHotRecommend")
+    @Expose
+    private int locationInHotRecommend;
 
     /**
      * 
@@ -61,27 +61,9 @@ public class SpecialColumn {
     /**
      * 
      * @return
-     *     The hasMore
-     */
-    public boolean isHasMore() {
-        return hasMore;
-    }
-
-    /**
-     * 
-     * @param hasMore
-     *     The hasMore
-     */
-    public void setHasMore(boolean hasMore) {
-        this.hasMore = hasMore;
-    }
-
-    /**
-     * 
-     * @return
      *     The list
      */
-    public List<List_______> getList() {
+    public List<List_> getList() {
         return list;
     }
 
@@ -90,8 +72,26 @@ public class SpecialColumn {
      * @param list
      *     The list
      */
-    public void setList(List<List_______> list) {
+    public void setList(List<List_> list) {
         this.list = list;
+    }
+
+    /**
+     * 
+     * @return
+     *     The locationInHotRecommend
+     */
+    public int getLocationInHotRecommend() {
+        return locationInHotRecommend;
+    }
+
+    /**
+     * 
+     * @param locationInHotRecommend
+     *     The locationInHotRecommend
+     */
+    public void setLocationInHotRecommend(int locationInHotRecommend) {
+        this.locationInHotRecommend = locationInHotRecommend;
     }
 
 }

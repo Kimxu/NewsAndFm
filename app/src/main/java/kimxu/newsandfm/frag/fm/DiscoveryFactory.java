@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
+import kimxu.core.net.model.discoverRecommend.DiscoveryColumns;
 import kimxu.newsandfm.R;
 
 /**
@@ -16,8 +17,8 @@ import kimxu.newsandfm.R;
 public class DiscoveryFactory extends AssemblyItemFactory<DiscoveryFactory.DiscoveryItem>{
 
     @Override
-    public Class<FMDiscovery.DiscoveryColumnsEntity> getBeanClass() {
-        return FMDiscovery.DiscoveryColumnsEntity.class;
+    public Class<DiscoveryColumns> getBeanClass() {
+        return DiscoveryColumns.class;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class DiscoveryFactory extends AssemblyItemFactory<DiscoveryFactory.Disco
         return new DiscoveryItem(parent,this);
     }
 
-    public class DiscoveryItem extends AssemblyItem<FMDiscovery.DiscoveryColumnsEntity,DiscoveryFactory>{
+    public class DiscoveryItem extends AssemblyItem<DiscoveryColumns,DiscoveryFactory>{
 
         public DiscoveryItem(ViewGroup parent, DiscoveryFactory discoveryFactory) {
             super(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_discovery,parent,false), discoveryFactory);
@@ -42,7 +43,7 @@ public class DiscoveryFactory extends AssemblyItemFactory<DiscoveryFactory.Disco
         }
 
         @Override
-        protected void onSetData(int position, FMDiscovery.DiscoveryColumnsEntity discoveryView) {
+        protected void onSetData(int position, DiscoveryColumns discoveryView) {
 
         }
     }

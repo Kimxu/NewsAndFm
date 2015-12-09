@@ -1,5 +1,5 @@
 
-package kimxu.core.net.model.gson;
+package kimxu.core.net.model.discoverRecommend;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
