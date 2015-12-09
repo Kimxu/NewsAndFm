@@ -11,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
+
+import kimxu.core.net.HttpConfig;
 import kimxu.core.net.model.NfRequest;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseActivity;
@@ -51,7 +54,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         viewDelegate.setAdapter(mAdapter);
         viewDelegate.setCurrentItem(MainDelegate.TAB_ID_FM);
         viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
-        NAVS_LENGTH =viewDelegate.getNavs().length;
+        NAVS_LENGTH = viewDelegate.getNavs().length;
 
         viewDelegate.setCenterLisenter(new View.OnClickListener() {
             @Override
@@ -59,6 +62,41 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
                 throw new RuntimeException("GGG");
             }
         });
+
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("channel_id", HttpConfig.SITE_KEJI);
+        map.put("fields", "url");
+//        map.put("fields", "image");
+//        ApiService.apiManager.getNews(map).
+//                observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<BNews>() {
+//                    @Override
+//                    public void call(BNews news) {
+////                        L.e(news.getChannel_name());
+////                        L.e(news.getStatus());
+////                        L.e("oooooooooooooo");
+////                        Ts.showToast(mActivity,
+////                                "oooooooooooooo" + news.getResult().toString());
+////                        Ts.showToast(mActivity,
+////                                "oooooooooooooo");
+//                        L.e(news.toString());
+//                    }
+//                }, new Action1<Throwable>() {
+//                    @Override
+//                    public void call(Throwable throwable) {
+//                        L.e(throwable.getMessage() + "Throwable" + throwable.toString() + ":::" + throwable.getLocalizedMessage());
+//                        Ts.showToast(mActivity,
+//                                "Throwable");
+//                    }
+//                }, new Action0() {
+//                    @Override
+//                    public void call() {
+//                        Ts.showToast(mActivity,
+//                                "Action0");
+//                        L.e("cccccccccccc");
+//                    }
+//                });
     }
 
     @Override
@@ -73,7 +111,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
 
     @Override
     protected void handleSuccessMessage(Message msg) {
-        NfRequest qr = new NfRequest(msg.obj) ;
+        NfRequest qr = new NfRequest(msg.obj);
         switch (qr.requestId) {
             case 1:
                 Ts.showToast(getApplicationContext(), "接收成功");
@@ -85,10 +123,10 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus&&mFrameWidth==0) {
+        if (hasFocus && mFrameWidth == 0) {
             mFrameWidth = viewDelegate.getmFrameLayout().getWidth();
             mOffset = (mFrameWidth / NAVS_LENGTH - mCursorWidth) / 2;
-            viewDelegate.updateCurrentTab(mActivity,startPage,true,mOffset, mFrameWidth);
+            viewDelegate.updateCurrentTab(mActivity, startPage, true, mOffset, mFrameWidth);
         }
     }
 
@@ -100,18 +138,19 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
     }
 
 
-
     class NfOnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrollStateChanged(int state) {
         }
+
         @Override
         public void onPageScrolled(int position, float positionOffset, int offset) {
-            viewDelegate.updateCursorMatrix(position, offset,mFrameWidth,mWindowWidth,mOffset);
+            viewDelegate.updateCursorMatrix(position, offset, mFrameWidth, mWindowWidth, mOffset);
         }
+
         @Override
         public void onPageSelected(int currentTab) {
-            viewDelegate.updateCurrentTab(mActivity,currentTab, false,mOffset,mFrameWidth);
+            viewDelegate.updateCurrentTab(mActivity, currentTab, false, mOffset, mFrameWidth);
         }
     }
 

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="nf_white">#fff</color>
+    <color name="nf_black">#000</color>
     <color name="nf_gray">#CCCCCC</color>
 
     <color name="nf_toolbar_selected">@color/nf_white</color>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:descendantFocusability="afterDescendants"
+    >
+    <!--顶部内容-->
+
+    <TextView
+        android:id="@+id/recommend_album_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="3dp"
+        android:text="小编推荐"/>
+
+    <TextView
+        android:id="@+id/recommend_album_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:text="更多"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/recommend_album_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingRight="5dp"
+            >
+            <ImageView
+                android:id="@+id/recommend_album_icon_0"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/discover_recommend_item_album_icon_height"
+                android:scaleType="fitXY"
+                android:background="@drawable/nf_default_album"/>
+            <TextView
+                android:id="@+id/recommend_album_name_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/recommend_album_icon_0"
+                android:textColor="#fff"
+                android:background="@color/nf_gray"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:text="专辑名称"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/recommend_album_track_name_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recommend_album_icon_0"
+                android:text="曲目名称"
+                android:maxLines="2"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+
+            android:paddingRight="5dp"
+            >
+            <ImageView
+                android:id="@+id/recommend_album_icon_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/discover_recommend_item_album_icon_height"
+                android:scaleType="fitXY"
+                android:background="@drawable/nf_default_album"/>
+            <TextView
+                android:id="@+id/recommend_album_name_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/recommend_album_icon_1"
+                android:textColor="#fff"
+                android:background="@color/nf_gray"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:text="专辑名称"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/recommend_album_track_name_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recommend_album_icon_1"
+                android:text="曲目名称"
+                android:maxLines="2"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+
+            android:paddingRight="5dp"
+            >
+            <ImageView
+                android:id="@+id/recommend_album_icon_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/discover_recommend_item_album_icon_height"
+
+                android:scaleType="fitXY"
+                android:background="@drawable/nf_default_album"/>
+            <TextView
+                android:id="@+id/recommend_album_name_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/recommend_album_icon_2"
+                android:textColor="#fff"
+                android:background="@color/nf_gray"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:text="专辑名称"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/recommend_album_track_name_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recommend_album_icon_2"
+                android:text="曲目名称"
+                android:maxLines="2"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

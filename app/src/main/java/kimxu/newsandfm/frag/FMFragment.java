@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.os.Message;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseFragment;
+import kimxu.utils.L;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -60,11 +62,32 @@ public class FMFragment extends KBaseFragment {
 
     @Override
     protected void bindEvenListener() {
+//        HashMap<String,String> map =new HashMap<>();
+//        map.put("albumId","321705");
+//        map.put("position","3");
+//        mApiService.getAlbum("1",map)
+//                .observeOn(Schedulers.computation())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .subscribe(album -> {
+//                    if (album.getRet()==0){
+//                        for (int i = 0; i < album.getTracks().getList().size(); i++) {
+//                            L.d(album.getTracks().getList().get(i).getAlbumTitle());
+//                        }
+//                    }else{
+//                        Ts.showToast(mActivity,"加载数据失败");
+//                    }
+//            },throwable -> {
+//                    Ts.showToast(mActivity,"加载数据失败");
+//                });
+
+        LinkedHashMap<String,String> map =new LinkedHashMap<>();
+        //map.put("channel","and-f6");
+        mApiService.getDiscoverRecommend(map)
+                .observeOn(Schedulers.computation())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(fmDiscovery -> L.e(fmDiscovery.getRet()+" okoko"), throwable -> L.e("error"+throwable.getMessage()));
 
 
-        rxAndroid();
-        rxBase();
-        rxAction();
     }
 
     private void rxAction() {

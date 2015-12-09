@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:descendantFocusability="afterDescendants">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--顶部内容-->
+        <TextView
+            android:id="@+id/recommend_special_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="3dp"
+            android:text="小编推荐"/>
+
+        <TextView
+            android:id="@+id/recommend_special_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="更多"/>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/recommend_special_rl_0"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/nf_item_selector"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/recommend_special_cover_0"
+            android:layout_marginRight="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/nf_default_album"/>
+        <TextView
+            android:id="@+id/recommend_special_name_0"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toRightOf="@id/recommend_special_cover_0"
+            android:layout_alignTop="@id/recommend_special_cover_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textSize="15sp"
+            android:textColor="@color/nf_black"
+            />
+
+        <ImageView
+            android:id="@+id/recommend_special_more_icon_0"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nf_arrow_right"
+            />
+
+        <TextView
+            android:id="@+id/recommend_special_subname_0"
+            android:layout_toRightOf="@id/recommend_special_cover_0"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/recommend_special_more_icon_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:text="subname"
+            />
+
+
+        <TextView
+            android:id="@+id/recommend_special_footnote_0"
+            android:layout_toRightOf="@id/recommend_special_cover_0"
+            android:layout_alignBottom="@id/recommend_special_cover_0"
+            android:layout_marginBottom="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="10首专辑"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/recommend_special_rl_0"
+        android:background="@color/nf_gray"
+        />
+
+
+    <RelativeLayout
+        android:layout_below="@id/recommend_special_rl_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:background="@drawable/nf_item_selector">
+        <ImageView
+            android:id="@+id/recommend_special_cover_1"
+            android:layout_marginRight="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/nf_default_album"/>
+        <TextView
+            android:id="@+id/recommend_special_name_1"
+            android:layout_toRightOf="@id/recommend_special_cover_1"
+            android:layout_alignTop="@id/recommend_special_cover_1"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textSize="15sp"
+            android:textColor="@color/nf_black"
+            />
+
+        <ImageView
+            android:id="@+id/recommend_special_more_icon_1"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/recommend_special_name_1"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nf_arrow_right"
+            />
+
+        <TextView
+            android:id="@+id/recommend_special_subname_1"
+            android:layout_toRightOf="@id/recommend_special_cover_1"
+            android:layout_toLeftOf="@id/recommend_special_more_icon_1"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:text="subname"
+            />
+        <TextView
+            android:id="@+id/recommend_special_footnote_1"
+            android:layout_toRightOf="@id/recommend_special_cover_1"
+            android:layout_alignBottom="@id/recommend_special_cover_1"
+            android:layout_marginBottom="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="10首专辑"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

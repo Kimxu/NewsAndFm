@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 
+import kimxu.core.net.ApiService;
 import kimxu.core.net.HttpConfig;
 import kimxu.core.net.HttpHandler;
 import kimxu.core.net.HttpService;
@@ -20,7 +21,7 @@ public abstract class KBaseFragment<T extends IDelegate> extends DataBindFragmen
 
     protected FragmentActivity mActivity;
     protected KBaseFragment mFragment;
-
+    protected ApiService mApiService;
     protected HttpService mHttpService;
     // 处理网络请求
     protected HttpHandler mHttpHandler;
@@ -45,8 +46,10 @@ public abstract class KBaseFragment<T extends IDelegate> extends DataBindFragmen
     public void onCreate(Bundle savedInstanceState) {
         mActivity = getActivity();
         mFragment = this;
+        mApiService=ApiService.getInstance();
         mHttpService = HttpService.getInstance(mActivity);
         mHttpHandler = new HttpHandler(this);
+
         super.onCreate(savedInstanceState);
     }
 
