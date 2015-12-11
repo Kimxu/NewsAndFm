@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
-import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseFragment;
 
 /**
@@ -40,16 +39,9 @@ public class FMFragment extends KBaseFragment<FMDelegate> {
 
 
     @Override
-    protected Class getDelegateClass() {
+    protected Class<FMDelegate> getDelegateClass() {
         return FMDelegate.class;
     }
-
-    @Override
-    public DataBinder getDataBinder() {
-        return null;
-    }
-
-
 
     class NfOnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override

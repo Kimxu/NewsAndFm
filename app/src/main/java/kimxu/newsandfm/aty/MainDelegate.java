@@ -17,7 +17,7 @@ import java.util.List;
 import kimxu.mvp.view.AppDelegate;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.frag.FMFragment;
-import kimxu.newsandfm.frag.NewsFragment;
+import kimxu.newsandfm.frag.MusicFragment;
 
 /**
  * 视图View
@@ -28,15 +28,15 @@ public class MainDelegate extends AppDelegate {
     private FrameLayout mFrameLayout;
     private ImageView mCursor;
     private TextView mToolFm;
-    private TextView mToolNews;
+    private TextView mToolMusic;
     private ImageView mCenter;
 
 
     private ArrayList<Fragment> mFrags;
     private TextView[] mNavs;
     private final static int NAVS_LENGTH = 2;
-    public final static int TAB_ID_FM = 0;
-    public final static int TAB_ID_NEWS = 1;
+    public final static int TAB_ID_MUSIC = 0;
+    public final static int TAB_ID_FM = 1;
 
     @Override
     public int getRootLayoutId() {
@@ -50,24 +50,24 @@ public class MainDelegate extends AppDelegate {
         mCursor = get(R.id.iVew_appMainToolBar_cursor);
         mFrameLayout = get(R.id.fLyout_appMainToolBar);
         mToolFm = get(R.id.tView_appMainToolBar_fm);
-        mToolNews = get(R.id.tView_appMainToolBar_News);
+        mToolMusic = get(R.id.tView_appMainToolBar_Music);
         mCenter =get(R.id.iView_appMainToolBar_center);
         initFrags();
     }
 
     private void initFrags() {
         FMFragment fmFragment = FMFragment.newInstance("", "");
-        NewsFragment newsFragment = NewsFragment.newInstance("", "");
+        MusicFragment musicFragment = MusicFragment.newInstance("", "");
         mFrags = new ArrayList<>();
+        mFrags.add(musicFragment);
         mFrags.add(fmFragment);
-        mFrags.add(newsFragment);
         initBar();
     }
 
     private void initBar() {
         mNavs = new TextView[NAVS_LENGTH];
+        mNavs[TAB_ID_MUSIC] = mToolMusic;
         mNavs[TAB_ID_FM] = mToolFm;
-        mNavs[TAB_ID_NEWS] = mToolNews;
     }
 
     public void setCenterLisenter(View.OnClickListener lisenter){

@@ -3,10 +3,9 @@ package kimxu.newsandfm;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import org.apache.http.protocol.HttpService;
-
 import kimxu.core.net.ApiService;
 import kimxu.mvp.databind.DataBindFragment;
+import kimxu.mvp.databind.DataBinder;
 import kimxu.mvp.view.IDelegate;
 
 /**
@@ -18,7 +17,6 @@ public abstract class KBaseFragment<T extends IDelegate> extends DataBindFragmen
     protected FragmentActivity mActivity;
     protected KBaseFragment mFragment;
     protected ApiService mApiService;
-    protected HttpService mHttpService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,5 +25,10 @@ public abstract class KBaseFragment<T extends IDelegate> extends DataBindFragmen
         mApiService=ApiService.getInstance();
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public DataBinder getDataBinder() {
+        return null;
     }
 }

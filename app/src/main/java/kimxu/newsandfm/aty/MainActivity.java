@@ -44,7 +44,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         mWindowWidth = ScreenUtils.getScreenWidth(mActivity);
         NfFragAdapter mAdapter = new NfFragAdapter(getSupportFragmentManager());
         viewDelegate.setAdapter(mAdapter);
-        viewDelegate.setCurrentItem(MainDelegate.TAB_ID_FM);
+        viewDelegate.setCurrentItem(MainDelegate.TAB_ID_MUSIC);
         viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
         NAVS_LENGTH = viewDelegate.getNavs().length;
     }

@@ -5,8 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="nav_1">电台</string>
-    <string name="nav_2">编辑</string>
+    <string name="nav_1">音乐</string>
+    <string name="nav_2">电台</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

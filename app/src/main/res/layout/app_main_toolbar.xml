@@ -37,7 +37,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/tView_appMainToolBar_News"
+                android:id="@+id/tView_appMainToolBar_Music"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
