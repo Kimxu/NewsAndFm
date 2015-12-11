@@ -5,17 +5,17 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 
-import com.google.gson.Gson;
-
 import kimxu.adapter.AssemblyAdapter;
-import kimxu.core.net.model.NfRequest;
+import kimxu.core.net.HttpConfig;
+import kimxu.core.net.model.news.Result;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseFragment;
 import kimxu.newsandfm.adapter.factory.NewsListItemFactory;
 import kimxu.newsandfm.aty.WebActivity;
-import kimxu.newsandfm.model.News;
 import kimxu.utils.L;
 import kimxu.utils.Ts;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,18 +50,27 @@ public class NewsChildFragment extends KBaseFragment<NewsChildDelegate> implemen
             mPager = getArguments().getInt(FROM_PAGER);
         }
 
-        switch (mPager){
-            case PAGER_KJ:
-                mHttpService.sendYiDianKeji(mHttpHandler,RESONPOSE_SUCCESS);
-                break;
-            case PAGER_SH:
-                mHttpService.sendYiDianSheHui(mHttpHandler,RESONPOSE_SUCCESS);
-                break;
-            case PAGER_DZ:
-                mHttpService.sendYiDianDuanZi(mHttpHandler,RESONPOSE_SUCCESS);
-                break;
+//        switch (mPager){
+//            case PAGER_KJ:
+//                mHttpService.sendYiDianKeji(mHttpHandler,RESONPOSE_SUCCESS);
+//                break;
+//            case PAGER_SH:
+//                mHttpService.sendYiDianSheHui(mHttpHandler,RESONPOSE_SUCCESS);
+//                break;
+//            case PAGER_DZ:
+//                mHttpService.sendYiDianDuanZi(mHttpHandler,RESONPOSE_SUCCESS);
+//                break;
+//
+//        }
 
-        }
+        mApiService.getNews(HttpConfig.SITE_SHEHUI)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(news -> {
+                    mAdapter =new AssemblyAdapter(news.getResult());
+                    mAdapter.addItemFactory(new NewsListItemFactory(mActivity,this));
+                    viewDelegate.setAdapter(mAdapter);
+                },throwable -> L.e("error "+throwable.getMessage()));
     }
 
     @Override
@@ -76,21 +85,22 @@ public class NewsChildFragment extends KBaseFragment<NewsChildDelegate> implemen
 
     @Override
     protected void handleSuccessMessage(Message msg) {
-        Ts.showToast(mActivity, "接收成功");
-        NfRequest qr = new NfRequest(msg.obj) ;
-        switch (qr.requestId) {
-            case RESONPOSE_SUCCESS:
-                L.i((String) qr.result);
-                Gson gson =new Gson();
-                News news = gson.fromJson((String) qr.result, News.class);
-                mAdapter =new AssemblyAdapter(news.getResult());
-                mAdapter.addItemFactory(new NewsListItemFactory(mActivity,this));
-                viewDelegate.setAdapter(mAdapter);
-                break;
-        }
+//        Ts.showToast(mActivity, "接收成功");
+//        NfRequest qr = new NfRequest(msg.obj) ;
+//        switch (qr.requestId) {
+//            case RESONPOSE_SUCCESS:
+//                L.i((String) qr.result);
+//                Gson gson =new Gson();
+//                News news = gson.fromJson((String) qr.result, News.class);
+//                mAdapter =new AssemblyAdapter(news.getResult());
+//                mAdapter.addItemFactory(new NewsListItemFactory(mActivity,this));
+//                viewDelegate.setAdapter(mAdapter);
+//                break;
+//        }
     }
     @Override
-    public void onClick(int position, News.ResultEntity news) {
+    public void onClick(int position, Result news) {
         WebActivity.launch(mActivity,news.getUrl());
     }
+
 }

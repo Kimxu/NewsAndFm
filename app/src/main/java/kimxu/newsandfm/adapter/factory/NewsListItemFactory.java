@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
+import kimxu.core.net.model.news.Result;
 import kimxu.newsandfm.R;
-import kimxu.newsandfm.model.News;
 
 /**
  *
@@ -30,13 +30,13 @@ public class NewsListItemFactory extends AssemblyItemFactory<NewsListItemFactory
 
 
     public interface EventListener{
-        void onClick(int position,  News.ResultEntity news);
+        void onClick(int position,  Result news);
     }
 
 
     @Override
     public Class<?> getBeanClass() {
-        return News.ResultEntity.class;
+        return Result.class;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class NewsListItemFactory extends AssemblyItemFactory<NewsListItemFactory
         return new NewsListItem(parent,this);
     }
 
-    public static class NewsListItem extends AssemblyItem<News.ResultEntity,NewsListItemFactory>{
+    public static class NewsListItem extends AssemblyItem<Result,NewsListItemFactory>{
         private Context context;
         private ImageView iconImageView;
         private TextView nameTextView;
@@ -75,7 +75,7 @@ public class NewsListItemFactory extends AssemblyItemFactory<NewsListItemFactory
         }
 
         @Override
-        protected void onSetData(int position, News.ResultEntity news) {
+        protected void onSetData(int position, Result news) {
             if (TextUtils.isEmpty(news.getTitle()))
                 return;
             if (!TextUtils.isEmpty(news.getImage())){

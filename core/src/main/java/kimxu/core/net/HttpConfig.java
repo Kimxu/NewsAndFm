@@ -17,7 +17,7 @@ public class HttpConfig {
 
 
     //社会
-    final static String SITE_SHEHUI = "1655594054";
+ public final static String SITE_SHEHUI = "1655594054";
     //科技
     public final static String SITE_KEJI = "1655594078";
     //段子
