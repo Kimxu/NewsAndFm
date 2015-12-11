@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Window;
 
-import kimxu.core.net.IHandleMessage;
 import kimxu.mvp.view.IDelegate;
 import kimxu.newsandfm.widget.SwipeBackLayout;
 
@@ -13,7 +12,7 @@ import kimxu.newsandfm.widget.SwipeBackLayout;
  * 带右滑销毁的activity
  * @param <T>
  */
-public abstract class KBaseSwipeBackActivity<T extends IDelegate> extends KBaseActivity<T> implements IHandleMessage {
+public abstract class KBaseSwipeBackActivity<T extends IDelegate> extends KBaseActivity<T>{
     protected SwipeBackLayout layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

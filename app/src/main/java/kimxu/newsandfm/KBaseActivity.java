@@ -3,30 +3,20 @@ package kimxu.newsandfm;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import kimxu.core.net.HttpConfig;
-import kimxu.core.net.HttpHandler;
-import kimxu.core.net.HttpService;
-import kimxu.core.net.IHandleMessage;
 import kimxu.mvp.databind.DataBindActivity;
 import kimxu.mvp.view.IDelegate;
-import kimxu.utils.Ts;
 
-public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivity<T> implements IHandleMessage {
+public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivity<T>{
     protected KBaseActivity mActivity;
-    protected HttpService mHttpService;
-    protected HttpHandler mHttpHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mActivity = this;
-        mHttpService = HttpService.getInstance(this);
-        mHttpHandler = new HttpHandler(this);
         setStatusBar();
         super.onCreate(savedInstanceState);
     }
@@ -51,25 +41,4 @@ public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivit
         }
         win.setAttributes(winParams);
     }
-
-
-
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what) {
-            case HttpConfig.MSGCODE_HTTP_ERROR:
-                handleErrorMessage(msg);
-                break;
-            case HttpConfig.MSGCODE_HTTP_RESPONSE:
-                handleSuccessMessage(msg);
-                break;
-            default:
-                Ts.showToast(getApplicationContext(), "网络错误");
-                break;
-        }
-    }
-
-
-    protected abstract void handleErrorMessage(Message msg);
-    protected abstract void handleSuccessMessage(Message msg);
 }

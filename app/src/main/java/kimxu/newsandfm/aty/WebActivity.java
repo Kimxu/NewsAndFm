@@ -2,7 +2,6 @@ package kimxu.newsandfm.aty;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Message;
 import android.view.KeyEvent;
 
 import kimxu.mvp.databind.DataBinder;
@@ -25,16 +24,6 @@ public class WebActivity extends KBaseSwipeBackActivity<WebDelegate> {
     @Override
     public DataBinder getDataBinder() {
         return null;
-    }
-
-    @Override
-    protected void handleErrorMessage(Message msg) {
-
-    }
-
-    @Override
-    protected void handleSuccessMessage(Message msg) {
-
     }
 
     public static void launch(Activity activity,String url){

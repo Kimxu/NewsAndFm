@@ -1,7 +1,6 @@
 package kimxu.newsandfm.frag;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -20,15 +19,6 @@ public class FMFragment extends KBaseFragment<FMDelegate> {
     private String mParam1;
     private String mParam2;
 
-    @Override
-    protected void handleErrorMessage(Message msg) {
-
-    }
-
-    @Override
-    protected void handleSuccessMessage(Message msg) {
-
-    }
 
     public static FMFragment newInstance(String param1, String param2) {
         FMFragment fragment = new FMFragment();

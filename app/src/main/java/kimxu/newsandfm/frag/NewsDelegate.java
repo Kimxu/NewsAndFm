@@ -11,7 +11,6 @@ import java.util.List;
 
 import kimxu.mvp.view.AppDelegate;
 import kimxu.newsandfm.R;
-import kimxu.newsandfm.frag.news.NewsChildFragment;
 
 /**
  * 新闻Fragment视图类
@@ -46,9 +45,9 @@ public class NewsDelegate extends AppDelegate {
 
     private void initFrag() {
         mFrags = new ArrayList<>();
-        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_KJ));
-        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_SH));
-        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_DZ));
+//        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_KJ));
+//        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_SH));
+//        mFrags.add(NewsChildFragment.newInstance(NewsChildFragment.PAGER_DZ));
         initBar();
     }
 
