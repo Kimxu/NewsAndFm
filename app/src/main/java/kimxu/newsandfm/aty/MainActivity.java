@@ -3,15 +3,21 @@ package kimxu.newsandfm.aty;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
 
+import java.io.File;
+import java.util.Vector;
+
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseActivity;
 import kimxu.newsandfm.R;
+import kimxu.newsandfm.utils.FileScanTool;
+import kimxu.utils.L;
 import kimxu.utils.ScreenUtils;
 
 public class MainActivity extends KBaseActivity<MainDelegate> {
@@ -47,8 +53,14 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         viewDelegate.setCurrentItem(MainDelegate.TAB_ID_MUSIC);
         viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
         NAVS_LENGTH = viewDelegate.getNavs().length;
+        FileScanTool fl = new FileScanTool();
+        L.e(Environment.getExternalStorageDirectory().toString());
+        fl.scanFile(Environment.getExternalStorageDirectory(),".mp3");
+        Vector<File> filss = fl.getFilelists();
+        for (int i = 0; i < filss.size(); i++) {
+            L.i(filss.get(i).getName());
+        }
     }
-
     @Override
     protected Class<MainDelegate> getDelegateClass() {
         return MainDelegate.class;
@@ -70,6 +82,7 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
             startPage = intent.getIntExtra("startPage", 0);
         }
     }
+
 
 
     class NfOnPageChangeListener implements ViewPager.OnPageChangeListener {
