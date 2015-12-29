@@ -1,13 +1,16 @@
 package kimxu.newsandfm.frag;
 
 import android.os.Bundle;
+import android.view.View;
 
 import kimxu.newsandfm.KBaseFragment;
+import kimxu.newsandfm.R;
+import kimxu.newsandfm.frag.music.LocalMusicActivity;
 
 /**
  * 新闻
  */
-public class MusicFragment extends KBaseFragment<MusicDelegate> {
+public class MusicFragment extends KBaseFragment<MusicDelegate> implements View.OnClickListener{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -29,15 +32,25 @@ public class MusicFragment extends KBaseFragment<MusicDelegate> {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        viewDelegate.setOnClickListener(this,R.id.netMusic_fragMusic,R.id.localMusic_fragMusic,R.id.load_fragMusic);
     }
-
     @Override
     protected Class<MusicDelegate> getDelegateClass() {
         return MusicDelegate.class;
     }
 
 
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.netMusic_fragMusic:
+                break;
+            case R.id.localMusic_fragMusic:
+                LocalMusicActivity.launch(mActivity);
+                break;
+            case R.id.load_fragMusic:
+                break;
+        }
+    }
 }
 

@@ -5,14 +5,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import kimxu.mvp.view.AppDelegate;
+import kimxu.mvp.view.AppAtyDelegate;
 import kimxu.newsandfm.R;
 
 /**
  *
  * Created by xuzhiguo on 15/11/26.
  */
-public class WebDelegate extends AppDelegate {
+public class WebDelegate extends AppAtyDelegate {
     private Toolbar toolbar;
     private WebView webView;
     @Override

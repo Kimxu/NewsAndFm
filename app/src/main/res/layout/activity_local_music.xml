@@ -1,0 +1,14 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".frag.music.LocalMusicActivity">
+    <include
+        android:id="@+id/tBar_atyMain"
+        layout="@layout/app_normal_toolbar" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

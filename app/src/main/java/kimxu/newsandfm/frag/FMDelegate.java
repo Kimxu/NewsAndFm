@@ -9,15 +9,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import kimxu.mvp.view.AppDelegate;
+import kimxu.mvp.view.AppFragAtyDelegate;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.frag.fm.FMIndexFragment;
 
 /**
  *
- * Created by xuzhiguo on 15/11/24.
+ * Created by kimxu on 15/11/24.
  */
-public class FMDelegate extends AppDelegate {
+public class FMDelegate extends AppFragAtyDelegate {
     private TextView tvIndex;
     private TextView tvLoad;
     private ViewPager vpContent;

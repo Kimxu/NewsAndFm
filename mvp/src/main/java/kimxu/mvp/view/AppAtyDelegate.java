@@ -14,7 +14,7 @@ import android.widget.Toast;
  * 默认Toolbar带有返回键，重写setSupportActionBar就可以取消
  * Created by xuzhiguo on 15/11/23.
  */
-public abstract class AppDelegate implements IDelegate{
+public abstract class AppAtyDelegate implements IDelegate{
     //存视图的数组
     protected final SparseArray<View> mViews = new SparseArray<View>();
     /** 根视图*/
@@ -40,9 +40,7 @@ public abstract class AppDelegate implements IDelegate{
     }
 
     @Override
-    public Toolbar getToolbar() {
-        return null;
-    }
+    public abstract Toolbar getToolbar();
 
     @Override
     public View getRootView() {

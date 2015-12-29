@@ -3,13 +3,13 @@ package kimxu.newsandfm.frag.fm;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import kimxu.mvp.view.AppDelegate;
+import kimxu.mvp.view.AppFragAtyDelegate;
 import kimxu.newsandfm.R;
 
 /**
- * Created by xuzhiguo on 15/12/8.
+ * Created by kimxu on 15/12/8.
  */
-public class FMIndexDelegate extends AppDelegate{
+public class FMIndexDelegate extends AppFragAtyDelegate {
     private ListView listView;
     @Override
     public int getRootLayoutId() {

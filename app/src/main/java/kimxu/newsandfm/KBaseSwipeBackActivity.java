@@ -31,8 +31,6 @@ public abstract class KBaseSwipeBackActivity<T extends IDelegate> extends KBaseA
     }
 
 
-
-
     // Press the back button in mobile phone
     @Override
     public void onBackPressed() {

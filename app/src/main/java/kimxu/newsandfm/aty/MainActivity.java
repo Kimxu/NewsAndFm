@@ -53,6 +53,8 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         viewDelegate.setCurrentItem(MainDelegate.TAB_ID_MUSIC);
         viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
         NAVS_LENGTH = viewDelegate.getNavs().length;
+
+
         FileScanTool fl = new FileScanTool();
         L.e(Environment.getExternalStorageDirectory().toString());
         fl.scanFile(Environment.getExternalStorageDirectory(),".mp3");

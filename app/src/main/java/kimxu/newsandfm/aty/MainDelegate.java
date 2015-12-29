@@ -2,11 +2,14 @@ package kimxu.newsandfm.aty;
 
 import android.app.Activity;
 import android.graphics.Matrix;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import kimxu.mvp.view.AppDelegate;
+import kimxu.mvp.view.AppAtyDelegate;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.frag.FMFragment;
 import kimxu.newsandfm.frag.MusicFragment;
@@ -23,7 +26,7 @@ import kimxu.newsandfm.frag.MusicFragment;
  * 视图View
  * Created by xuzhiguo on 15/11/23.
  */
-public class MainDelegate extends AppDelegate {
+public class MainDelegate extends AppAtyDelegate {
     private ViewPager mPager;
     private FrameLayout mFrameLayout;
     private ImageView mCursor;
@@ -37,6 +40,11 @@ public class MainDelegate extends AppDelegate {
     private final static int NAVS_LENGTH = 2;
     public final static int TAB_ID_MUSIC = 0;
     public final static int TAB_ID_FM = 1;
+
+    @Override
+    public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.create(inflater, container, savedInstanceState);
+    }
 
     @Override
     public int getRootLayoutId() {

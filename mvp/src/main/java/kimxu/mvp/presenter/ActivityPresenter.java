@@ -1,8 +1,10 @@
 package kimxu.mvp.presenter;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -42,6 +44,9 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             viewDelegate.setSupportActionBar(getSupportActionBar());
+            if (!TextUtils.isEmpty(viewDelegate.getToolbar().getTitle())) {
+                viewDelegate.getToolbar().setTitleTextColor(Color.parseColor("#ffffff"));
+            }
         }
     }
 
