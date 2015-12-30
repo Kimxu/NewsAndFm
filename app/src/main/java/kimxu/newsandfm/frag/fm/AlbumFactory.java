@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
-import kimxu.core.net.model.discoverRecommend.List__;
+import kimxu.xmly.discoverRecommend.List__;
 import kimxu.newsandfm.R;
 
 /**

@@ -8,17 +8,22 @@ import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import kimxu.core.net.ApiService;
 import kimxu.mvp.databind.DataBindActivity;
 import kimxu.mvp.view.IDelegate;
 
 public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivity<T>{
     protected KBaseActivity mActivity;
-
+    protected KBaseApplication mApplication;
+    protected ApiService mApiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mActivity = this;
+        mApiService=ApiService.getInstance();
+        mApplication= (KBaseApplication) getApplication();
         setStatusBar();
         super.onCreate(savedInstanceState);
+
     }
 
     private void setStatusBar() {

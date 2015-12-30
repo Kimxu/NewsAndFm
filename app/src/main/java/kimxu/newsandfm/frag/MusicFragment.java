@@ -5,7 +5,7 @@ import android.view.View;
 
 import kimxu.newsandfm.KBaseFragment;
 import kimxu.newsandfm.R;
-import kimxu.newsandfm.frag.music.LocalMusicActivity;
+import kimxu.newsandfm.aty.LocalMusicActivity;
 
 /**
  * 新闻

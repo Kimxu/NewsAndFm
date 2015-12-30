@@ -10,10 +10,9 @@ import kimxu.newsandfm.R;
 
 /**
  *
- * Created by xuzhiguo on 15/11/26.
+ * Created by kimxu on 15/11/26.
  */
 public class WebDelegate extends AppAtyDelegate {
-    private Toolbar toolbar;
     private WebView webView;
     @Override
     public int getRootLayoutId() {
@@ -22,8 +21,6 @@ public class WebDelegate extends AppAtyDelegate {
 
     @Override
     public void initWidget() {
-        super.initWidget();
-        toolbar=get(R.id.tBar_atyWeb);
         webView=get(R.id.wView_atyWeb);
     }
 
@@ -58,6 +55,6 @@ public class WebDelegate extends AppAtyDelegate {
 
     @Override
     public Toolbar getToolbar() {
-        return toolbar;
+        return get(R.id.tBar_atyXXX);
     }
 }

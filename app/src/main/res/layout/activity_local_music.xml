@@ -2,13 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/nf_white"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".frag.music.LocalMusicActivity">
+    tools:context=".aty.LocalMusicActivity">
     <include
-        android:id="@+id/tBar_atyMain"
+        android:id="@+id/tBar_atyXXX"
         layout="@layout/app_normal_toolbar" />
+    <kimxu.newsandfm.widget.HintView
+        android:id="@+id/hintView_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <ListView
+        android:id="@+id/lv_atyLocalMusic"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

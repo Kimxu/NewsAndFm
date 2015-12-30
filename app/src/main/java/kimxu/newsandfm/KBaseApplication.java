@@ -1,29 +1,73 @@
 package kimxu.newsandfm;
 
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.os.Looper;
 import android.widget.Toast;
 
 import org.litepal.LitePalApplication;
 
+import kimxu.newsandfm.service.PlayMusicService;
 import kimxu.newsandfm.utils.DbUtils;
 import kimxu.utils.L;
+import kimxu.utils.Ts;
 
 /**
  * Application基类
  * Created by xuzhiguo on 15/11/19.
  */
 public class KBaseApplication extends LitePalApplication {
-
+    private KBaseApplication mApplication;
+    public PlayMusicService mPlayMusicService;
     @Override
     public void onCreate() {
         super.onCreate();
+        mApplication=this;
         DbUtils.initDateBase();
         L.isDebug =BuildConfig.LOG_DEBUG;
         /** 异常自己处理 */
         //Thread.setDefaultUncaughtExceptionHandler(mUncaughtExceptionHandler);
         //LitePalApplication.initialize(this);
+
+
+        startPlayMusicService();
+        bindPlayMusicService();
     }
+
+    private void startPlayMusicService() {
+        Intent it = new Intent (mApplication, PlayMusicService.class);
+        startService(it);
+    }
+
+    private void stopPlayMusicService() {
+        Intent it = new Intent(mApplication, PlayMusicService.class);
+        stopService(it);
+    }
+
+    private void bindPlayMusicService() {
+        Intent it = new Intent (mApplication, PlayMusicService.class);
+        this.bindService(it, new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                if (service instanceof PlayMusicService.ServiceBinder) {
+                    PlayMusicService.ServiceBinder binder = (PlayMusicService.ServiceBinder)service;
+                    mPlayMusicService = binder.getService();
+                    //mPlayMusicService.registerServiceCallback(mPlayManager);
+                    mPlayMusicService.registerServiceCallback();
+                }
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                Ts.showToast(mApplication,"PlayMusicService is Disconnected"+name);
+            }
+        }, Service.BIND_AUTO_CREATE);
+    }
+
+
 
     /**
      * 以下为uncaught exception的处理代码 防止程序崩溃
