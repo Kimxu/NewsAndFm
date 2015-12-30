@@ -3,6 +3,7 @@ package kimxu.newsandfm.aty;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
@@ -45,11 +46,15 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         mApplication.mPlayMusicService.setOnPlaybackListener((source, state) -> mState = state);
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
+    }
 
-        String title = mAudios.get(mPosition).getTitle();
-
-
+    /**
+     * 设置歌曲相册
+     * @param title
+     */
+    private void setPhotoAlbum(String title, ImageView imageView) {
         mApiService.apiBdyyManager.getSongId(title).map(searchId -> {
+            //如果获取不到，就返回-1
             if (searchId.getSong().size() == 0) {
                 return "-1";
             } else {
@@ -70,26 +75,27 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
                     @Override
                     public void onNext(String songid) {
-                        mApiService.apiBdyyManager.getAlbumPic(songid).map(albumPic -> {
-                            return albumPic.getSonginfo().getPicHuge();
-                        }).subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Subscriber<String>() {
-                                    @Override
-                                    public void onCompleted() {
+                        if (!songid.equals("-1")) {
+                            mApiService.apiBdyyManager.getAlbumPic(songid).map(albumPic -> albumPic.getSonginfo().getPicHuge())
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Subscriber<String>() {
+                                        @Override
+                                        public void onCompleted() {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onError(Throwable e) {
+                                        @Override
+                                        public void onError(Throwable e) {
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onNext(String s) {
-                                        Picasso.with(mActivity).load(s).into(viewDelegate.ivPhotoAlbum);
-                                    }
-                                });
+                                        @Override
+                                        public void onNext(String s) {
+                                            Picasso.with(mActivity).load(s).into(imageView);
+                                        }
+                                    });
+                        }
                     }
                 });
     }
@@ -118,7 +124,9 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         if (mAudios != null) {
             mCurrentPosition++;
             if (mCurrentPosition <= mAudios.size()) {
-                mApplication.mPlayMusicService.start(mAudios.get(++mCurrentPosition));
+                Audio audio= mAudios.get(++mCurrentPosition);
+                mApplication.mPlayMusicService.start(audio);
+                setPhotoAlbum(audio.getTitle(),viewDelegate.ivPhotoAlbum);
             } else {
                 Ts.showToast(mActivity, "是最后一首啦~");
             }
@@ -129,7 +137,9 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         if (mAudios != null) {
             mCurrentPosition--;
             if (mCurrentPosition >= 0) {
-                mApplication.mPlayMusicService.start(mAudios.get(--mCurrentPosition));
+                Audio audio=mAudios.get(--mCurrentPosition);
+                mApplication.mPlayMusicService.start(audio);
+                setPhotoAlbum(audio.getTitle(),viewDelegate.ivPhotoAlbum);
             } else {
                 Ts.showToast(mActivity, "是第一首啦~");
             }
@@ -144,8 +154,9 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         } else {
             if (mAudios != null) {
                 mCurrentPosition = mPosition;
-                mApplication.mPlayMusicService.start(mAudios.get(mCurrentPosition));
-
+                Audio audio =mAudios.get(mCurrentPosition);
+                mApplication.mPlayMusicService.start(audio);
+                setPhotoAlbum(audio.getTitle(),viewDelegate.ivPhotoAlbum);
             }
         }
     }
