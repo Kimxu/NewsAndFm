@@ -1,16 +1,19 @@
 package kimxu.newsandfm.aty;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
+import android.widget.RemoteViews;
 
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseActivity;
+import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
 import kimxu.utils.ScreenUtils;
 
@@ -24,21 +27,8 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //WebActivity.launch(this);
-        handleIntent();
-
-    }
-
-    @Override
-    public DataBinder getDataBinder() {
-        return null;
-    }
-
-
-    @Override
     protected void bindEvenListener() {
+        handleIntent();
         mCursorWidth = BitmapFactory.decodeResource(getResources(),
                 R.drawable.nf_cursor).getWidth();
         mWindowWidth = ScreenUtils.getScreenWidth(mActivity);
@@ -47,7 +37,10 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         viewDelegate.setCurrentItem(MainDelegate.TAB_ID_MUSIC);
         viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
         NAVS_LENGTH = viewDelegate.getNavs().length;
+
     }
+
+
     @Override
     protected Class<MainDelegate> getDelegateClass() {
         return MainDelegate.class;
@@ -70,6 +63,10 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         }
     }
 
+    @Override
+    public DataBinder getDataBinder() {
+        return null;
+    }
 
 
     class NfOnPageChangeListener implements ViewPager.OnPageChangeListener {

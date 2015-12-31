@@ -4,17 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseSwipeBackActivity;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
-import kimxu.utils.Ts;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -25,12 +23,12 @@ import rx.schedulers.Schedulers;
  * Created by kimxu on 2015/12/30
  */
 public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDelegate> implements View.OnClickListener {
-    private static final String CURRENT_AUDIO = "Audios";
-    private static final String CURRENT_AUDIO_POSITION = "Audio_position";
-    private ArrayList<Audio> mAudios;
-    private int mPosition;//记录传进来的歌曲标识
+    //private static final String CURRENT_AUDIO = "Audios";
+    //private static final String CURRENT_AUDIO_POSITION = "Audio_position";
+    //private ArrayList<Audio> mAudios;
+    //private int mPosition;//记录传进来的歌曲标识
     private PlayMusicService.State mState;
-    private int mCurrentPosition;//当前播放的表识
+    //private int mCurrentPosition;//当前播放的表识
 
     @Override
     public DataBinder getDataBinder() {
@@ -39,17 +37,56 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
     @Override
     protected void bindEvenListener() {
-        mAudios = (ArrayList<Audio>) getIntent().getSerializableExtra(CURRENT_AUDIO);
-        mPosition = getIntent().getIntExtra(CURRENT_AUDIO_POSITION, 0);
-        viewDelegate.setOnClickListener(this, R.id.ib_musicPlayer_playStart, R.id.ib_musicPlayer_playPre, R.id.ib_musicPlayer_playNext);
+        //mAudios = mApplication.audios;
+        //playIsCurrent
+        //mPosition = mApplication.mPosition;
+        viewDelegate.setOnClickListener(this, R.id.ib_atyMusicPlayer_playNext, R.id.ib_atyMusicPlayer_playPre, R.id.ib_atyMusicPlayer_playStart);
         //歌曲状态改变
-        mApplication.mPlayMusicService.setOnPlaybackListener((source, state) -> mState = state);
+        mApplication.mPlayMusicService.setOnPlaybackListener(new PlayMusicService.OnPlaybackListener() {
+            @Override
+            public void onStateChanged(Audio source, PlayMusicService.State state) {
+                mState = state;
+                viewDelegate.setPlayStartStatus(mActivity, mState);
+                if (source != null)
+                    viewDelegate.setToolbarTitle(source.getTitle());
+            }
+
+            @Override
+            public void onStartProgressChanged(int progress) {
+                viewDelegate.skProgress.setProgress(progress);
+            }
+
+            @Override
+            public void onStartProgressDuration(int duration) {
+                viewDelegate.skProgress.setMax(duration);
+            }
+        });
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
+        viewDelegate.setPlayStartStatus(mActivity, mState);
+        viewDelegate.setProgressListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser)
+                    mApplication.mPlayMusicService.seekTo(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
     }
 
     /**
      * 设置歌曲相册
+     *
      * @param title
      */
     private void setPhotoAlbum(String title, ImageView imageView) {
@@ -108,42 +145,26 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ib_musicPlayer_playPre:
+            case R.id.ib_atyMusicPlayer_playPre:
                 playPre();
                 break;
-            case R.id.ib_musicPlayer_playStart:
+            case R.id.ib_atyMusicPlayer_playStart:
                 playStart();
                 break;
-            case R.id.ib_musicPlayer_playNext:
+            case R.id.ib_atyMusicPlayer_playNext:
                 playNext();
                 break;
         }
     }
 
     private void playNext() {
-        if (mAudios != null) {
-            mCurrentPosition++;
-            if (mCurrentPosition <= mAudios.size()) {
-                Audio audio= mAudios.get(++mCurrentPosition);
-                mApplication.mPlayMusicService.start(audio);
-                setPhotoAlbum(audio.getTitle(),viewDelegate.ivPhotoAlbum);
-            } else {
-                Ts.showToast(mActivity, "是最后一首啦~");
-            }
-        }
+        if (mApplication.playNext() != null)
+            funStart(mApplication.playNext());
     }
 
     private void playPre() {
-        if (mAudios != null) {
-            mCurrentPosition--;
-            if (mCurrentPosition >= 0) {
-                Audio audio=mAudios.get(--mCurrentPosition);
-                mApplication.mPlayMusicService.start(audio);
-                setPhotoAlbum(audio.getTitle(),viewDelegate.ivPhotoAlbum);
-            } else {
-                Ts.showToast(mActivity, "是第一首啦~");
-            }
-        }
+        if (mApplication.playPre() != null)
+            funStart(mApplication.playPre());
     }
 
     private void playStart() {
@@ -152,19 +173,21 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         } else if (mState == PlayMusicService.State.PAUSED) {
             mApplication.mPlayMusicService.reStart();
         } else {
-            if (mAudios != null) {
-                mCurrentPosition = mPosition;
-                Audio audio =mAudios.get(mCurrentPosition);
-                mApplication.mPlayMusicService.start(audio);
-                setPhotoAlbum(audio.getTitle(),viewDelegate.ivPhotoAlbum);
+            if (mApplication.play() != null) {
+                funStart(mApplication.play());
             }
         }
+
     }
 
-    public static void launch(Activity activity, ArrayList<Audio> audios, int position) {
-        activity.startActivity(new Intent(activity, MusicPlayerActivity.class)
-                .putExtra(CURRENT_AUDIO, audios)
-                .putExtra(CURRENT_AUDIO_POSITION, position));
+    private void funStart(Audio audio) {
+        mApplication.mPlayMusicService.start(audio);
+
+        setPhotoAlbum(audio.getTitle(), viewDelegate.ivPhotoAlbum);
+    }
+
+    public static void launch(Activity activity) {
+        activity.startActivity(new Intent(activity, MusicPlayerActivity.class));
     }
 
 }

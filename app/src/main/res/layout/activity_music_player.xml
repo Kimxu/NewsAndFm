@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/nf_gray"
+    android:fitsSystemWindows="true"
     tools:context="kimxu.newsandfm.aty.MusicPlayerActivity">
 
     <include
@@ -18,23 +18,23 @@
         android:layout_below="@+id/tBar_atyXXX"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        tools:src="@color/nf_black" />
+        android:background="@drawable/nf_album_default" />
 
     <SeekBar
         android:id="@+id/sb_musicPlayer_playProgress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ll_musicPlayer_playController"
+        android:layout_above="@+id/ll_atyMusicPlayer_playController"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:max="100"
-        android:progressDrawable="@drawable/play_progressbar"
-        android:thumb="@drawable/progress_thumb"
+        android:progressDrawable="@drawable/nf_play_progressbar"
+        android:thumb="@drawable/nf_play_progress_thumb"
         android:thumbOffset="5dp" />
 
     <LinearLayout
-        android:id="@+id/ll_musicPlayer_playController"
+        android:id="@+id/ll_atyMusicPlayer_playController"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -44,26 +44,23 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/ib_musicPlayer_playPre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/player_btn_pre_normal" />
+            android:id="@+id/ib_atyMusicPlayer_playPre"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/nf_player_btn_pre_normal" />
 
         <ImageButton
-            android:id="@+id/ib_musicPlayer_playStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/ib_atyMusicPlayer_playStart"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/player_btn_play_normal" />
+            tools:background="@drawable/nf_player_btn_play_normal" />
 
         <ImageButton
-            android:id="@+id/ib_musicPlayer_playNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/player_btn_next_normal" />
+            android:id="@+id/ib_atyMusicPlayer_playNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/nf_player_btn_next_normal" />
     </LinearLayout>
 </RelativeLayout>

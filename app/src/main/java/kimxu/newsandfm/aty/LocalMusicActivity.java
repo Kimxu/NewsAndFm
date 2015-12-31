@@ -31,7 +31,9 @@ public class LocalMusicActivity extends KBaseSwipeBackActivity<LocalMusicFDelega
                 .subscribe((ArrayList<Audio> audios) -> {
                     AssemblyAdapter adapter = new AssemblyAdapter(audios);
                     adapter.addItemFactory(new LocalMusicFactory(position -> {
-                        MusicPlayerActivity.launch(mActivity,audios,position);
+                        mApplication.audios=audios;
+                        mApplication.mPosition =position;
+                        MusicPlayerActivity.launch(mActivity);
                     }));
                     viewDelegate.setAdapter(adapter);
                     viewDelegate.hiddenHintView();
