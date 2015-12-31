@@ -1,7 +1,6 @@
 package kimxu.newsandfm.aty;
 
-import android.app.Notification;
-import android.app.PendingIntent;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
@@ -9,11 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.ViewGroup;
-import android.widget.RemoteViews;
 
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseActivity;
-import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
 import kimxu.utils.ScreenUtils;
 
@@ -106,5 +103,9 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         public void destroyItem(ViewGroup container, int position, Object object) {
 
         }
+    }
+
+    public static void launch(Activity activity){
+        activity.startActivity(new Intent(activity,MainActivity.class));
     }
 }

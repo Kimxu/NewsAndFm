@@ -19,6 +19,7 @@ import java.util.List;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
 import kimxu.newsandfm.utils.DbUtils;
+import kimxu.newsandfm.utils.GlobalUtils;
 import kimxu.utils.L;
 import kimxu.utils.Ts;
 
@@ -127,6 +128,22 @@ public class KBaseApplication extends LitePalApplication {
                     PlayMusicService.ServiceBinder binder = (PlayMusicService.ServiceBinder) service;
                     mPlayMusicService = binder.getService();
                     //mPlayMusicService.registerServiceCallback(mPlayManager);
+                    mPlayMusicService.setOnPlaybackListener(new PlayMusicService.OnPlaybackListener() {
+                        @Override
+                        public void onStateChanged(Audio source, PlayMusicService.State state) {
+
+                        }
+
+                        @Override
+                        public void onStartProgressChanged(int progress) {
+
+                        }
+
+                        @Override
+                        public void onStartProgressDuration(int duration) {
+
+                        }
+                    });
                     mPlayMusicService.registerServiceCallback();
                 }
             }
@@ -187,5 +204,16 @@ public class KBaseApplication extends LitePalApplication {
         Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+
+    public void setNotificationStatus(PlayMusicService.State state){
+        if (state== PlayMusicService.State.STARTED){
+            mNotification.contentView.setBitmap(R.id.ib_notificationControl_playStart,"setImageBitmap", GlobalUtils.drawable2Bitmap(mApplication, R.drawable.nf_player_btn_pause_normal));
+            mNotificationManager.notify(NfContant.MUSIC_NOTIFICATION, mNotification);
+        }else{
+            mNotification.contentView.setBitmap(R.id.ib_notificationControl_playStart,"setImageBitmap", GlobalUtils.drawable2Bitmap(mApplication, R.drawable.nf_player_btn_play_normal));
+            mNotificationManager.notify(NfContant.MUSIC_NOTIFICATION, mNotification);
+        }
     }
 }

@@ -13,6 +13,7 @@ import kimxu.newsandfm.KBaseSwipeBackActivity;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
+import kimxu.utils.L;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -46,6 +47,8 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             @Override
             public void onStateChanged(Audio source, PlayMusicService.State state) {
                 mState = state;
+                //控制通知栏的播放状态
+                mApplication.setNotificationStatus(mState);
                 viewDelegate.setPlayStartStatus(mActivity, mState);
                 if (source != null)
                     viewDelegate.setToolbarTitle(source.getTitle());
@@ -190,4 +193,9 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         activity.startActivity(new Intent(activity, MusicPlayerActivity.class));
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        L.e("onNewIntent");
+        super.onNewIntent(intent);
+    }
 }

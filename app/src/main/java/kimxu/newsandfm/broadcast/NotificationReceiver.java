@@ -21,7 +21,6 @@ public class NotificationReceiver extends BroadcastReceiver {
         String ctrl_code = intent.getAction();//获取action标记，用户区分点击事件  
         if (application.audios != null) {
             if ("play".equals(ctrl_code)) {
-
                 if (application.mPlayMusicService.getPlayer() == null)
                     playStart();
                 else {
@@ -44,7 +43,6 @@ public class NotificationReceiver extends BroadcastReceiver {
     private void playStart() {
         //application.mNotification.contentView.setImageViewBitmap(R.id.ib_notificationControl_playStart, GlobalUtils.drawable2Bitmap(application, R.drawable.nf_player_btn_play_normal));
         application.mNotification.contentView.setBitmap(R.id.ib_notificationControl_playStart,"setImageBitmap", GlobalUtils.drawable2Bitmap(application, R.drawable.nf_player_btn_play_normal));
-        //application.mNotification.notify();
         application.mNotificationManager.notify(NfContant.MUSIC_NOTIFICATION, application.mNotification);
         application.mPlayMusicService.start(application.play());
 
@@ -55,7 +53,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         application.mNotification.contentView.setBitmap(R.id.ib_notificationControl_playStart,"setImageBitmap", GlobalUtils.drawable2Bitmap(application, R.drawable.nf_player_btn_pause_normal));
         application.mNotificationManager.notify(NfContant.MUSIC_NOTIFICATION, application.mNotification);
         application.mPlayMusicService.paused();
-
     }
+
 
 }  
