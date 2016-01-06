@@ -1,7 +1,10 @@
 package kimxu.newsandfm.aty;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -10,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseSwipeBackActivity;
+import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
@@ -24,12 +28,19 @@ import rx.schedulers.Schedulers;
  * Created by kimxu on 2015/12/30
  */
 public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDelegate> implements View.OnClickListener {
-    //private static final String CURRENT_AUDIO = "Audios";
-    //private static final String CURRENT_AUDIO_POSITION = "Audio_position";
-    //private ArrayList<Audio> mAudios;
-    //private int mPosition;//记录传进来的歌曲标识
+    private IntentFilter mPlayMusicFilter;
+    private MusicPlayReceiver mMusicPlayReceiver;
     private PlayMusicService.State mState;
-    //private int mCurrentPosition;//当前播放的表识
+    public static final String INTENT_NAME ="intent_name";
+    public static final int INTENT_STATE_CHANGED =0x001;
+    public static final int INTENT_STATE_PROGRESS_CHANGED =0x002;
+    public static final int INTENT_STATE_PROGRESS_DURATION =0x003;
+
+    public static final String ARG_SOURCE="source";
+    public static final String ARG_STATE="state";
+    public static final String ARG_PROGRESS="progress";
+    public static final String ARG_DURATION="duration";
+
 
     @Override
     public DataBinder getDataBinder() {
@@ -38,34 +49,11 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
     @Override
     protected void bindEvenListener() {
-        //mAudios = mApplication.audios;
-        //playIsCurrent
-        //mPosition = mApplication.mPosition;
         viewDelegate.setOnClickListener(this, R.id.ib_atyMusicPlayer_playNext, R.id.ib_atyMusicPlayer_playPre, R.id.ib_atyMusicPlayer_playStart);
-        //歌曲状态改变
-        mApplication.mPlayMusicService.setOnPlaybackListener(new PlayMusicService.OnPlaybackListener() {
-            @Override
-            public void onStateChanged(Audio source, PlayMusicService.State state) {
-                mState = state;
-                //控制通知栏的播放状态
-                mApplication.setNotificationStatus(mState);
-                viewDelegate.setPlayStartStatus(mActivity, mState);
-                if (source != null)
-                    viewDelegate.setToolbarTitle(source.getTitle());
-            }
-
-            @Override
-            public void onStartProgressChanged(int progress) {
-                viewDelegate.skProgress.setProgress(progress);
-            }
-
-            @Override
-            public void onStartProgressDuration(int duration) {
-                viewDelegate.skProgress.setMax(duration);
-            }
-        });
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
+        viewDelegate.setToolbarTitle(mApplication.getCurrentAudioTitle());
+        mState=mApplication.mState;
         viewDelegate.setPlayStartStatus(mActivity, mState);
         viewDelegate.setProgressListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -85,6 +73,8 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             }
         });
 
+        mMusicPlayReceiver=new MusicPlayReceiver();
+        mPlayMusicFilter =new IntentFilter(NfContant.INTENT_PLAY_MUSIC);
     }
 
     /**
@@ -161,13 +151,15 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     }
 
     private void playNext() {
-        if (mApplication.playNext() != null)
-            funStart(mApplication.playNext());
+        Audio audio;
+        if ((audio=mApplication.playNext()) != null)
+            funStart(audio);
     }
 
     private void playPre() {
-        if (mApplication.playPre() != null)
-            funStart(mApplication.playPre());
+        Audio audio;
+        if ((audio=mApplication.playPre()) != null)
+            funStart(audio);
     }
 
     private void playStart() {
@@ -185,7 +177,6 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
     private void funStart(Audio audio) {
         mApplication.mPlayMusicService.start(audio);
-
         setPhotoAlbum(audio.getTitle(), viewDelegate.ivPhotoAlbum);
     }
 
@@ -197,5 +188,44 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     protected void onNewIntent(Intent intent) {
         L.e("onNewIntent");
         super.onNewIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mMusicPlayReceiver,mPlayMusicFilter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mMusicPlayReceiver);
+    }
+
+    public class MusicPlayReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int intentName = intent.getIntExtra(INTENT_NAME,-1);
+            if (intentName==-1)
+                return;
+            switch (intentName){
+                case INTENT_STATE_CHANGED:
+                    Audio source = (Audio) intent.getSerializableExtra(ARG_SOURCE);
+                    mState = (PlayMusicService.State) intent.getSerializableExtra(ARG_STATE);
+                    viewDelegate.setPlayStartStatus(mActivity, mState);
+                    if (source != null)
+                        viewDelegate.setToolbarTitle(source.getTitle());
+                    break;
+                case INTENT_STATE_PROGRESS_CHANGED:
+                    int progress= intent.getIntExtra(ARG_PROGRESS,-1);
+                    viewDelegate.skProgress.setProgress(progress);
+                    break;
+                case INTENT_STATE_PROGRESS_DURATION:
+                    int duration= intent.getIntExtra(ARG_DURATION,-1);
+                    viewDelegate.skProgress.setMax(duration);
+                    break;
+            }
+        }
     }
 }

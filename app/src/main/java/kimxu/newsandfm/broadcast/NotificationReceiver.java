@@ -7,6 +7,7 @@ import android.content.Intent;
 import kimxu.newsandfm.KBaseApplication;
 import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
+import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.utils.GlobalUtils;
 
 /**
@@ -34,9 +35,15 @@ public class NotificationReceiver extends BroadcastReceiver {
                 application.mPlayMusicService.paused();
                 System.out.println("pause");
             } else if ("next".equals(ctrl_code)) {
-                application.mPlayMusicService.start(application.playNext());
+                playNext();
                 System.out.println("next");
             }
+        }
+    }
+    private void playNext() {
+        Audio audio;
+        if ((audio=application.playNext()) != null) {
+            application.mPlayMusicService.start(audio);
         }
     }
 

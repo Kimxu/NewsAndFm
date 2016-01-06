@@ -16,6 +16,7 @@ import org.litepal.LitePalApplication;
 
 import java.util.List;
 
+import kimxu.newsandfm.aty.MusicPlayerActivity;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
 import kimxu.newsandfm.utils.DbUtils;
@@ -35,6 +36,10 @@ public class KBaseApplication extends LitePalApplication {
     public List<Audio> audios;
     //歌曲播放位置
     public int mPosition;
+    //当前播放歌曲
+    public Audio mAudio;
+    //当前播放歌曲状态
+    public PlayMusicService.State mState;
 
     public Notification mNotification;
 
@@ -47,11 +52,11 @@ public class KBaseApplication extends LitePalApplication {
         /** 异常自己处理 */
         //Thread.setDefaultUncaughtExceptionHandler(mUncaughtExceptionHandler);
         //LitePalApplication.initialize(this);
-        startPlayMusicService();
-        bindPlayMusicService();
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // 初始化通知栏播放控件
         initNotificationBar();
+        startPlayMusicService();
+        bindPlayMusicService();
     }
 
     public Audio playPre() {
@@ -68,12 +73,14 @@ public class KBaseApplication extends LitePalApplication {
     public Audio playNext() {
         if (audios != null) {
             mPosition++;
-            if (mPosition <= audios.size()) {
+            if (mPosition < audios.size()) {
                 return audios.get(mPosition);
             } else {
                 return null;
             }
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     public Audio play(){
@@ -85,7 +92,6 @@ public class KBaseApplication extends LitePalApplication {
             }
         } else return null;
     }
-
 
     private void initNotificationBar() {
         mNotification = new Notification();
@@ -127,24 +133,36 @@ public class KBaseApplication extends LitePalApplication {
                 if (service instanceof PlayMusicService.ServiceBinder) {
                     PlayMusicService.ServiceBinder binder = (PlayMusicService.ServiceBinder) service;
                     mPlayMusicService = binder.getService();
-                    //mPlayMusicService.registerServiceCallback(mPlayManager);
-                    mPlayMusicService.setOnPlaybackListener(new PlayMusicService.OnPlaybackListener() {
+                    mPlayMusicService.registerServiceCallback();
+                    mApplication.mPlayMusicService.setOnPlaybackListener(new PlayMusicService.OnPlaybackListener() {
                         @Override
                         public void onStateChanged(Audio source, PlayMusicService.State state) {
-
+                            mAudio=source;
+                            mState=state;
+                            setNotificationStatus(mState);
+                            Intent intent = new Intent(NfContant.INTENT_PLAY_MUSIC);
+                            intent.putExtra(MusicPlayerActivity.INTENT_NAME,MusicPlayerActivity.INTENT_STATE_CHANGED);
+                            intent.putExtra(MusicPlayerActivity.ARG_SOURCE,source);
+                            intent.putExtra(MusicPlayerActivity.ARG_STATE,state);
+                            sendBroadcast(intent);
                         }
 
                         @Override
                         public void onStartProgressChanged(int progress) {
-
+                            Intent intent = new Intent(NfContant.INTENT_PLAY_MUSIC);
+                            intent.putExtra(MusicPlayerActivity.INTENT_NAME,MusicPlayerActivity.INTENT_STATE_PROGRESS_CHANGED);
+                            intent.putExtra(MusicPlayerActivity.ARG_PROGRESS,progress);
+                            sendBroadcast(intent);
                         }
 
                         @Override
                         public void onStartProgressDuration(int duration) {
-
+                            Intent intent = new Intent(NfContant.INTENT_PLAY_MUSIC);
+                            intent.putExtra(MusicPlayerActivity.INTENT_NAME,MusicPlayerActivity.INTENT_STATE_PROGRESS_DURATION);
+                            intent.putExtra(MusicPlayerActivity.ARG_DURATION,duration);
+                            sendBroadcast(intent);
                         }
                     });
-                    mPlayMusicService.registerServiceCallback();
                 }
             }
 
@@ -154,7 +172,14 @@ public class KBaseApplication extends LitePalApplication {
             }
         }, Service.BIND_AUTO_CREATE);
     }
-
+    /** 当前歌曲的名称*/
+    public String getCurrentAudioTitle(){
+        if (mAudio==null){
+            return "";
+        }else{
+            return mAudio.getTitle();
+        }
+    }
 
     /**
      * 以下为uncaught exception的处理代码 防止程序崩溃

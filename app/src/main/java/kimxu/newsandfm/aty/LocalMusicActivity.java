@@ -29,9 +29,9 @@ public class LocalMusicActivity extends KBaseSwipeBackActivity<LocalMusicFDelega
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((ArrayList<Audio> audios) -> {
+                    mApplication.audios=audios;
                     AssemblyAdapter adapter = new AssemblyAdapter(audios);
                     adapter.addItemFactory(new LocalMusicFactory(position -> {
-                        mApplication.audios=audios;
                         mApplication.mPosition =position;
                         MusicPlayerActivity.launch(mActivity);
                     }));
