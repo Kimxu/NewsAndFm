@@ -2,11 +2,12 @@ package kimxu.core.net;
 
 import java.util.Map;
 
-import kimxu.bdyy.pic.AlbumPic;
+import kimxu.bdyy.pic.AlbumInfo;
 import kimxu.bdyy.searchSongId.SearchId;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
 import retrofit.RestAdapter;
+import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -16,6 +17,7 @@ import rx.Observable;
 public class ApiService {
     public ApiXmlyManagerService apiXmlyManager;//获得喜马拉雅
     public ApiBdyyManagerService apiBdyyManager;//百度云音乐
+    public ApiLrcManagerService apiLrcManager;//歌词搜索
     private static ApiService apiService;
     private ApiService (){
         String ENDPOINT = "http://mobile.ximalaya.com";
@@ -25,6 +27,9 @@ public class ApiService {
         ENDPOINT = "http://tingapi.ting.baidu.com/v1/restserver";
         RestAdapter restBdyyAdapter =new RestAdapter.Builder().setEndpoint(ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL).build();
         apiBdyyManager =restBdyyAdapter.create(ApiBdyyManagerService.class);
+        ENDPOINT="http://musicdata.baidu.com/data2/lrc";
+        RestAdapter restLrcAdapter =new RestAdapter.Builder().setEndpoint(ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL).build();
+        apiLrcManager=restLrcAdapter.create(ApiLrcManagerService.class);
     }
     public static ApiService getInstance(){
         if (apiService==null){
@@ -57,8 +62,18 @@ public class ApiService {
         Observable<SearchId> getSongId(@Query("query") String query);
 
         @GET("/ting"+bdyyUrl+"method=baidu.ting.song.getInfos")
-        Observable<AlbumPic> getAlbumPic(@Query("songid")String songid);
+        Observable<AlbumInfo> getAlbumPic(@Query("songid")String songid);
     }
+
+    public interface ApiLrcManagerService{
+        //搜索歌词
+        @GET("/{songId}/{songName}")
+        Observable<Response> getLrc(@Path("songId")String songId, @Path("songName")String songName);
+
+//        @GET("/{path}")
+//        Observable<File> getmLrc(@Path("path")String path);
+    }
+
     public Observable<Album> getAlbum(String pager, Map<String,String> map){
         //albumId=321705&pageSize=20&isAsc=true&position=3&device=android
         map.put("pageSize","20");

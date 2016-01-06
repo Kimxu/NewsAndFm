@@ -4,7 +4,7 @@ package kimxu.bdyy.pic;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AlbumPic {
+public class AlbumInfo {
 
     @SerializedName("songurl")
     @Expose
@@ -14,7 +14,7 @@ public class AlbumPic {
     private Long errorCode;
     @SerializedName("songinfo")
     @Expose
-    private Songinfo songinfo;
+    private SongInfo songinfo;
 
     /**
      * 
@@ -57,7 +57,7 @@ public class AlbumPic {
      * @return
      *     The songinfo
      */
-    public Songinfo getSonginfo() {
+    public SongInfo getSonginfo() {
         return songinfo;
     }
 
@@ -66,7 +66,7 @@ public class AlbumPic {
      * @param songinfo
      *     The songinfo
      */
-    public void setSonginfo(Songinfo songinfo) {
+    public void setSonginfo(SongInfo songinfo) {
         this.songinfo = songinfo;
     }
 

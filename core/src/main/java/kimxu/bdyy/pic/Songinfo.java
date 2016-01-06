@@ -1,11 +1,10 @@
 
 package kimxu.bdyy.pic;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Songinfo {
+public class SongInfo {
 
     @SerializedName("resource_type_ext")
     @Expose

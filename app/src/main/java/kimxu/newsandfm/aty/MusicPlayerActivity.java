@@ -11,13 +11,20 @@ import android.widget.SeekBar;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+
+import kimxu.bdyy.pic.AlbumInfo;
+import kimxu.bdyy.pic.SongInfo;
+import kimxu.bdyy.searchSongId.Song;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseSwipeBackActivity;
 import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
+import kimxu.newsandfm.utils.GlobalUtils;
 import kimxu.utils.L;
+import retrofit.client.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -31,15 +38,15 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     private IntentFilter mPlayMusicFilter;
     private MusicPlayReceiver mMusicPlayReceiver;
     private PlayMusicService.State mState;
-    public static final String INTENT_NAME ="intent_name";
-    public static final int INTENT_STATE_CHANGED =0x001;
-    public static final int INTENT_STATE_PROGRESS_CHANGED =0x002;
-    public static final int INTENT_STATE_PROGRESS_DURATION =0x003;
+    public static final String INTENT_NAME = "intent_name";
+    public static final int INTENT_STATE_CHANGED = 0x001;
+    public static final int INTENT_STATE_PROGRESS_CHANGED = 0x002;
+    public static final int INTENT_STATE_PROGRESS_DURATION = 0x003;
 
-    public static final String ARG_SOURCE="source";
-    public static final String ARG_STATE="state";
-    public static final String ARG_PROGRESS="progress";
-    public static final String ARG_DURATION="duration";
+    public static final String ARG_SOURCE = "source";
+    public static final String ARG_STATE = "state";
+    public static final String ARG_PROGRESS = "progress";
+    public static final String ARG_DURATION = "duration";
 
 
     @Override
@@ -53,7 +60,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
         viewDelegate.setToolbarTitle(mApplication.getCurrentAudioTitle());
-        mState=mApplication.mState;
+        mState = mApplication.mState;
         viewDelegate.setPlayStartStatus(mActivity, mState);
         viewDelegate.setProgressListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -73,8 +80,8 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             }
         });
 
-        mMusicPlayReceiver=new MusicPlayReceiver();
-        mPlayMusicFilter =new IntentFilter(NfContant.INTENT_PLAY_MUSIC);
+        mMusicPlayReceiver = new MusicPlayReceiver();
+        mPlayMusicFilter = new IntentFilter(NfContant.INTENT_PLAY_MUSIC);
     }
 
     /**
@@ -84,15 +91,15 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
      */
     private void setPhotoAlbum(String title, ImageView imageView) {
         mApiService.apiBdyyManager.getSongId(title).map(searchId -> {
-            //如果获取不到，就返回-1
+            //如果获取不到，就返回null
             if (searchId.getSong().size() == 0) {
-                return "-1";
+                return null;
             } else {
-                return searchId.getSong().get(0).getSongid();
+                return searchId.getSong().get(0);
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
+                .subscribe(new Subscriber<Song>() {
                     @Override
                     public void onCompleted() {
 
@@ -104,12 +111,13 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                     }
 
                     @Override
-                    public void onNext(String songid) {
-                        if (!songid.equals("-1")) {
-                            mApiService.apiBdyyManager.getAlbumPic(songid).map(albumPic -> albumPic.getSonginfo().getPicHuge())
+                    public void onNext(Song song) {
+                        if (song != null) {
+                            //获得封面
+                            mApiService.apiBdyyManager.getAlbumPic(song.getSongid()).map(AlbumInfo::getSonginfo)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Subscriber<String>() {
+                                    .subscribe(new Subscriber<SongInfo>() {
                                         @Override
                                         public void onCompleted() {
 
@@ -121,14 +129,65 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                                         }
 
                                         @Override
-                                        public void onNext(String s) {
-                                            Picasso.with(mActivity).load(s).into(imageView);
+                                        public void onNext(SongInfo s) {
+                                            String[] params = s.getLrclink().substring(37).split("/");
+                                            mApiService.apiLrcManager
+                                                    .getLrc(params[0], params[1])
+                                                    .subscribeOn(Schedulers.io())
+                                                    .observeOn(AndroidSchedulers.mainThread())
+                                                    .subscribe(new Subscriber<Response>() {
+                                                        @Override
+                                                        public void onCompleted() {
+                                                            L.d("ok");
+                                                        }
+
+                                                        @Override
+                                                        public void onError(Throwable e) {
+                                                            L.d(e.getLocalizedMessage());
+                                                        }
+
+                                                        @Override
+                                                        public void onNext(Response response) {
+                                                            L.d("next");
+                                                            try {
+                                                               byte[] bytes= GlobalUtils.getBytesFromStream(response.getBody().in());
+                                                                GlobalUtils.saveBytesToFile(bytes,mActivity.getFilesDir().getAbsolutePath()+"/江南.lrc");
+                                                            } catch (IOException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                            //boolean is = GlobalUtils.inputLrc2Local(mActivity, file);
+                                                        }
+                                                    });
+
+                                            Picasso.with(mActivity).load(s.getPicHuge()).into(imageView);
                                         }
                                     });
+                            //获得歌词
+//                            mApiService.apiLrcManager.getLrc(song.getSongid(),song.getSongname())
+//                                    .subscribeOn(Schedulers.io())
+//                                    .observeOn(AndroidSchedulers.mainThread())
+//                                    .subscribe(new Subscriber<File>() {
+//                                        @Override
+//                                        public void onCompleted() {
+//                                            L.d("ok");
+//                                        }
+//
+//                                        @Override
+//                                        public void onError(Throwable e) {
+//                                            L.d("e");
+//                                        }
+//                                        @Override
+//                                        public void onNext(File file) {
+//                                            boolean is = GlobalUtils.inputLrc2Local(mActivity,file);
+//                                        }
+//                                    });
                         }
+
+
                     }
                 });
     }
+
 
     @Override
     protected Class<MusicPlayerDelegate> getDelegateClass() {
@@ -152,13 +211,13 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
     private void playNext() {
         Audio audio;
-        if ((audio=mApplication.playNext()) != null)
+        if ((audio = mApplication.playNext()) != null)
             funStart(audio);
     }
 
     private void playPre() {
         Audio audio;
-        if ((audio=mApplication.playPre()) != null)
+        if ((audio = mApplication.playPre()) != null)
             funStart(audio);
     }
 
@@ -193,7 +252,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(mMusicPlayReceiver,mPlayMusicFilter);
+        registerReceiver(mMusicPlayReceiver, mPlayMusicFilter);
     }
 
     @Override
@@ -203,13 +262,12 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     }
 
     public class MusicPlayReceiver extends BroadcastReceiver {
-
         @Override
         public void onReceive(Context context, Intent intent) {
-            int intentName = intent.getIntExtra(INTENT_NAME,-1);
-            if (intentName==-1)
+            int intentName = intent.getIntExtra(INTENT_NAME, -1);
+            if (intentName == -1)
                 return;
-            switch (intentName){
+            switch (intentName) {
                 case INTENT_STATE_CHANGED:
                     Audio source = (Audio) intent.getSerializableExtra(ARG_SOURCE);
                     mState = (PlayMusicService.State) intent.getSerializableExtra(ARG_STATE);
@@ -218,11 +276,11 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                         viewDelegate.setToolbarTitle(source.getTitle());
                     break;
                 case INTENT_STATE_PROGRESS_CHANGED:
-                    int progress= intent.getIntExtra(ARG_PROGRESS,-1);
+                    int progress = intent.getIntExtra(ARG_PROGRESS, -1);
                     viewDelegate.skProgress.setProgress(progress);
                     break;
                 case INTENT_STATE_PROGRESS_DURATION:
-                    int duration= intent.getIntExtra(ARG_DURATION,-1);
+                    int duration = intent.getIntExtra(ARG_DURATION, -1);
                     viewDelegate.skProgress.setMax(duration);
                     break;
             }
