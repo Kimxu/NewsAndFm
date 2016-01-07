@@ -11,17 +11,16 @@
         android:id="@+id/tBar_atyXXX"
         layout="@layout/app_normal_toolbar" />
 
-    <ImageView
-        android:id="@+id/iv_atyMusicPlayer_photoAlbum"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/tBar_atyXXX"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/nf_album_default" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager_atyMusicPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sb_atyMusicPlayer_playProgress"
+        android:layout_below="@+id/tBar_atyXXX" />
 
     <SeekBar
-        android:id="@+id/sb_musicPlayer_playProgress"
+        android:id="@+id/sb_atyMusicPlayer_playProgress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -8,4 +8,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="discover_recommend_list_divider_height">10dp</dimen>
     <dimen name="discover_recommend_item_album_icon_height">120dp</dimen>
+
+    <dimen name="pause_bar_width">48dp</dimen>
+    <dimen name="pause_bar_distance">40dp</dimen>
+    <dimen name="pause_bar_height">144dp</dimen>
 </resources>

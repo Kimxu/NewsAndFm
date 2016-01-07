@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import kimxu.mvp.view.AppFragAtyDelegate;
+import kimxu.mvp.view.AppFragDelegate;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.frag.fm.FMIndexFragment;
 
@@ -17,7 +17,7 @@ import kimxu.newsandfm.frag.fm.FMIndexFragment;
  *
  * Created by kimxu on 15/11/24.
  */
-public class FMDelegate extends AppFragAtyDelegate {
+public class FMDelegate extends AppFragDelegate {
     private TextView tvIndex;
     private TextView tvLoad;
     private ViewPager vpContent;

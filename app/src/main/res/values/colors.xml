@@ -10,4 +10,5 @@
     <color name="nf_toolbar_selected">@color/nf_white</color>
     <color name="nf_toolbar_unselected">@color/nf_gray</color>
     <color name="nf_light_gray">#ebebeb</color>
+    <color name="nf_lrc_main">#Fc2381</color>
 </resources>

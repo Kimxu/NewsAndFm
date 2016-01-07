@@ -1,9 +1,9 @@
 package kimxu.newsandfm.aty;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 
 import kimxu.mvp.view.AppAtyDelegate;
@@ -16,9 +16,10 @@ import kimxu.newsandfm.service.PlayMusicService;
  */
 
 public class MusicPlayerDelegate extends AppAtyDelegate{
-    public ImageView ivPhotoAlbum;
+    //public ImageView ivPhotoAlbum;
     public ImageButton ibStart;
     public SeekBar skProgress;
+    public ViewPager viewPager;
     @Override
     public int getRootLayoutId() {
         return R.layout.activity_music_player;
@@ -26,10 +27,12 @@ public class MusicPlayerDelegate extends AppAtyDelegate{
 
     @Override
     public void initWidget() {
-        ivPhotoAlbum=get(R.id.iv_atyMusicPlayer_photoAlbum);
+        //ivPhotoAlbum=get(R.id.iv_atyMusicPlayer_photoAlbum);
         ibStart=get(R.id.ib_atyMusicPlayer_playStart);
-        skProgress=get(R.id.sb_musicPlayer_playProgress);
+        skProgress=get(R.id.sb_atyMusicPlayer_playProgress);
+        viewPager=get(R.id.vPager_atyMusicPlayer);
     }
+
 
 
     public void setProgressListener(SeekBar.OnSeekBarChangeListener onSeekBarChangeListener){

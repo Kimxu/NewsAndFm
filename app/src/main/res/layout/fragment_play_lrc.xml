@@ -1,0 +1,20 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lrc="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kimxu.newsandfm.frag.play.PlayLrcFragment">
+
+    <kimxu.newsandfm.widget.LrcView
+        android:id="@+id/lrc_fragPlayLrc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        lrc:currentTextColor="@color/nf_lrc_main"
+        lrc:dividerHeight="20dp"
+        lrc:normalTextColor="@color/nf_white"
+        lrc:rows="9"
+        lrc:lrctextSize="18sp" />
+
+</FrameLayout>

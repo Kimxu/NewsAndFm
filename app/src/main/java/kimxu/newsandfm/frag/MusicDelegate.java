@@ -3,14 +3,14 @@ package kimxu.newsandfm.frag;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import kimxu.mvp.view.AppFragAtyDelegate;
+import kimxu.mvp.view.AppFragDelegate;
 import kimxu.newsandfm.R;
 
 /**
  * Fragment视图类
  * Created by kimxu on 15/11/24.
  */
-public class MusicDelegate extends AppFragAtyDelegate {
+public class MusicDelegate extends AppFragDelegate {
     private ImageView ivUserPhoto;
     private TextView tvUserName;
 

@@ -5,13 +5,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.SeekBar;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import kimxu.bdyy.pic.AlbumInfo;
 import kimxu.bdyy.pic.SongInfo;
@@ -20,12 +26,13 @@ import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseSwipeBackActivity;
 import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
+import kimxu.newsandfm.frag.play.PlayCoverFragment;
+import kimxu.newsandfm.frag.play.PlayLrcFragment;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
 import kimxu.newsandfm.utils.GlobalUtils;
 import kimxu.utils.L;
-import retrofit.client.Response;
-import rx.Subscriber;
+import kimxu.utils.Ts;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -48,6 +55,9 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     public static final String ARG_PROGRESS = "progress";
     public static final String ARG_DURATION = "duration";
 
+    private List<Fragment> mFragments;
+    private PlayCoverFragment mPlayCoverFrag;
+    private PlayLrcFragment mPlayLrcFrag;
 
     @Override
     public DataBinder getDataBinder() {
@@ -56,6 +66,21 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
     @Override
     protected void bindEvenListener() {
+        initView();
+        initPlay();
+    }
+
+    private void initView() {
+        mFragments=new ArrayList<>();
+        mPlayCoverFrag=PlayCoverFragment.newInstance("","");
+        mPlayLrcFrag =PlayLrcFragment.newInstance("","");
+        mFragments.add(mPlayCoverFrag);
+        mFragments.add(mPlayLrcFrag);
+        viewDelegate.viewPager.setAdapter(new VFragAdapter(getSupportFragmentManager()));
+        viewDelegate.viewPager.setOnPageChangeListener(new VOnPageChangeListener());
+    }
+
+    private void initPlay() {
         viewDelegate.setOnClickListener(this, R.id.ib_atyMusicPlayer_playNext, R.id.ib_atyMusicPlayer_playPre, R.id.ib_atyMusicPlayer_playStart);
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
@@ -65,8 +90,10 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         viewDelegate.setProgressListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser)
+                if (fromUser) {
                     mApplication.mPlayMusicService.seekTo(progress);
+                    mPlayLrcFrag.changeCurrent(progress);
+                }
             }
 
             @Override
@@ -79,7 +106,6 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
             }
         });
-
         mMusicPlayReceiver = new MusicPlayReceiver();
         mPlayMusicFilter = new IntentFilter(NfContant.INTENT_PLAY_MUSIC);
     }
@@ -89,7 +115,13 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
      *
      * @param title
      */
-    private void setPhotoAlbum(String title, ImageView imageView) {
+    private void setPhotoAlbum(String title) {
+        boolean hasLrc = false;
+        if (!TextUtils.isEmpty(GlobalUtils.getLrcPath(mActivity,title))){
+            hasLrc=true;
+            mPlayLrcFrag.setLrc(GlobalUtils.getLrcPath(mActivity,title));
+        }
+        final boolean finalHasLrc = hasLrc;
         mApiService.apiBdyyManager.getSongId(title).map(searchId -> {
             //如果获取不到，就返回null
             if (searchId.getSong().size() == 0) {
@@ -99,95 +131,53 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Song>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Song song) {
-                        if (song != null) {
-                            //获得封面
-                            mApiService.apiBdyyManager.getAlbumPic(song.getSongid()).map(AlbumInfo::getSonginfo)
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Subscriber<SongInfo>() {
-                                        @Override
-                                        public void onCompleted() {
-
-                                        }
-
-                                        @Override
-                                        public void onError(Throwable e) {
-
-                                        }
-
-                                        @Override
-                                        public void onNext(SongInfo s) {
-                                            String[] params = s.getLrclink().substring(37).split("/");
-                                            mApiService.apiLrcManager
-                                                    .getLrc(params[0], params[1])
-                                                    .subscribeOn(Schedulers.io())
-                                                    .observeOn(AndroidSchedulers.mainThread())
-                                                    .subscribe(new Subscriber<Response>() {
-                                                        @Override
-                                                        public void onCompleted() {
-                                                            L.d("ok");
-                                                        }
-
-                                                        @Override
-                                                        public void onError(Throwable e) {
-                                                            L.d(e.getLocalizedMessage());
-                                                        }
-
-                                                        @Override
-                                                        public void onNext(Response response) {
-                                                            L.d("next");
-                                                            try {
-                                                               byte[] bytes= GlobalUtils.getBytesFromStream(response.getBody().in());
-                                                                GlobalUtils.saveBytesToFile(bytes,mActivity.getFilesDir().getAbsolutePath()+"/江南.lrc");
-                                                            } catch (IOException e) {
-                                                                e.printStackTrace();
-                                                            }
-                                                            //boolean is = GlobalUtils.inputLrc2Local(mActivity, file);
-                                                        }
-                                                    });
-
-                                            Picasso.with(mActivity).load(s.getPicHuge()).into(imageView);
-                                        }
-                                    });
-                            //获得歌词
-//                            mApiService.apiLrcManager.getLrc(song.getSongid(),song.getSongname())
-//                                    .subscribeOn(Schedulers.io())
-//                                    .observeOn(AndroidSchedulers.mainThread())
-//                                    .subscribe(new Subscriber<File>() {
-//                                        @Override
-//                                        public void onCompleted() {
-//                                            L.d("ok");
-//                                        }
-//
-//                                        @Override
-//                                        public void onError(Throwable e) {
-//                                            L.d("e");
-//                                        }
-//                                        @Override
-//                                        public void onNext(File file) {
-//                                            boolean is = GlobalUtils.inputLrc2Local(mActivity,file);
-//                                        }
-//                                    });
-                        }
-
-
+                .subscribe(song -> {
+                    if (song != null) {
+                        getCover(song, finalHasLrc);
                     }
                 });
     }
 
+    /**
+     * 获得封面
+     * @param hasLrc 是否需要加载歌词
+     */
+    private void getCover(Song song,boolean hasLrc) {
+        mApiService.apiBdyyManager.getAlbumPic(song.getSongid()).map(AlbumInfo::getSonginfo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    parsingLrc(s,hasLrc);
+                    mPlayCoverFrag.setCover(s.getPicHuge());
+                });
+    }
+
+    /**
+     * 获得歌词，保存到本地
+     */
+    private void parsingLrc(SongInfo s,boolean hasLrc) {
+        if (!TextUtils.isEmpty(s.getLrclink())&&!hasLrc) {
+            //0 歌曲编号 1 歌曲名字
+            String[] params = s.getLrclink().substring(37).split("/");
+
+            mApiService.apiLrcManager
+                    .getLrc(params[0], params[1])
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(response -> {
+                        try {
+                            byte[] bytes = GlobalUtils.getBytesFromStream(response.getBody().in());
+                            String name =URLDecoder.decode(params[1], "UTF-8");
+                            GlobalUtils.saveBytes2File(bytes, GlobalUtils.getLrcPath(mActivity) + name);
+                            mPlayLrcFrag.setLrc(GlobalUtils.getLrcPath(mActivity,name.replace(".lrc","")));
+                        } catch (IOException e) {
+                            L.e(e.getLocalizedMessage() + "歌词没加载进去");
+                        }
+                    });
+        } else {
+            Ts.showToast(mActivity, "本首歌没有歌词哦");
+        }
+    }
 
     @Override
     protected Class<MusicPlayerDelegate> getDelegateClass() {
@@ -236,7 +226,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
 
     private void funStart(Audio audio) {
         mApplication.mPlayMusicService.start(audio);
-        setPhotoAlbum(audio.getTitle(), viewDelegate.ivPhotoAlbum);
+        setPhotoAlbum(audio.getTitle());
     }
 
     public static void launch(Activity activity) {
@@ -284,6 +274,46 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                     viewDelegate.skProgress.setMax(duration);
                     break;
             }
+        }
+    }
+
+
+    class VOnPageChangeListener implements ViewPager.OnPageChangeListener {
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int offset) {
+
+        }
+
+        @Override
+        public void onPageSelected(int currentTab) {
+
+        }
+    }
+
+
+    class VFragAdapter extends FragmentStatePagerAdapter {
+
+        public VFragAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+
         }
     }
 }
