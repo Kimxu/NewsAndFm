@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,17 +55,10 @@ public class GlobalUtils {
     }
 
     public static String getLrcPath(Context context,String name){
-        boolean isExist = false;
-        String[] strings= context.getFilesDir().list();
-        for (String string:strings){
-           if(string.contains(name)){
-               isExist=true;
-           }
-        }
-        if (isExist)
-            return context.getFilesDir().getAbsolutePath()+"/"+name+".lrc";
-        else
-            return "";
+        File file =new File(getLrcPath(context)+name+".lrc");
+        if (file.exists())
+            return getLrcPath(context)+name+".lrc";
+        else return "";
     }
 
     public static String getLrcPath(Context context){

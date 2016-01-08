@@ -117,9 +117,10 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
      */
     private void setPhotoAlbum(String title) {
         boolean hasLrc = false;
-        if (!TextUtils.isEmpty(GlobalUtils.getLrcPath(mActivity,title))){
+        String path=GlobalUtils.getLrcPath(mActivity,title);
+        if (!TextUtils.isEmpty(path)){
             hasLrc=true;
-            mPlayLrcFrag.setLrc(GlobalUtils.getLrcPath(mActivity,title));
+            mPlayLrcFrag.setLrc(path);
         }
         final boolean finalHasLrc = hasLrc;
         mApiService.apiBdyyManager.getSongId(title).map(searchId -> {
@@ -156,8 +157,10 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
      * 获得歌词，保存到本地
      */
     private void parsingLrc(SongInfo s,boolean hasLrc) {
-        if (!TextUtils.isEmpty(s.getLrclink())&&!hasLrc) {
-            //0 歌曲编号 1 歌曲名字
+        if (hasLrc)
+            return;
+        if (!TextUtils.isEmpty(s.getLrclink())) {
+            //0 歌曲编号 1 歌曲名字 xxx.lrc
             String[] params = s.getLrclink().substring(37).split("/");
 
             mApiService.apiLrcManager
@@ -168,8 +171,9 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                         try {
                             byte[] bytes = GlobalUtils.getBytesFromStream(response.getBody().in());
                             String name =URLDecoder.decode(params[1], "UTF-8");
-                            GlobalUtils.saveBytes2File(bytes, GlobalUtils.getLrcPath(mActivity) + name);
-                            mPlayLrcFrag.setLrc(GlobalUtils.getLrcPath(mActivity,name.replace(".lrc","")));
+                            String path =GlobalUtils.getLrcPath(mActivity) + name;
+                            GlobalUtils.saveBytes2File(bytes,path);
+                            mPlayLrcFrag.setLrc(path);
                         } catch (IOException e) {
                             L.e(e.getLocalizedMessage() + "歌词没加载进去");
                         }
@@ -268,6 +272,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                 case INTENT_STATE_PROGRESS_CHANGED:
                     int progress = intent.getIntExtra(ARG_PROGRESS, -1);
                     viewDelegate.skProgress.setProgress(progress);
+                    mPlayLrcFrag.changeCurrent(progress);
                     break;
                 case INTENT_STATE_PROGRESS_DURATION:
                     int duration = intent.getIntExtra(ARG_DURATION, -1);
