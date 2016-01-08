@@ -3,6 +3,8 @@ package kimxu.core.net;
 import java.util.Map;
 
 import kimxu.bdyy.pic.AlbumInfo;
+import kimxu.bdyy.playlist.Playlist;
+import kimxu.bdyy.ranking.Ranking;
 import kimxu.bdyy.searchSongId.SearchId;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
@@ -58,11 +60,17 @@ public class ApiService {
     //百度音乐
     public interface ApiBdyyManagerService{
         String bdyyUrl="?from=android&version=5.6.6.1&channel=360safe&operator=3&format=json&ts=1451464605101&e=bLkVYIBl6FyH5SR9BbVH5Iv7HxAMs0b4xqQNRrBDXPwPoEE6uYJc4pqcgxu%2Bsjft&nw=2&ucf=1&res=1&l2p=0&lpb=&usup=1&lebo=0&";
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.search.catalogSug&format=json")
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.search.catalogSug")
         Observable<SearchId> getSongId(@Query("query") String query);
 
         @GET("/ting"+bdyyUrl+"method=baidu.ting.song.getInfos")
         Observable<AlbumInfo> getAlbumPic(@Query("songid")String songid);
+
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.billboard.billCategory")
+        Observable<Ranking> getRanking();
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.diy.gedan&page_size=30&page_no=1&operator=3")
+        Observable<Playlist> getPlaylist();
+
     }
 
     public interface ApiLrcManagerService{

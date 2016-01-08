@@ -4,10 +4,12 @@ package kimxu.xmly.discoverRecommend;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import kimxu.mvp.model.IModel;
+
 /**
  * 获得推荐内容
  */
-public class DiscoverRecommend {
+public class DiscoverRecommend implements IModel {
 
     @SerializedName("entrances")
     @Expose

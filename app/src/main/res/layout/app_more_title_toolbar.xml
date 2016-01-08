@@ -5,20 +5,13 @@
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    app:title=" ">
-
-    <ImageView
-        android:id="@+id/iView_appMainToolBar_center"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/nf_account_default" />
+    android:title=""
+    app:navigationIcon="?android:attr/homeAsUpIndicator">
 
     <FrameLayout
-        android:id="@+id/fLyout_appMainToolBar"
+        android:id="@+id/fLyout_appMoreTitleToolBar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
+        android:layout_height="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,33 +20,43 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tView_appMainToolBar_fm"
+                android:id="@+id/tView_appMoreTitleToolBar_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/nav_1"
+                android:text="@string/nav_more_1"
                 android:textColor="@color/nf_white"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/tView_appMainToolBar_Music"
+                android:id="@+id/tView_appMoreTitleToolBar_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/nav_2"
+                android:text="@string/nav_more_2"
+                android:textColor="@color/nf_white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tView_appMoreTitleToolBar_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/nav_more_3"
                 android:textColor="@color/nf_white"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/iVew_appMainToolBar_cursor"
+            android:id="@+id/iVew_appMoreTitleToolBar_cursor"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:scaleType="matrix"
             android:layout_gravity="bottom"
             android:background="@null"
+            android:scaleType="matrix"
             android:src="@drawable/nf_cursor" />
     </FrameLayout>
 </android.support.v7.widget.Toolbar>

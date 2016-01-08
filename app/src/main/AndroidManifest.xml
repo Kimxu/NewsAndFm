@@ -40,26 +40,30 @@
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <activity
             android:name=".aty.MusicPlayerActivity"
-            android:launchMode="singleTask"
             android:label="音乐播放"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
 
         <service
             android:name=".service.PlayMusicService"
             android:enabled="true"
-            android:exported="true"/>
-
+            android:exported="true" />
 
         <receiver
             android:name=".broadcast.NotificationReceiver"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
-                <action android:name="play" /><!-- 定制play广播 -->
-                <action android:name="next" /><!-- ...... -->
+                <action android:name="play" /> <!-- 定制play广播 -->
+                <action android:name="next" /> <!-- ...... -->
                 <action android:name="pause" />
                 <action android:name="cancel" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:label="网络音乐"
+            android:name=".aty.NetMusicActivity"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
     </application>
 
 </manifest>

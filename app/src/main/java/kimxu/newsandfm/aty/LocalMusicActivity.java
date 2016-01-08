@@ -32,7 +32,13 @@ public class LocalMusicActivity extends KBaseSwipeBackActivity<LocalMusicFDelega
                     mApplication.audios=audios;
                     AssemblyAdapter adapter = new AssemblyAdapter(audios);
                     adapter.addItemFactory(new LocalMusicFactory(position -> {
-                        mApplication.mPosition =position;
+                        if(!(mApplication.mPosition==position)) {
+                            mApplication.mPosition=position;
+                            Audio audio=mApplication.play();
+                            if (audio != null) {
+                                mApplication.mPlayMusicService.start(audio);
+                            }
+                        }
                         MusicPlayerActivity.launch(mActivity);
                     }));
                     viewDelegate.setAdapter(adapter);

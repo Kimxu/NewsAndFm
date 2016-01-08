@@ -7,6 +7,7 @@ import kimxu.mvp.view.AppFragDelegate;
 import kimxu.newsandfm.R;
 
 /**
+ * 
  * Created by kimxu on 15/12/8.
  */
 public class FMIndexDelegate extends AppFragDelegate {

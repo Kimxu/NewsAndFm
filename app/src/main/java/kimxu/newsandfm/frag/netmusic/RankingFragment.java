@@ -1,26 +1,22 @@
-package kimxu.newsandfm.frag.fm;
+package kimxu.newsandfm.frag.netmusic;
 import android.os.Bundle;
 
-import java.util.LinkedHashMap;
-
-import kimxu.adapter.AssemblyAdapter;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseFragment;
-import kimxu.utils.L;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
 /**
- *电台主页
+ *网络音乐排行
  */
-public class FMIndexFragment extends KBaseFragment<FMIndexDelegate>{
+public class RankingFragment extends KBaseFragment<NewMusicDelegate>{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private AssemblyAdapter mAdapter;
 
-    public static FMIndexFragment newInstance(String param1, String param2) {
-        FMIndexFragment fragment = new FMIndexFragment();
+    public static RankingFragment newInstance(String param1, String param2) {
+        RankingFragment fragment = new RankingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -34,22 +30,21 @@ public class FMIndexFragment extends KBaseFragment<FMIndexDelegate>{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        LinkedHashMap<String,String> map =new LinkedHashMap<>();
-        mApiService.getDiscoverRecommend(map)
+        mApiService.apiBdyyManager
+                .getRanking()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::notifyModelChanged,
-                        throwable -> L.e("error"+throwable.getMessage()));
-
+                .subscribe(this::notifyModelChanged);
     }
+
     @Override
-    protected Class<FMIndexDelegate> getDelegateClass() {
-        return FMIndexDelegate.class;
+    protected Class<NewMusicDelegate> getDelegateClass() {
+        return NewMusicDelegate.class;
     }
 
     @Override
     public DataBinder getDataBinder() {
-        return new FMIndexDataBinder(mActivity);
+        return new RankingDataBinder(mActivity);
     }
 
 }

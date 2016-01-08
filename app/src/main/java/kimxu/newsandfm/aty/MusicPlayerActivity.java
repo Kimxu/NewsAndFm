@@ -44,7 +44,6 @@ import rx.schedulers.Schedulers;
 public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDelegate> implements View.OnClickListener {
     private IntentFilter mPlayMusicFilter;
     private MusicPlayReceiver mMusicPlayReceiver;
-    private PlayMusicService.State mState;
     public static final String INTENT_NAME = "intent_name";
     public static final int INTENT_STATE_CHANGED = 0x001;
     public static final int INTENT_STATE_PROGRESS_CHANGED = 0x002;
@@ -85,8 +84,8 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
         viewDelegate.setToolbarTitle(mApplication.getCurrentAudioTitle());
-        mState = mApplication.mState;
-        viewDelegate.setPlayStartStatus(mActivity, mState);
+        setPhotoAlbum(mApplication.getCurrentAudioTitle());
+        viewDelegate.setPlayStartStatus(mActivity, mApplication.mState);
         viewDelegate.setProgressListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -216,13 +215,14 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     }
 
     private void playStart() {
-        if (mState == PlayMusicService.State.STARTED) {
+        if (mApplication.mState == PlayMusicService.State.STARTED) {
             mApplication.mPlayMusicService.paused();
-        } else if (mState == PlayMusicService.State.PAUSED) {
+        } else if (mApplication.mState == PlayMusicService.State.PAUSED) {
             mApplication.mPlayMusicService.reStart();
         } else {
-            if (mApplication.play() != null) {
-                funStart(mApplication.play());
+            Audio audio;
+            if ((audio=mApplication.play()) != null) {
+                funStart(audio);
             }
         }
 
@@ -264,8 +264,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             switch (intentName) {
                 case INTENT_STATE_CHANGED:
                     Audio source = (Audio) intent.getSerializableExtra(ARG_SOURCE);
-                    mState = (PlayMusicService.State) intent.getSerializableExtra(ARG_STATE);
-                    viewDelegate.setPlayStartStatus(mActivity, mState);
+                    viewDelegate.setPlayStartStatus(mActivity, mApplication.mState);
                     if (source != null)
                         viewDelegate.setToolbarTitle(source.getTitle());
                     break;

@@ -6,6 +6,7 @@ import android.view.View;
 import kimxu.newsandfm.KBaseFragment;
 import kimxu.newsandfm.R;
 import kimxu.newsandfm.aty.LocalMusicActivity;
+import kimxu.newsandfm.aty.NetMusicActivity;
 
 /**
  * 新闻
@@ -44,6 +45,7 @@ public class MusicFragment extends KBaseFragment<MusicDelegate> implements View.
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.netMusic_fragMusic:
+                NetMusicActivity.launch(mActivity);
                 break;
             case R.id.localMusic_fragMusic:
                 LocalMusicActivity.launch(mActivity);
