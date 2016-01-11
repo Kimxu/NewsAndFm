@@ -7,6 +7,7 @@ import kimxu.bdyy.playlist.Playlist;
 import kimxu.mvp.databind.DataBinder;
 
 /**
+ *
  * Created by kimxu on 16/1/8.
  */
 

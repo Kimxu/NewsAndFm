@@ -11,7 +11,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion '23.0.2'
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -98,7 +98,6 @@ dependencies {
     compile project(':dao')
     compile project(':adapter')
     compile project(':mvp')
-
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -106,4 +105,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'io.reactivex:rxjava:1.0.14'
+    compile project(':banner')
 }

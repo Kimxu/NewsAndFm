@@ -1,0 +1,54 @@
+
+package kimxu.bdyy.hotplaylist;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
+public class Content {
+
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("list")
+    @Expose
+    private java.util.List<List> list = new ArrayList<List>();
+
+    /**
+     * 
+     * @return
+     *     The title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * 
+     * @param title
+     *     The title
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * 
+     * @return
+     *     The list
+     */
+    public java.util.List<List> getList() {
+        return list;
+    }
+
+    /**
+     * 
+     * @param list
+     *     The list
+     */
+    public void setList(java.util.List<List> list) {
+        this.list = list;
+    }
+
+}
