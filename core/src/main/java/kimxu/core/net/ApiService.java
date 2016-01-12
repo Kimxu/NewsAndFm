@@ -2,10 +2,16 @@ package kimxu.core.net;
 
 import java.util.Map;
 
+import kimxu.bdyy.banner.Banner;
+import kimxu.bdyy.hotplaylist.HotPlaylist;
+import kimxu.bdyy.kingranking.KingRanking;
 import kimxu.bdyy.pic.AlbumInfo;
 import kimxu.bdyy.playlist.Playlist;
+import kimxu.bdyy.radio.Radio;
 import kimxu.bdyy.ranking.Ranking;
+import kimxu.bdyy.recommend.Recommend;
 import kimxu.bdyy.searchSongId.SearchId;
+import kimxu.bdyy.style.Style;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
 import retrofit.RestAdapter;
@@ -60,16 +66,37 @@ public class ApiService {
     //百度音乐
     public interface ApiBdyyManagerService{
         String bdyyUrl="?from=android&version=5.6.6.1&channel=360safe&operator=3&format=json&ts=1451464605101&e=bLkVYIBl6FyH5SR9BbVH5Iv7HxAMs0b4xqQNRrBDXPwPoEE6uYJc4pqcgxu%2Bsjft&nw=2&ucf=1&res=1&l2p=0&lpb=&usup=1&lebo=0&";
+        /** 歌曲id */
         @GET("/ting"+bdyyUrl+"method=baidu.ting.search.catalogSug")
         Observable<SearchId> getSongId(@Query("query") String query);
-
+        /** 专辑封面 */
         @GET("/ting"+bdyyUrl+"method=baidu.ting.song.getInfos")
         Observable<AlbumInfo> getAlbumPic(@Query("songid")String songid);
-
+        /** 排行 */
         @GET("/ting"+bdyyUrl+"method=baidu.ting.billboard.billCategory")
         Observable<Ranking> getRanking();
+        /** 歌单 */
         @GET("/ting"+bdyyUrl+"method=baidu.ting.diy.gedan&page_size=30&page_no=1&operator=3")
         Observable<Playlist> getPlaylist();
+
+        /** 歌曲推荐 */
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.song.getEditorRecommend&num=6")
+        Observable<Recommend> getRecommend();
+        /** 热门歌单*/
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.diy.getHotGeDanAndOfficial&num=6")
+        Observable<HotPlaylist> getHotPlaylist();
+        /** 电台节目*/
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.radio.getRecommendRadioList&num=6")
+        Observable<Radio> getRadio();
+        /** 风格*/
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.scene.getSugScene")
+        Observable<Style> getStyle();
+        /** King榜单*/
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.plaza.king")
+        Observable<KingRanking> getKingList();
+        /** Banner*/
+        @GET("/ting"+bdyyUrl+"method=baidu.ting.plaza.getFocusPic&num=6")
+        Observable<Banner> getBanner();
 
     }
 

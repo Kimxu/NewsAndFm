@@ -6,8 +6,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kimxu.mvp.model.IModel;
+
 //推荐banner
-public class Banner {
+public class Banner implements IModel{
 
     @SerializedName("pic")
     @Expose

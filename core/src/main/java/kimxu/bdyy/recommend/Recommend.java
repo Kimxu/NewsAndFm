@@ -6,8 +6,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kimxu.mvp.model.IModel;
+
 //歌曲推荐
-public class Recommend {
+public class Recommend implements IModel{
 
     @SerializedName("error_code")
     @Expose

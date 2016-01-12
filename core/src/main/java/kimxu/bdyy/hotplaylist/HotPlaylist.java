@@ -4,7 +4,9 @@ package kimxu.bdyy.hotplaylist;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class HotPlaylist {
+import kimxu.mvp.model.IModel;
+
+public class HotPlaylist implements IModel {
 
     @SerializedName("error_code")
     @Expose

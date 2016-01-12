@@ -100,6 +100,16 @@ http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.lebo.getAlbum
 
 接口界面设计到一半，就没完成了。明天继续
 
+—2016.1.12
+
+library项目中已经引入的jar，library就不要再引入到主项目中了。
+
+添加banner
+
+这里数据没问题，界面现在只显示了banner，还没有做其他的
+
+
+
 
 
 

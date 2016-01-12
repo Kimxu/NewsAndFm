@@ -7,7 +7,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KingRanking {
+import kimxu.mvp.model.IModel;
+
+public class KingRanking implements IModel {
 
     @SerializedName("error_code")
     @Expose

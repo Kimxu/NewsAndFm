@@ -10,18 +10,28 @@
         android:layout_height="120dp">
 
         <ImageView
+            android:id="@+id/iv_album"
             android:layout_width="120dp"
             android:layout_height="120dp"
             tools:src="@color/nf_black" />
 
         <TextView
+            android:id="@+id/tv_album_sum"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:ellipsize="end"
-            android:minLines="2"
+            android:singleLine="true"
             android:textColor="@color/nf_white"
-            tools:text="这是小情歌。" />
+            tools:text="30123。" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/tv_album_title"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:minLines="2"
+        android:textColor="@color/nf_white"
+        tools:text="这是小情歌。" />
 </LinearLayout>
