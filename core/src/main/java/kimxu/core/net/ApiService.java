@@ -11,7 +11,6 @@ import kimxu.bdyy.radio.Radio;
 import kimxu.bdyy.ranking.Ranking;
 import kimxu.bdyy.recommend.Recommend;
 import kimxu.bdyy.searchSongId.SearchId;
-import kimxu.bdyy.style.Style;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
 import retrofit.RestAdapter;
@@ -88,9 +87,6 @@ public class ApiService {
         /** 电台节目*/
         @GET("/ting"+bdyyUrl+"method=baidu.ting.radio.getRecommendRadioList&num=6")
         Observable<Radio> getRadio();
-        /** 风格*/
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.scene.getSugScene")
-        Observable<Style> getStyle();
         /** King榜单*/
         @GET("/ting"+bdyyUrl+"method=baidu.ting.plaza.king")
         Observable<KingRanking> getKingList();

@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
-
 import kimxu.adapter.AssemblyItem;
 import kimxu.adapter.AssemblyItemFactory;
-import kimxu.xmly.discoverRecommend.List_;
 import kimxu.newsandfm.R;
+import kimxu.newsandfm.utils.GlobalUtils;
+import kimxu.xmly.discoverRecommend.List_;
 
 /**
  *
@@ -55,9 +54,9 @@ public class DiscoveryFactory extends AssemblyItemFactory<DiscoveryFactory.Disco
             discoveryNames = new TextView[aSize];
             getDiscoverySubNames = new TextView[aSize];
             for (int i = 0; i < aSize; i++) {
-                discoveryCovers[i] = (ImageView) findView(convertView, "recommend_discovery_cover_" + i);
-                discoveryNames[i] = (TextView) findView(convertView, "recommend_discovery_name_" + i);
-                getDiscoverySubNames[i] = (TextView) findView(convertView, "recommend_discovery_subname_" + i);
+                discoveryCovers[i] = (ImageView) GlobalUtils.findView(convertView, "recommend_discovery_cover_" + i);
+                discoveryNames[i] = (TextView) GlobalUtils.findView(convertView, "recommend_discovery_name_" + i);
+                getDiscoverySubNames[i] = (TextView) GlobalUtils.findView(convertView, "recommend_discovery_subname_" + i);
             }
         }
 
@@ -71,31 +70,6 @@ public class DiscoveryFactory extends AssemblyItemFactory<DiscoveryFactory.Disco
             String title = discovery.getTitle();
             txtTitle.setText(title);
 
-        }
-        /**
-         * 根据名称获取ID(反射)
-         * @param container
-         * @param fieldName
-         * @return
-         */
-        public View findView(View container, String fieldName){
-            View  ret = null;
-            if (container != null && fieldName != null) {
-                Class<R.id> idClass = R.id.class;
-                Field field = null;
-                try {
-                    field = idClass.getDeclaredField(fieldName);
-                    int id = field.getInt(idClass);
-                    //通过静态常量，获取int 值，
-                    ret = container.findViewById(id);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return ret;
         }
     }
 }

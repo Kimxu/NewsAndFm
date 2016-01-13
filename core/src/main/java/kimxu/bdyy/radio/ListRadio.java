@@ -4,7 +4,7 @@ package kimxu.bdyy.radio;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class List {
+public class ListRadio {
 
     @SerializedName("channelid")
     @Expose

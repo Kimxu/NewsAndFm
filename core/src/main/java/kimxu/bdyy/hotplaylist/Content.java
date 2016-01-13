@@ -13,7 +13,7 @@ public class Content {
     private String title;
     @SerializedName("list")
     @Expose
-    private java.util.List<List> list = new ArrayList<List>();
+    private java.util.List<ListHostPlay> list = new ArrayList<ListHostPlay>();
 
     /**
      * 
@@ -38,7 +38,7 @@ public class Content {
      * @return
      *     The list
      */
-    public java.util.List<List> getList() {
+    public java.util.List<ListHostPlay> getList() {
         return list;
     }
 
@@ -47,7 +47,7 @@ public class Content {
      * @param list
      *     The list
      */
-    public void setList(java.util.List<List> list) {
+    public void setList(java.util.List<ListHostPlay> list) {
         this.list = list;
     }
 

@@ -16,7 +16,7 @@ public class Radio implements IModel {
     private Long errorCode;
     @SerializedName("list")
     @Expose
-    private java.util.List<List> list = new ArrayList<List>();
+    private java.util.List<ListRadio> list = new ArrayList<ListRadio>();
 
     /**
      * 
@@ -41,7 +41,7 @@ public class Radio implements IModel {
      * @return
      *     The list
      */
-    public java.util.List<List> getList() {
+    public java.util.List<ListRadio> getList() {
         return list;
     }
 
@@ -50,7 +50,7 @@ public class Radio implements IModel {
      * @param list
      *     The list
      */
-    public void setList(java.util.List<List> list) {
+    public void setList(java.util.List<ListRadio> list) {
         this.list = list;
     }
 

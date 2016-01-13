@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+
+import kimxu.newsandfm.R;
 
 /**
  * 工具类
@@ -63,5 +67,31 @@ public class GlobalUtils {
 
     public static String getLrcPath(Context context){
         return context.getFilesDir().getAbsolutePath()+"/";
+    }
+
+    /**
+     * 根据名称获取ID(反射)
+     * @param container
+     * @param fieldName
+     * @return
+     */
+    public static View findView(View container, String fieldName){
+        View  ret = null;
+        if (container != null && fieldName != null) {
+            Class<R.id> idClass = R.id.class;
+            Field field = null;
+            try {
+                field = idClass.getDeclaredField(fieldName);
+                int id = field.getInt(idClass);
+                //通过静态常量，获取int 值，
+                ret = container.findViewById(id);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ret;
     }
 }

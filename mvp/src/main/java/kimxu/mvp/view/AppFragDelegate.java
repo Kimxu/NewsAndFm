@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
  */
 public abstract class AppFragDelegate extends AppAtyDelegate {
 
+
     @Override
     public Toolbar getToolbar() {
         return null;

@@ -39,9 +39,9 @@ public class AlbumShow extends RelativeLayout {
     private void initData(Context context, AttributeSet attrs) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.glist_item_hot_playlist, this, true);
-        ivAlbum = (ImageView) layout.findViewById(R.id.iv_album);
-        tvTitle = (TextView) layout.findViewById(R.id.tv_album_title);
-        tvSum = (TextView) layout.findViewById(R.id.tv_album_sum);
+        ivAlbum = (ImageView) layout.findViewById(R.id.iv_itemHotPlaylist);
+        tvTitle = (TextView) layout.findViewById(R.id.tv_itemHotPlaylist_title);
+        tvSum = (TextView) layout.findViewById(R.id.tv_itemHotPlaylist_sum);
     }
 
 }

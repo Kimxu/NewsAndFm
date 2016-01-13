@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="120dp"
-    android:layout_height="match_parent"
+    android:layout_height="160dp"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -10,13 +10,13 @@
         android:layout_height="120dp">
 
         <ImageView
-            android:id="@+id/iv_album"
+            android:id="@+id/iv_itemHotPlaylist"
             android:layout_width="120dp"
             android:layout_height="120dp"
             tools:src="@color/nf_black" />
 
         <TextView
-            android:id="@+id/tv_album_sum"
+            android:id="@+id/tv_itemHotPlaylist_sum"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -27,11 +27,12 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/tv_album_title"
+        android:id="@+id/tv_itemHotPlaylist_title"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:minLines="2"
-        android:textColor="@color/nf_white"
-        tools:text="这是小情歌。" />
+        android:maxLines="2"
+        android:textColor="@color/nf_black"
+        tools:text="这是小情歌。这是小情歌。这是小情歌。这是小情歌。这是小情歌。" />
 </LinearLayout>
