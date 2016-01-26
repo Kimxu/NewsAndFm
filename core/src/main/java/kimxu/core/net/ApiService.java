@@ -13,12 +13,14 @@ import kimxu.bdyy.recommend.Recommend;
 import kimxu.bdyy.searchSongId.SearchId;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
-import retrofit.RestAdapter;
-import retrofit.client.Response;
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
-import retrofit.http.QueryMap;
+import okhttp3.ResponseBody;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
+import retrofit2.RxJavaCallAdapterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 public class ApiService {
@@ -27,16 +29,28 @@ public class ApiService {
     public ApiLrcManagerService apiLrcManager;//歌词搜索
     private static ApiService apiService;
     private ApiService (){
-        String ENDPOINT = "http://mobile.ximalaya.com";
-        RestAdapter restXmlyAdapter= new RestAdapter.Builder().setEndpoint(ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL).build();
-        apiXmlyManager = restXmlyAdapter.create(ApiXmlyManagerService.class);
+        String ENDPOINT = "http://mobile.ximalaya.com/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ENDPOINT)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiXmlyManager = retrofit.create(ApiXmlyManagerService.class);
         //-------------
-        ENDPOINT = "http://tingapi.ting.baidu.com/v1/restserver";
-        RestAdapter restBdyyAdapter =new RestAdapter.Builder().setEndpoint(ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL).build();
-        apiBdyyManager =restBdyyAdapter.create(ApiBdyyManagerService.class);
-        ENDPOINT="http://musicdata.baidu.com/data2/lrc";
-        RestAdapter restLrcAdapter =new RestAdapter.Builder().setEndpoint(ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL).build();
-        apiLrcManager=restLrcAdapter.create(ApiLrcManagerService.class);
+        ENDPOINT = "http://tingapi.ting.baidu.com/v1/restserver/";
+        Retrofit bdyyRetrofit = new Retrofit.Builder()
+                .baseUrl(ENDPOINT)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiBdyyManager =bdyyRetrofit.create(ApiBdyyManagerService.class);
+        ENDPOINT="http://musicdata.baidu.com/data2/lrc/";
+        Retrofit lrcRetrofit = new Retrofit.Builder()
+                .baseUrl(ENDPOINT)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiLrcManager=lrcRetrofit.create(ApiLrcManagerService.class);
     }
     public static ApiService getInstance(){
         if (apiService==null){
@@ -52,13 +66,13 @@ public class ApiService {
          * retrofit 支持 rxjava 整合
          * 这种方法适用于新接口
          */
-        @GET("/mobile/others/ca/album/track/321705/true/{pager}/20")
+        @GET("mobile/others/ca/album/track/321705/true/{pager}/20")
         Observable<Album> getAlbum(@Path("pager")String pager, @QueryMap Map<String,String> map);
         /**
           获得推荐
          * @return
          */
-       @GET("/mobile/discovery/v1/recommends")
+       @GET("mobile/discovery/v1/recommends")
        Observable<DiscoverRecommend> getDiscoverRecommend(@QueryMap Map<String,String> map);
     }
 
@@ -66,43 +80,41 @@ public class ApiService {
     public interface ApiBdyyManagerService{
         String bdyyUrl="?from=android&version=5.6.6.1&channel=360safe&operator=3&format=json&ts=1451464605101&e=bLkVYIBl6FyH5SR9BbVH5Iv7HxAMs0b4xqQNRrBDXPwPoEE6uYJc4pqcgxu%2Bsjft&nw=2&ucf=1&res=1&l2p=0&lpb=&usup=1&lebo=0&";
         /** 歌曲id */
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.search.catalogSug")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.search.catalogSug")
         Observable<SearchId> getSongId(@Query("query") String query);
         /** 专辑封面 */
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.song.getInfos")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.song.getInfos")
         Observable<AlbumInfo> getAlbumPic(@Query("songid")String songid);
         /** 排行 */
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.billboard.billCategory")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.billboard.billCategory")
         Observable<Ranking> getRanking();
         /** 歌单 */
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.diy.gedan&page_size=30&page_no=1&operator=3")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.diy.gedan&page_size=30&page_no=1&operator=3")
         Observable<Playlist> getPlaylist();
 
         /** 歌曲推荐 */
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.song.getEditorRecommend&num=6")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.song.getEditorRecommend&num=6")
         Observable<Recommend> getRecommend();
         /** 热门歌单*/
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.diy.getHotGeDanAndOfficial&num=6")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.diy.getHotGeDanAndOfficial&num=6")
         Observable<HotPlaylist> getHotPlaylist();
         /** 电台节目*/
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.radio.getRecommendRadioList&num=6")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.radio.getRecommendRadioList&num=6")
         Observable<Radio> getRadio();
         /** King榜单*/
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.plaza.king")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.plaza.king")
         Observable<KingRanking> getKingList();
         /** Banner*/
-        @GET("/ting"+bdyyUrl+"method=baidu.ting.plaza.getFocusPic&num=6")
+        @GET("ting"+bdyyUrl+"method=baidu.ting.plaza.getFocusPic&num=6")
         Observable<Banner> getBanner();
 
     }
 
     public interface ApiLrcManagerService{
         //搜索歌词
-        @GET("/{songId}/{songName}")
-        Observable<Response> getLrc(@Path("songId")String songId, @Path("songName")String songName);
+        @GET("{songId}/{songName}")
+        Observable<ResponseBody> getLrc(@Path("songId")String songId, @Path("songName")String songName);
 
-//        @GET("/{path}")
-//        Observable<File> getmLrc(@Path("path")String path);
     }
 
     public Observable<Album> getAlbum(String pager, Map<String,String> map){

@@ -168,7 +168,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(response -> {
                         try {
-                            byte[] bytes = GlobalUtils.getBytesFromStream(response.getBody().in());
+                            byte[] bytes = GlobalUtils.getBytesFromStream(response.byteStream());
                             String name =URLDecoder.decode(params[1], "UTF-8");
                             String path =GlobalUtils.getLrcPath(mActivity) + name;
                             GlobalUtils.saveBytes2File(bytes,path);

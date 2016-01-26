@@ -11,14 +11,14 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion "22.0.1"
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         applicationId "kimxu.newsandfm"
-        versionCode 1
-        versionName "1.0"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         multiDexEnabled true
 
     }
@@ -99,4 +99,6 @@ dependencies {
     compile project(':banner')
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.facebook.react:react-native:0.19.0'
+
 }

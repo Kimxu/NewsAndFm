@@ -1,1 +1,1 @@
-include ':app', ':core', ':utils', ':dao', ':adapter', ':mvp', ':retrofit', ':test', ':banner'
+include ':app', ':core', ':utils', ':dao', ':adapter', ':mvp', ':test', ':banner'

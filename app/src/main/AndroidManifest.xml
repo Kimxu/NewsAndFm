@@ -20,11 +20,6 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="version"
@@ -61,9 +56,17 @@
         </receiver>
 
         <activity
-            android:label="网络音乐"
             android:name=".aty.NetMusicActivity"
+            android:label="网络音乐"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
+        <activity android:name=".aty.ReactNativeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
