@@ -15,6 +15,7 @@
  */
 package kimxu.mvp.presenter;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import kimxu.mvp.communication.Functions;
 import kimxu.mvp.view.IDelegate;
 
 
@@ -34,7 +36,8 @@ import kimxu.mvp.view.IDelegate;
  */
 public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     public T viewDelegate;
-
+    //fragment 与 activity 通信
+    public ActivityPresenter mBaseActivity;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,4 +83,22 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
     }
 
     protected abstract Class<T> getDelegateClass();
+
+
+    /** * 函数的集合 */
+    protected Functions mFunctions;
+    /** * activity调用此方法进行设置Functions
+     * @param functions */
+    public void setFunctions(Functions functions){
+        this.mFunctions = functions;
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        //呼叫activity进行回调方法的设置
+        if(activity instanceof ActivityPresenter){
+            mBaseActivity = (ActivityPresenter)activity;
+            mBaseActivity.setFunctionsForFragment(getId());
+        }
+    }
 }

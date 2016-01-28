@@ -81,4 +81,12 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
 
 
     protected abstract Class<T> getDelegateClass();
+
+    /**
+     * 为fragment设置functions，具体实现子类来做
+     * @param fragmentId
+     * */
+    public void setFunctionsForFragment(int fragmentId){
+
+    }
 }

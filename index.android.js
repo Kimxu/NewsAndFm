@@ -1,33 +1,51 @@
 /**
- * Created by xuzhiguo on 16/1/26.
+ * Sample React Native App
+ * https://github.com/facebook/react-native
  */
 'use strict';
+import React, {
+  AppRegistry,
+  Component,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 
-var React = require('react-native');
-var {
-    Text,
-    View
-    } = React;
-
-class MyAwesomeApp extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-    <Text style={styles.hello}>Hello, World</Text>
-        </View>
-    )
-    }
+class newsandfm extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
+        <Text style={styles.instructions}>
+          To get started, edit index.android.js
+        </Text>
+        <Text style={styles.instructions}>
+        xxxxx
+        </Text>
+      </View>
+    );
+  }
 }
-var styles = React.StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-    hello: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
 });
 
-React.AppRegistry.registerComponent('NewsAndFm', () => MyAwesomeApp);
+AppRegistry.registerComponent('newsandfm', () => newsandfm);
