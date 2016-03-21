@@ -22,7 +22,7 @@ class newsandfm extends Component {
           To get started, edit index.android.js
         </Text>
         <Text style={styles.instructions}>
-        xxxxx
+          Shake or press menu button for dev menu
         </Text>
       </View>
     );

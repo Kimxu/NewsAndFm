@@ -9,12 +9,12 @@
         layout="@layout/app_main_toolbar" />
     <android.support.v4.view.ViewPager
         android:id="@+id/vPager_atyMain_content"
-        android:layout_above="@+id/lyout_atyMain"
+        android:layout_above="@+id/lLyout_AtyMain"
         android:layout_below="@+id/tBar_atyMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <LinearLayout
-        android:id="@+id/lyout_atyMain"
+        android:id="@+id/lLyout_AtyMain"
         android:background="@color/nf_black"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

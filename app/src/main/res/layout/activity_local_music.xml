@@ -7,10 +7,10 @@
     android:fitsSystemWindows="true"
     tools:context=".aty.LocalMusicActivity">
     <include
-        android:id="@+id/tBar_atyXXX"
+        android:id="@+id/tBar_atyLocalMusic"
         layout="@layout/app_normal_toolbar" />
     <kimxu.newsandfm.widget.HintView
-        android:id="@+id/hintView_empty"
+        android:id="@+id/hintViewEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <ListView

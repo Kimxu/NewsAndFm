@@ -22,7 +22,7 @@ public class RecommendDelegate extends AppFragDelegate {
     @Override
     public void initWidget() {
         mLLayout=get(R.id.ll_fragRecommend);
-        mHintView=get(R.id.hintView_empty);
+        mHintView=get(R.id.hintViewEmpty);
         mHintView.loading().show();
     }
 }

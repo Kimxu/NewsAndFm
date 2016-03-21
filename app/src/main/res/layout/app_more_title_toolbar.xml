@@ -9,7 +9,7 @@
     app:navigationIcon="?android:attr/homeAsUpIndicator">
 
     <FrameLayout
-        android:id="@+id/fLyout_appMoreTitleToolBar"
+        android:id="@+id/fLyout_AppMoreTitleToolBar"
         android:layout_width="match_parent"
         android:layout_height="40dp">
 

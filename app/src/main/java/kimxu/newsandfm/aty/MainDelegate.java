@@ -26,6 +26,7 @@ public class MainDelegate extends AppAtyDelegate {
     public final static int TAB_ID_MUSIC = 0;
     public final static int TAB_ID_FM = 1;
 
+    ImageView iVcenter;
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.create(inflater, container, savedInstanceState);
@@ -42,6 +43,7 @@ public class MainDelegate extends AppAtyDelegate {
         viewPager = get(R.id.vPager_atyMain_content);
         mCursor = get(R.id.iVew_appMainToolBar_cursor);
         mFrameLayout = get(R.id.fLyout_appMainToolBar);
+        iVcenter = (ImageView) getToolbar().findViewById(R.id.iView_appMainToolBar_center);
     }
 
     private void initBar() {

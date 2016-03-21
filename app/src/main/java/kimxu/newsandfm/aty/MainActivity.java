@@ -5,7 +5,9 @@ import android.graphics.BitmapFactory;
 
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseActivity;
+import kimxu.newsandfm.NfContant;
 import kimxu.newsandfm.R;
+import kimxu.utils.SPUtils;
 import kimxu.utils.ScreenUtils;
 
 public class MainActivity extends KBaseActivity<MainDelegate> {
@@ -20,6 +22,16 @@ public class MainActivity extends KBaseActivity<MainDelegate> {
         mCursorWidth = BitmapFactory.decodeResource(mActivity.getResources(),
                 R.drawable.nf_cursor).getWidth();
         mWindowWidth = ScreenUtils.getScreenWidth(mActivity);
+        viewDelegate.iVcenter.setOnClickListener(v->goToUserManager());
+    }
+
+    private void goToUserManager() {
+       String userInfo = (String) SPUtils.get(mActivity, NfContant.NF_USERINFO, "null");
+        if (userInfo.equals("null")){
+            LoginActivity.launch(mActivity);
+        }else {
+            UserManagerActivity.launch(mActivity);
+        }
     }
 
     @Override

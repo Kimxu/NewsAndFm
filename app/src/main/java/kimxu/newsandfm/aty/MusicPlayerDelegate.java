@@ -28,7 +28,7 @@ public class MusicPlayerDelegate extends AppAtyDelegate{
     @Override
     public void initWidget() {
         //ivPhotoAlbum=get(R.id.iv_atyMusicPlayer_photoAlbum);
-        ibStart=get(R.id.ib_atyMusicPlayer_playStart);
+        ibStart=get(R.id.iB_atyMusicPlayer_playStart);
         skProgress=get(R.id.sb_atyMusicPlayer_playProgress);
         viewPager=get(R.id.vPager_atyMusicPlayer);
     }
@@ -50,7 +50,7 @@ public class MusicPlayerDelegate extends AppAtyDelegate{
 
     @Override
     public Toolbar getToolbar() {
-        return get(R.id.tBar_atyXXX);
+        return get(R.id.tBar_atyMusicPlayer);
     }
 
     public void setToolbarTitle(String title){

@@ -27,13 +27,13 @@ public class NetMusicDelegate extends AppAtyDelegate {
 
     @Override
     public void initWidget() {
-        mToolbarLayout=get(R.id.fLyout_appMoreTitleToolBar);
+        mToolbarLayout=get(R.id.fLyout_AppMoreTitleToolBar);
         mNavs =new TextView[3];
         mNavs[0]=get(R.id.tView_appMoreTitleToolBar_1);
         mNavs[1]=get(R.id.tView_appMoreTitleToolBar_2);
         mNavs[2]=get(R.id.tView_appMoreTitleToolBar_3);
         mCursor=get(R.id.iVew_appMoreTitleToolBar_cursor);
-        viewPager=get(R.id.vP_atyNetMusic);
+        viewPager=get(R.id.vPager_atyNetMusic);
     }
 
     @Override

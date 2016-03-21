@@ -55,6 +55,6 @@ public class WebDelegate extends AppAtyDelegate {
 
     @Override
     public Toolbar getToolbar() {
-        return get(R.id.tBar_atyXXX);
+        return get(R.id.tBar_atyWeb);
     }
 }

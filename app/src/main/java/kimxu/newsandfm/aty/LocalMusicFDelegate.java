@@ -21,11 +21,11 @@ public class LocalMusicFDelegate extends AppAtyDelegate {
     }
     @Override
     public Toolbar getToolbar() {
-        return get(R.id.tBar_atyXXX);
+        return get(R.id.tBar_atyLocalMusic);
     }
     @Override
     public void initWidget() {
-        mHintView=get(R.id.hintView_empty);
+        mHintView=get(R.id.hintViewEmpty);
         mHintView.loading().show();
         mListView=get(R.id.lv_atyLocalMusic);
 

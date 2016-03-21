@@ -16,6 +16,7 @@ import org.litepal.LitePalApplication;
 
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import kimxu.newsandfm.aty.MusicPlayerActivity;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.service.PlayMusicService;
@@ -57,6 +58,9 @@ public class KBaseApplication extends LitePalApplication {
         initNotificationBar();
         startPlayMusicService();
         bindPlayMusicService();
+        // 初始化 Bmob SDK
+        // 使用时请将第二个参数Application ID替换成你在Bmob服务器端创建的Application ID
+        Bmob.initialize(this, "5d5332afc7a109703f3fbf77ae0c729b");
     }
 
     public Audio playPre() {

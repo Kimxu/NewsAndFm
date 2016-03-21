@@ -80,7 +80,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
     }
 
     private void initPlay() {
-        viewDelegate.setOnClickListener(this, R.id.ib_atyMusicPlayer_playNext, R.id.ib_atyMusicPlayer_playPre, R.id.ib_atyMusicPlayer_playStart);
+        viewDelegate.setOnClickListener(this, R.id.iB_atyMusicPlayer_playNext, R.id.ib_atyMusicPlayer_playPre, R.id.iB_atyMusicPlayer_playStart);
         //播放完毕，播放下一首
         mApplication.mPlayMusicService.setmCompletionListener(mp -> playNext());
         viewDelegate.setToolbarTitle(mApplication.getCurrentAudioTitle());
@@ -193,10 +193,10 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             case R.id.ib_atyMusicPlayer_playPre:
                 playPre();
                 break;
-            case R.id.ib_atyMusicPlayer_playStart:
+            case R.id.iB_atyMusicPlayer_playStart:
                 playStart();
                 break;
-            case R.id.ib_atyMusicPlayer_playNext:
+            case R.id.iB_atyMusicPlayer_playNext:
                 playNext();
                 break;
         }

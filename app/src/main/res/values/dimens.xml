@@ -12,4 +12,11 @@
     <dimen name="pause_bar_width">48dp</dimen>
     <dimen name="pause_bar_distance">40dp</dimen>
     <dimen name="pause_bar_height">144dp</dimen>
+
+    <!-- 默认TextView样式 -->
+    <dimen name="textSize">16dp</dimen>
+    <!-- 默认Button样式 -->
+    <dimen name="textSize_button">16dp</dimen>
+
+    <dimen name="view_margin">10dp</dimen>
 </resources>

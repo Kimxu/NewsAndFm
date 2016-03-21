@@ -8,7 +8,7 @@
     tools:context="kimxu.newsandfm.aty.MusicPlayerActivity">
 
     <include
-        android:id="@+id/tBar_atyXXX"
+        android:id="@+id/tBar_atyMusicPlayer"
         layout="@layout/app_normal_toolbar" />
 
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/sb_atyMusicPlayer_playProgress"
-        android:layout_below="@+id/tBar_atyXXX" />
+        android:layout_below="@+id/tBar_atyMusicPlayer" />
 
     <SeekBar
         android:id="@+id/sb_atyMusicPlayer_playProgress"
@@ -49,7 +49,7 @@
             android:background="@drawable/nf_player_btn_pre_normal" />
 
         <ImageButton
-            android:id="@+id/ib_atyMusicPlayer_playStart"
+            android:id="@+id/iB_atyMusicPlayer_playStart"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginLeft="20dp"
@@ -57,7 +57,7 @@
             tools:background="@drawable/nf_player_btn_play_normal" />
 
         <ImageButton
-            android:id="@+id/ib_atyMusicPlayer_playNext"
+            android:id="@+id/iB_atyMusicPlayer_playNext"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/nf_player_btn_next_normal" />

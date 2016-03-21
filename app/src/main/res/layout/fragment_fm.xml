@@ -13,14 +13,14 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="推荐"
-            style="@style/TextViewNFNews"
+            style="@style/Text.Center"
             android:layout_height="match_parent" />
         <TextView
             android:id="@+id/tView_fragFM_load"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="下载管理"
-            style="@style/TextViewNFNews"
+            style="@style/Text.Center"
             android:layout_height="match_parent" />
     </LinearLayout>
 
