@@ -15,11 +15,13 @@ import kimxu.newsandfm.R;
  */
 
 public class NetMusicDelegate extends AppAtyDelegate {
-    public TextView[] mNavs;
-    public ViewPager viewPager;
-    public ImageView mCursor;
-    public FrameLayout mToolbarLayout;
-    public final int NAVS_LENGTH=3;
+    TextView[] mNavs;
+    ViewPager mViewPager;
+    ImageView mCursor;
+    FrameLayout mToolbarLayout;
+    final int NAVS_LENGTH=3;
+    ImageView mIvSearch;
+
     @Override
     public int getRootLayoutId() {
         return R.layout.activity_net_music;
@@ -33,7 +35,8 @@ public class NetMusicDelegate extends AppAtyDelegate {
         mNavs[1]=get(R.id.tView_appMoreTitleToolBar_2);
         mNavs[2]=get(R.id.tView_appMoreTitleToolBar_3);
         mCursor=get(R.id.iVew_appMoreTitleToolBar_cursor);
-        viewPager=get(R.id.vPager_atyNetMusic);
+        mIvSearch=get(R.id.iV_appMoreTitleToolBar_search);
+        mViewPager =get(R.id.vPager_atyNetMusic);
     }
 
     @Override

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nf_white"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/tBar_atySearch"
+        layout="@layout/app_search_toolbar" />
+
+    <View
+        android:id="@+id/v_AtySearch"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_below="@+id/tBar_atySearch" />
+
+    <ListView
+        android:id="@+id/lV_atySearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tBar_atySearch" />
+
+    <kimxu.newsandfm.widget.MultipleTextViewGroup
+        android:id="@+id/mTG_AtyMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/v_AtySearch"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:mTextBackground="@drawable/nf_selector_card_bg_color"
+        app:mTextColor="#ff0000"
+        app:mTextLineMargin="10dp"
+        app:mTextPaddingBottom="5dp"
+        app:mTextPaddingLeft="10dp"
+        app:mTextPaddingRight="10dp"
+        app:mTextPaddingTop="5dp"
+        app:mTextSize="14sp"
+        app:mTextWordMargin="10dp"
+        app:overspread="true" />
+</RelativeLayout>

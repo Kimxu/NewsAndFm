@@ -79,6 +79,10 @@
             android:name=".aty.RegisterActivity"
             android:label="网络音乐"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
+        <activity
+            android:name=".aty.SearchActivity"
+            android:label="网络音乐"
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
         <!--<activity android:name=".aty.ReactNativeActivity">-->
 
 

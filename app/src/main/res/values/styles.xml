@@ -66,4 +66,11 @@
         <item name="android:background">@drawable/nf_selector_button_blue_round_stroke</item>
         <item name="android:textColor">@color/selector_button_blue_stroke</item>
     </style>
+
+    <style name="EditText">
+        <item name="android:textSize">@dimen/textSize</item>
+    </style>
+    <style name="EditText.Search" parent="EditText">
+        <item name="android:background">@color/nf_white</item>
+    </style>
 </resources>

@@ -1,5 +1,7 @@
 package kimxu.core.net;
 
+import android.view.SearchEvent;
+
 import java.util.Map;
 
 import kimxu.bdyy.banner.Banner;
@@ -10,6 +12,8 @@ import kimxu.bdyy.playlist.Playlist;
 import kimxu.bdyy.radio.Radio;
 import kimxu.bdyy.ranking.Ranking;
 import kimxu.bdyy.recommend.Recommend;
+import kimxu.bdyy.search.SearchRecommended;
+import kimxu.bdyy.search.searchresult.SearchResult;
 import kimxu.bdyy.searchSongId.SearchId;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
@@ -107,6 +111,13 @@ public class ApiService {
         /** Banner*/
         @GET("ting"+bdyyUrl+"method=baidu.ting.plaza.getFocusPic&num=6")
         Observable<Banner> getBanner();
+        /** 歌曲搜索推荐*/
+        @GET("ting"+bdyyUrl+"method=baidu.ting.search.hot")
+        Observable<SearchRecommended> getSearchRecommend();
+        /** 歌曲搜索*/
+        @GET("ting"+bdyyUrl+" method=baidu.ting.search.catalogSug")
+        Observable<SearchResult> getSearchResult(@Query("query")String query);
+
 
     }
 

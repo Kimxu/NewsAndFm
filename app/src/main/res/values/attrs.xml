@@ -11,12 +11,27 @@
         <attr name="dividerHeight" format="dimension" />
         <attr name="rows" format="integer" />
     </declare-styleable>
-    <declare-styleable name="playerview">
+    <declare-styleable name="PlayerView">
         <attr name="cover" format="integer" />
         <attr name="buttonColor" format="color"/>
         <attr name="progressEmptyColor" format="color"/>
         <attr name="progressLoadedColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="textSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="MultipleTextViewGroup">
+        <attr name="mTextColor" format="color" />
+        <attr name="mTextSize" format="dimension" />
+        <attr name="mTextWordMargin" format="dimension" />
+        <attr name="mTextLineMargin" format="dimension" />
+        <attr name="mTextBackground" format="reference" />
+        <attr name="mTextPaddingLeft" format="dimension" />
+        <attr name="mTextPaddingRight" format="dimension" />
+        <attr name="mTextPaddingTop" format="dimension" />
+        <attr name="mTextPaddingBottom" format="dimension" />
+
+        <attr name="overspread" format="boolean" />
+        <attr name="columnNum" format="integer" />
     </declare-styleable>
 </resources>

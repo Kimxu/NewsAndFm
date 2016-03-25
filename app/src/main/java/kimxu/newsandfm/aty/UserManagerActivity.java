@@ -17,9 +17,9 @@ public class UserManagerActivity extends KBaseActivity<UserManagerDelegate> {
     }
 
     private void logout() {
-
-        Ts.showToast(mActivity,"退出成功");
+        Ts.showToast(mActivity, "退出成功");
         SPUtils.remove(mActivity, NfContant.NF_USERINFO);
+        finish();
     }
 
     @Override

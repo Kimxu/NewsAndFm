@@ -9,10 +9,14 @@ import kimxu.newsandfm.KBaseSwipeBackActivity;
 import kimxu.newsandfm.R;
 import kimxu.utils.ScreenUtils;
 
+/**
+ * 网络请求没有写onError
+ */
 public class NetMusicActivity extends KBaseSwipeBackActivity<NetMusicDelegate> {
     private float mFrameWidth;
     private float mWindowWidth;
     private int mCursorWidth;
+
     @Override
     public DataBinder getDataBinder() {
         return new NetMusicDataBinder(mActivity);
@@ -23,17 +27,20 @@ public class NetMusicActivity extends KBaseSwipeBackActivity<NetMusicDelegate> {
         mCursorWidth = BitmapFactory.decodeResource(mActivity.getResources(),
                 R.drawable.nf_cursor).getWidth();
         mWindowWidth = ScreenUtils.getScreenWidth(mActivity);
+        viewDelegate.mIvSearch.setOnClickListener(v ->
+                        SearchActivity.launch(mActivity));
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && mFrameWidth == 0) {
             mFrameWidth = viewDelegate.mToolbarLayout.getWidth();
-            NetMusicData data =new NetMusicData();
-            data.mCursorWidth=mCursorWidth;
-            data.mOffset= (mFrameWidth / viewDelegate.NAVS_LENGTH - mCursorWidth) / 2;
-            data.mWindowWidth=mWindowWidth;
-            data.mFrameWidth=mFrameWidth;
+            NetMusicData data = new NetMusicData();
+            data.mCursorWidth = mCursorWidth;
+            data.mOffset = (mFrameWidth / viewDelegate.NAVS_LENGTH - mCursorWidth) / 2;
+            data.mWindowWidth = mWindowWidth;
+            data.mFrameWidth = mFrameWidth;
             notifyModelChanged(data);
         }
     }
@@ -42,7 +49,8 @@ public class NetMusicActivity extends KBaseSwipeBackActivity<NetMusicDelegate> {
     protected Class<NetMusicDelegate> getDelegateClass() {
         return NetMusicDelegate.class;
     }
-    public static void launch(Activity ac){
-        ac.startActivity(new Intent(ac,NetMusicActivity.class));
+
+    public static void launch(Activity ac) {
+        ac.startActivity(new Intent(ac, NetMusicActivity.class));
     }
 }

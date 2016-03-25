@@ -17,7 +17,7 @@ import kimxu.newsandfm.R;
  * 视图View
  * Created by xuzhiguo on 15/11/23.
  */
-public class MainDelegate extends AppAtyDelegate {
+public class               MainDelegate extends AppAtyDelegate {
     public ViewPager viewPager;
     public FrameLayout mFrameLayout;
     public ImageView mCursor;

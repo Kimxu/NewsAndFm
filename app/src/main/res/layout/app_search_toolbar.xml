@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:title=""
+    app:navigationIcon="?android:attr/homeAsUpIndicator">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <EditText
+            android:id="@+id/eT_appSearchToolBar"
+            style="@style/EditText.Search"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/iV_appSearchToolBar"
+            android:hint="歌曲,歌名,专辑,歌词,伴奏"
+            android:padding="5dp" />
+
+        <ImageView
+            android:id="@+id/iV_appSearchToolBar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/nf_search_white" />
+    </RelativeLayout>
+</android.support.v7.widget.Toolbar>

@@ -42,8 +42,8 @@ public class NetMusicDataBinder implements DataBinder<NetMusicDelegate, NetMusic
         mFragments.add(RecommendFragment.newInstance("",""));
         mFragments.add(RankingFragment.newInstance("",""));
         mFragments.add(PlayListFragment.newInstance("",""));
-        viewDelegate.viewPager.setAdapter(new NetMusicFragAdapter(mActivity.getSupportFragmentManager()));
-        viewDelegate.viewPager.setOnPageChangeListener(new NetMusicPageChangeListener());
+        viewDelegate.mViewPager.setAdapter(new NetMusicFragAdapter(mActivity.getSupportFragmentManager()));
+        viewDelegate.mViewPager.setOnPageChangeListener(new NetMusicPageChangeListener());
     }
 
 

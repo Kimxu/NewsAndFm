@@ -306,17 +306,17 @@ public class MusicPlayerView extends View implements PlayPauseDrawable.OnPlayPau
     mPlayPauseDrawable.setToggleListener(MusicPlayerView.this);
 
     //Get Image resource from xml
-    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.playerview);
-    Drawable mDrawableCover = a.getDrawable(R.styleable.playerview_cover);
+    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PlayerView);
+    Drawable mDrawableCover = a.getDrawable(R.styleable.PlayerView_cover);
     if (mDrawableCover != null) mBitmapCover = drawableToBitmap(mDrawableCover);
 
-    mButtonColor = a.getColor(R.styleable.playerview_buttonColor, mButtonColor);
+    mButtonColor = a.getColor(R.styleable.PlayerView_buttonColor, mButtonColor);
     mProgressEmptyColor =
-        a.getColor(R.styleable.playerview_progressEmptyColor, mProgressEmptyColor);
+        a.getColor(R.styleable.PlayerView_progressEmptyColor, mProgressEmptyColor);
     mProgressLoadedColor =
-        a.getColor(R.styleable.playerview_progressLoadedColor, mProgressLoadedColor);
-    mTextColor = a.getColor(R.styleable.playerview_textColor, mTextColor);
-    mTextSize = a.getDimensionPixelSize(R.styleable.playerview_textSize, mTextSize);
+        a.getColor(R.styleable.PlayerView_progressLoadedColor, mProgressLoadedColor);
+    mTextColor = a.getColor(R.styleable.PlayerView_textColor, mTextColor);
+    mTextSize = a.getDimensionPixelSize(R.styleable.PlayerView_textSize, mTextSize);
     a.recycle();
 
     mRotateDegrees = 0;

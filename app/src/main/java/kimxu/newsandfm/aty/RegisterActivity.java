@@ -31,8 +31,8 @@ public class RegisterActivity extends KBaseActivity<RegisterDelegate> {
      * 验证登录信息
      */
     private void validation() {
-       String user = viewDelegate.tvRePwd.getText().toString();
-       String pwd = viewDelegate.tvRePwd.getText().toString();
+       String user = viewDelegate.tvUser.getText().toString();
+       String pwd = viewDelegate.tvPwd.getText().toString();
        String rePwd = viewDelegate.tvRePwd.getText().toString();
         if (TextUtils.isEmpty(user)
                 ||TextUtils.isEmpty(pwd)
