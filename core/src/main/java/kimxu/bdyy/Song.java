@@ -1,5 +1,5 @@
 
-package kimxu.bdyy.searchSongId;
+package kimxu.bdyy;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

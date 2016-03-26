@@ -1,14 +1,17 @@
 
-package kimxu.bdyy.search.searchresult;
+package kimxu.bdyy.search.catalogsug;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import kimxu.bdyy.Album;
+import kimxu.bdyy.Song;
 import kimxu.mvp.model.IModel;
 
-public class SearchResult implements IModel{
+public class CatalogSug implements IModel{
 
     @SerializedName("song")
     @Expose

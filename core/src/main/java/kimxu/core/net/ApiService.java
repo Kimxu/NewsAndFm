@@ -1,7 +1,5 @@
 package kimxu.core.net;
 
-import android.view.SearchEvent;
-
 import java.util.Map;
 
 import kimxu.bdyy.banner.Banner;
@@ -12,9 +10,9 @@ import kimxu.bdyy.playlist.Playlist;
 import kimxu.bdyy.radio.Radio;
 import kimxu.bdyy.ranking.Ranking;
 import kimxu.bdyy.recommend.Recommend;
-import kimxu.bdyy.search.SearchRecommended;
-import kimxu.bdyy.search.searchresult.SearchResult;
-import kimxu.bdyy.searchSongId.SearchId;
+import kimxu.bdyy.search.Search;
+import kimxu.bdyy.search.catalogsug.CatalogSug;
+import kimxu.bdyy.search.searchhot.SearchHot;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
 import okhttp3.ResponseBody;
@@ -83,9 +81,6 @@ public class ApiService {
     //百度音乐
     public interface ApiBdyyManagerService{
         String bdyyUrl="?from=android&version=5.6.6.1&channel=360safe&operator=3&format=json&ts=1451464605101&e=bLkVYIBl6FyH5SR9BbVH5Iv7HxAMs0b4xqQNRrBDXPwPoEE6uYJc4pqcgxu%2Bsjft&nw=2&ucf=1&res=1&l2p=0&lpb=&usup=1&lebo=0&";
-        /** 歌曲id */
-        @GET("ting"+bdyyUrl+"method=baidu.ting.search.catalogSug")
-        Observable<SearchId> getSongId(@Query("query") String query);
         /** 专辑封面 */
         @GET("ting"+bdyyUrl+"method=baidu.ting.song.getInfos")
         Observable<AlbumInfo> getAlbumPic(@Query("songid")String songid);
@@ -113,12 +108,13 @@ public class ApiService {
         Observable<Banner> getBanner();
         /** 歌曲搜索推荐*/
         @GET("ting"+bdyyUrl+"method=baidu.ting.search.hot")
-        Observable<SearchRecommended> getSearchRecommend();
-        /** 歌曲搜索*/
+        Observable<SearchHot> getSearchRecommend();
+        /** 歌曲搜索 反馈*/
         @GET("ting"+bdyyUrl+" method=baidu.ting.search.catalogSug")
-        Observable<SearchResult> getSearchResult(@Query("query")String query);
-
-
+        Observable<CatalogSug> getCatalogSug(@Query("query")String query);
+        /** 歌曲搜索 确认内容返回 */
+        @GET("ting"+bdyyUrl+" baidu.ting.learn.search&page_no=1&page_size=50")
+        Observable<Search> getSearch(@Query("query")String query);
     }
 
     public interface ApiLrcManagerService{

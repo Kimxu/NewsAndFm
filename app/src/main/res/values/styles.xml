@@ -38,6 +38,11 @@
         <item name="android:background">@drawable/nf_selector_text_blue_round</item>
     </style>
 
+    <style name="Text.BigText" parent="Text">
+        <item name="android:textSize">@dimen/textSize</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/nf_black</item>
+    </style>
     <style name="Button">
         <item name="android:layout_margin">@dimen/view_margin</item>
         <item name="android:paddingLeft">32dp</item>

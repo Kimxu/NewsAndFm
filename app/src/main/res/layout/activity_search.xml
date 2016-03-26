@@ -17,11 +17,7 @@
         android:layout_height="15dp"
         android:layout_below="@+id/tBar_atySearch" />
 
-    <ListView
-        android:id="@+id/lV_atySearch"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tBar_atySearch" />
+
 
     <kimxu.newsandfm.widget.MultipleTextViewGroup
         android:id="@+id/mTG_AtyMain"
@@ -40,4 +36,9 @@
         app:mTextSize="14sp"
         app:mTextWordMargin="10dp"
         app:overspread="true" />
+    <ListView
+        android:id="@+id/lV_atySearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tBar_atySearch" />
 </RelativeLayout>

@@ -1,51 +1,75 @@
+
 package kimxu.bdyy.search;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Result {
 
-    @SerializedName("strong")
+    @SerializedName("total")
     @Expose
-    private Long strong;
-    @SerializedName("word")
+    private Long total;
+    @SerializedName("have_more")
     @Expose
-    private String word;
+    private Long haveMore;
+    @SerializedName("items")
+    @Expose
+    private List<Item> items = new ArrayList<Item>();
 
     /**
      * 
      * @return
-     *     The strong
+     *     The total
      */
-    public Long getStrong() {
-        return strong;
+    public Long getTotal() {
+        return total;
     }
 
     /**
      * 
-     * @param strong
-     *     The strong
+     * @param total
+     *     The total
      */
-    public void setStrong(Long strong) {
-        this.strong = strong;
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     /**
      * 
      * @return
-     *     The word
+     *     The haveMore
      */
-    public String getWord() {
-        return word;
+    public Long getHaveMore() {
+        return haveMore;
     }
 
     /**
      * 
-     * @param word
-     *     The word
+     * @param haveMore
+     *     The have_more
      */
-    public void setWord(String word) {
-        this.word = word;
+    public void setHaveMore(Long haveMore) {
+        this.haveMore = haveMore;
+    }
+
+    /**
+     * 
+     * @return
+     *     The items
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * 
+     * @param items
+     *     The items
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
 }

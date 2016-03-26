@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kimxu.bdyy.search.Result;
+import kimxu.bdyy.search.searchhot.Result;
 import kimxu.newsandfm.R;
 
 /**

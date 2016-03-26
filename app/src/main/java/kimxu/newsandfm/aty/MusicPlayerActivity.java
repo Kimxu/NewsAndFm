@@ -19,9 +19,9 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import kimxu.bdyy.Song;
 import kimxu.bdyy.pic.AlbumInfo;
 import kimxu.bdyy.pic.SongInfo;
-import kimxu.bdyy.searchSongId.Song;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseSwipeBackActivity;
 import kimxu.newsandfm.NfContant;
@@ -122,7 +122,7 @@ public class MusicPlayerActivity extends KBaseSwipeBackActivity<MusicPlayerDeleg
             mPlayLrcFrag.setLrc(path);
         }
         final boolean finalHasLrc = hasLrc;
-        mApiService.apiBdyyManager.getSongId(title).map(searchId -> {
+        mApiService.apiBdyyManager.getCatalogSug(title).map(searchId -> {
             //如果获取不到，就返回null
             if (searchId.getSong().size() == 0) {
                 return null;

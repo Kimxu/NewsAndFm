@@ -15,6 +15,8 @@
 
     <!-- 默认TextView样式 -->
     <dimen name="textSize">16dp</dimen>
+    <!-- 默认TextView样式 -->
+    <dimen name="textBigSize">22dp</dimen>
     <!-- 默认Button样式 -->
     <dimen name="textSize_button">16dp</dimen>
 

@@ -1,4 +1,4 @@
-package kimxu.bdyy.search;
+package kimxu.bdyy.search.searchhot;
 
 /**
  * 歌曲搜索推荐
@@ -12,7 +12,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SearchRecommended {
+public class SearchHot {
 
     @SerializedName("error_code")
     @Expose
