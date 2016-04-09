@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import kimxu.bdyy.search.merge.SearchMerge;
 import kimxu.core.net.ApiService;
 import kimxu.newsandfm.KBaseActivity;
+import kimxu.utils.L;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class SearchActivity extends KBaseActivity<SearchDelegate> {
@@ -42,6 +45,10 @@ public class SearchActivity extends KBaseActivity<SearchDelegate> {
         });
     }
 
+    /**
+     * 获得搜索结果
+     * @param query
+     */
     private void getSearchResult(String query) {
         ApiService.getInstance()
                 .apiBdyyManager
@@ -52,6 +59,32 @@ public class SearchActivity extends KBaseActivity<SearchDelegate> {
 
     }
 
+    /**
+     * 获得搜索完成的listview内容
+     * @param query
+     */
+    public void getResultList(String query){
+        ApiService.getInstance()
+                .apiBdyyManager
+                .getSearchMerge(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::notifyModelChanged);
+
+    }
+
+    public void getMusicInfo(String songId){
+        ApiService.getInstance()
+                .apiBdyyManager
+                .getMp3Info(songId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s->{
+                    L.e(s.getErrorCode().toString());
+                },error->{
+                    L.e(error.getMessage());
+                });
+    }
 
     @Override
     protected Class<SearchDelegate> getDelegateClass() {
@@ -61,7 +94,7 @@ public class SearchActivity extends KBaseActivity<SearchDelegate> {
 
     @Override
     public SearchDataBinder getDataBinder() {
-        return new SearchDataBinder(mActivity);
+        return new SearchDataBinder((SearchActivity) mActivity);
     }
 
     public static void launch(Activity activity) {

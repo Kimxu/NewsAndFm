@@ -1,4 +1,4 @@
-package kimxu.newsandfm.frag.fm;
+package kimxu.newsandfm.adapter.factory;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;

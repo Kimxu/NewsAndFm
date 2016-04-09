@@ -23,6 +23,8 @@ import kimxu.bdyy.recommend.SongList;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.mvp.model.IModel;
 import kimxu.newsandfm.R;
+import kimxu.newsandfm.adapter.factory.HotPlaylistFactory;
+import kimxu.newsandfm.adapter.factory.RadioFactory;
 import kimxu.newsandfm.utils.GlobalUtils;
 import kimxu.newsandfm.widget.ItemShow;
 import kimxu.utils.L;

@@ -24,14 +24,14 @@
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="version"
+                android:value="${version}" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="version"
-                android:value="${version}" />
         </activity>
         <activity
             android:name=".aty.WebActivity"
@@ -83,11 +83,10 @@
             android:name=".aty.SearchActivity"
             android:label="网络音乐"
             android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <!--<activity android:name=".aty.ReactNativeActivity">-->
+        <activity android:name=".aty.ReactNativeActivity">
 
 
-
-        <!--</activity>-->
+        </activity>
     </application>
 
 </manifest>

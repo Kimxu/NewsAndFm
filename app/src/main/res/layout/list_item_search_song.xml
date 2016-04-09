@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/tv_itemSearchSong_name"
+        style="@style/Text.BigText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:ellipsize="end"
+        android:singleLine="true"
+        tools:text="烟酒嗓；经典，魅力" />
+
+    <TextView
+        android:padding="5dp"
+        android:id="@+id/tv_itemSearchSong_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/nf_gray"
+        android:textSize="12sp"
+        tools:text="烟酒嗓；经典，魅力" />
+</LinearLayout>

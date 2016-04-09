@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import kimxu.adapter.AssemblyAdapter;
 import kimxu.bdyy.ranking.Ranking;
 import kimxu.mvp.databind.DataBinder;
+import kimxu.newsandfm.adapter.factory.RankingFactory;
 
 /**
  * Created by kimxu on 16/1/8.

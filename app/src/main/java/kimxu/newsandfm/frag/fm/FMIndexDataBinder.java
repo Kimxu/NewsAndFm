@@ -7,6 +7,9 @@ import java.util.List;
 
 import kimxu.adapter.AssemblyAdapter;
 import kimxu.mvp.databind.DataBinder;
+import kimxu.newsandfm.adapter.factory.AlbumFactory;
+import kimxu.newsandfm.adapter.factory.DiscoveryFactory;
+import kimxu.newsandfm.adapter.factory.SpecialFactory;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
 
 /**

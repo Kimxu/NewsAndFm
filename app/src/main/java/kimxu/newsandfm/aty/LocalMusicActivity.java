@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import kimxu.adapter.AssemblyAdapter;
 import kimxu.mvp.databind.DataBinder;
 import kimxu.newsandfm.KBaseSwipeBackActivity;
+import kimxu.newsandfm.adapter.factory.LocalMusicFactory;
 import kimxu.newsandfm.model.Audio;
 import kimxu.newsandfm.utils.MediaUtils;
 import rx.Observable;

@@ -1,4 +1,4 @@
-package kimxu.newsandfm.frag.netmusic;
+package kimxu.newsandfm.adapter.factory;
 
 import android.app.Activity;
 import android.content.Context;

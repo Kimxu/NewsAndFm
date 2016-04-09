@@ -12,7 +12,9 @@ import kimxu.bdyy.ranking.Ranking;
 import kimxu.bdyy.recommend.Recommend;
 import kimxu.bdyy.search.Search;
 import kimxu.bdyy.search.catalogsug.CatalogSug;
+import kimxu.bdyy.search.merge.SearchMerge;
 import kimxu.bdyy.search.searchhot.SearchHot;
+import kimxu.bdyy.song.GetInfo;
 import kimxu.xmly.album.Album;
 import kimxu.xmly.discoverRecommend.DiscoverRecommend;
 import okhttp3.ResponseBody;
@@ -112,9 +114,17 @@ public class ApiService {
         /** 歌曲搜索 反馈*/
         @GET("ting"+bdyyUrl+" method=baidu.ting.search.catalogSug")
         Observable<CatalogSug> getCatalogSug(@Query("query")String query);
-        /** 歌曲搜索 确认内容返回 */
-        @GET("ting"+bdyyUrl+" baidu.ting.learn.search&page_no=1&page_size=50")
+        /** 歌曲搜索 确认内容返回 list清单*/
+        @GET("ting"+bdyyUrl+" method=baidu.ting.learn.search&page_no=1&page_size=50")
         Observable<Search> getSearch(@Query("query")String query);
+
+        /** 确认搜索 显示最终结果 */
+        @GET("ting"+bdyyUrl+" method=baidu.ting.search.merge&page_no=1&page_size=50")
+        Observable<SearchMerge> getSearchMerge(@Query("query")String query);
+        /** 获得歌曲源*/
+        @GET("ting"+bdyyUrl+"method=baidu.ting.song.getInfos&format=json&nw=2&ucf=1&res=1&l2p=418&lpb=&usup=1&e=MCf8H4bs0Z7qNstmB9pgMo%2B9HY4vXaEdOZ1mJJR%2F8SYOf51LzMvJnE1cAOw2mcjG")
+        Observable<GetInfo> getMp3Info(@Query("songid")String songId);
+
     }
 
     public interface ApiLrcManagerService{

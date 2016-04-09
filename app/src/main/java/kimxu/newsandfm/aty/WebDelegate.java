@@ -26,7 +26,6 @@ public class WebDelegate extends AppAtyDelegate {
 
     public void loadURL(String url){
         //打开网页时不调用系统浏览器， 而是在本WebView中显示
-
         webView.loadUrl(url);
     }
 

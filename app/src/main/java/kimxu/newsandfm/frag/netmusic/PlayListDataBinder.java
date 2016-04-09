@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import kimxu.adapter.AssemblyAdapter;
 import kimxu.bdyy.playlist.Playlist;
 import kimxu.mvp.databind.DataBinder;
+import kimxu.newsandfm.adapter.factory.PlayListFactory;
 
 /**
  *
