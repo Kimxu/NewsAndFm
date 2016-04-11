@@ -122,8 +122,8 @@ public class ApiService {
         @GET("ting"+bdyyUrl+" method=baidu.ting.search.merge&page_no=1&page_size=50")
         Observable<SearchMerge> getSearchMerge(@Query("query")String query);
         /** 获得歌曲源*/
-        @GET("ting"+bdyyUrl+"method=baidu.ting.song.getInfos&format=json&nw=2&ucf=1&res=1&l2p=418&lpb=&usup=1&e=MCf8H4bs0Z7qNstmB9pgMo%2B9HY4vXaEdOZ1mJJR%2F8SYOf51LzMvJnE1cAOw2mcjG")
-        Observable<GetInfo> getMp3Info(@Query("songid")String songId);
+        @GET("http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.7.2.0&channel=360safe&operator=3&method=baidu.ting.song.getInfos&format=json&songid=938392&nw=2&ucf=1&res=1&l2p=418&lpb=&usup=1&e=MCf8H4bs0Z7qNstmB9pgMo%2B9HY4vXaEdOZ1mJJR%2F8SYOf51LzMvJnE1cAOw2mcjG")
+        Observable<GetInfo> getMp3Info();
 
     }
 

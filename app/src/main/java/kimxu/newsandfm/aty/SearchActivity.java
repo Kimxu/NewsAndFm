@@ -73,14 +73,20 @@ public class SearchActivity extends KBaseActivity<SearchDelegate> {
 
     }
 
+    /**
+     *
+     * @Execption 这里有个问题,就是不能根据歌曲id去获得到歌曲音频源
+     * 所以这里固定写死了.做个演示用
+     */
     public void getMusicInfo(String songId){
         ApiService.getInstance()
                 .apiBdyyManager
-                .getMp3Info(songId)
+                .getMp3Info()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s->{
                     L.e(s.getErrorCode().toString());
+
                 },error->{
                     L.e(error.getMessage());
                 });
