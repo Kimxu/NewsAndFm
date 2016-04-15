@@ -2,6 +2,8 @@ package me.kimxu.aty;
 
 import kimxu.mvp.databind.DataBinder;
 import me.kimxu.KBaseActivity;
+import me.kimxu.databinder.MainDataBinder;
+import me.kimxu.delegate.MainDelegate;
 
 public class MainActivity extends KBaseActivity<MainDelegate> {
 

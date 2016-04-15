@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:textColor="@color/nf_gray"
+        android:textColor="@color/nf_grey"
         tools:text="data/data/music/0/23.mp3"
         android:id="@+id/tv_itemLocal_path"
         android:layout_width="wrap_content"

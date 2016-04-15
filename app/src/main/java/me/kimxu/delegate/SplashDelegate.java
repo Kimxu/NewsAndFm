@@ -1,4 +1,4 @@
-package me.kimxu.aty;
+package me.kimxu.delegate;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -14,13 +14,8 @@ import me.kimxu.R;
  * 视图View
  * Created by xuzhiguo on 15/11/23.
  */
-public class MainDelegate extends AppAtyDelegate {
-    public final static int NAVS_LENGTH = 2;
-    public final static int TAB_ID_MUSIC = 0;
-    public final static int TAB_ID_FM = 1;
-
-    ImageView iVcenter;
-
+public class SplashDelegate extends AppAtyDelegate {
+    public ImageView ivSplash;
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.create(inflater, container, savedInstanceState);
@@ -28,16 +23,14 @@ public class MainDelegate extends AppAtyDelegate {
 
     @Override
     public int getRootLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_splash;
     }
 
     @Override
     public void initWidget() {
-        initBar();
+        ivSplash=get(R.id.iv_activitySplash);
     }
 
-    private void initBar() {
-    }
 
 
     @Override
@@ -47,7 +40,7 @@ public class MainDelegate extends AppAtyDelegate {
 
     @Override
     public Toolbar getToolbar() {
-        return get(R.id.tBar_atyMain);
+        return null;
     }
 
 }

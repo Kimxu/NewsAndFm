@@ -16,11 +16,21 @@ public class SPUtils {
      * 保存在手机里面的文件名
      */
     public static final String FILE_NAME = "share_data";
-
+    private static final String PLAY_MODE = "play_mode";
     private static Context mContext;
 
     public static void init(Context context) {
         mContext = context.getApplicationContext();
+    }
+    private static final String MUSIC_ID = "music_id";
+    public static void saveCurrentSongId(long id) {
+        put(MUSIC_ID, id);
+    }
+    public static int getPlayMode(int defValue) {
+        return (int)get(PLAY_MODE, defValue);
+    }
+    public static long getCurrentSongId(long defValue) {
+        return (long)get(MUSIC_ID, defValue);
     }
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法

@@ -1,6 +1,9 @@
-package me.kimxu.aty;
+package me.kimxu.databinder;
 
 import kimxu.mvp.databind.DataBinder;
+import me.kimxu.aty.MainActivity;
+import me.kimxu.data.MainData;
+import me.kimxu.delegate.MainDelegate;
 
 /**
  *数据绑定

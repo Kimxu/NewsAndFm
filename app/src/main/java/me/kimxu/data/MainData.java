@@ -1,4 +1,4 @@
-package me.kimxu.aty;
+package me.kimxu.data;
 
 import kimxu.mvp.model.IModel;
 

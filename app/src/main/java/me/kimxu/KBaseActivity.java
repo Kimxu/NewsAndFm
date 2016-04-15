@@ -10,6 +10,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import kimxu.core.net.ApiService;
 import kimxu.mvp.databind.DataBindActivity;
+import kimxu.mvp.databind.DataBinder;
 import kimxu.mvp.view.IDelegate;
 
 public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivity<T>{
@@ -45,5 +46,10 @@ public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivit
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    @Override
+    public DataBinder getDataBinder() {
+        return null;
     }
 }

@@ -29,7 +29,7 @@
 
     <style name="Text.Center" parent="Text">
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/nf_gray</item>
+        <item name="android:textColor">@color/nf_grey</item>
     </style>
     <style name="Text.Left" parent="Text">
         <item name="android:layout_margin">@dimen/view_margin</item>

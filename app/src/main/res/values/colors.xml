@@ -6,8 +6,7 @@
 
     <color name="nf_white">#fff</color>
     <color name="nf_black">#000</color>
-    <color name="nf_gray">#CCCCCC</color>
-
+    <color name="nf_grey">#9E9E9E</color>
     <color name="nf_text_disable">#cccccc</color>
     <color name="nf_text_blue_normal">#0099ff</color>
     <color name="nf_text_blue_pressed">#0178c7</color>
