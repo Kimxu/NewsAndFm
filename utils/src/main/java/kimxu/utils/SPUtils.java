@@ -17,16 +17,19 @@ public class SPUtils {
      */
     public static final String FILE_NAME = "share_data";
 
+    private static Context mContext;
+
+    public static void init(Context context) {
+        mContext = context.getApplicationContext();
+    }
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      *
-     * @param context
      * @param key
      * @param object
      */
-    public static void put(Context context, String key, Object object) {
-
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static void put(String key, Object object) {
+        SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -50,13 +53,12 @@ public class SPUtils {
     /**
      * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
      *
-     * @param context
      * @param key
      * @param defaultObject
      * @return
      */
-    public static Object get(Context context, String key, Object defaultObject) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static Object get( String key, Object defaultObject) {
+        SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
 
         if (defaultObject instanceof String) {
@@ -77,11 +79,10 @@ public class SPUtils {
     /**
      * 移除某个key值已经对应的值
      *
-     * @param context
      * @param key
      */
-    public static void remove(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static void remove( String key) {
+        SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
@@ -104,12 +105,11 @@ public class SPUtils {
     /**
      * 查询某个key是否已经存在
      *
-     * @param context
      * @param key
      * @return
      */
-    public static boolean contains(Context context, String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+    public static boolean contains( String key) {
+        SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         return sp.contains(key);
     }

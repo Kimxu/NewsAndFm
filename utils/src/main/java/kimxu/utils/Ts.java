@@ -14,32 +14,39 @@ import android.widget.Toast;
  * Created by xuzhiguo on 15/11/18.
  */
 public class Ts {
+    private static Context mContext;
+
     private Ts() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
-    private static void showToast(final Context context, final String message, final int duration) {
+
+    public static void init(Context context) {
+        mContext = context.getApplicationContext();
+    }
+
+    private static void showToast(final String message, final int duration) {
         if (Looper.myLooper() != null && Looper.myLooper() == Looper.getMainLooper()) {
-            Toast.makeText(context,message,duration).show();
+            Toast.makeText(mContext, message, duration).show();
         } else {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    showToast(context, message, duration);
+                    showToast(message, duration);
                 }
             });
         }
     }
 
-    private static void showToast(Context context, int resId, int duration) {
-        showToast(context, context.getString(resId), duration);
+    private static void showToast(int resId, int duration) {
+        showToast(mContext.getString(resId), duration);
     }
 
-    public static void showToast(Context context, String msg) {
-        showToast(context, msg, Toast.LENGTH_LONG);
+    public static void showToast(String msg) {
+        showToast(msg, Toast.LENGTH_LONG);
     }
 
-    public static void showToast(Context context, int resId) {
-        showToast(context, resId, Toast.LENGTH_LONG);
+    public static void showToast(int resId) {
+        showToast(resId, Toast.LENGTH_LONG);
     }
 }
