@@ -33,8 +33,6 @@ public class FMFragment extends KBaseFragment<FMDelegate> {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        viewDelegate.setAdapter(new NfNewsFragAdapter(mActivity.getSupportFragmentManager()));
-        viewDelegate.setOnPageChangeListener(new NfOnPageChangeListener());
     }
 
 
@@ -43,42 +41,4 @@ public class FMFragment extends KBaseFragment<FMDelegate> {
         return FMDelegate.class;
     }
 
-    class NfOnPageChangeListener implements ViewPager.OnPageChangeListener {
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int offset) {
-
-        }
-
-        @Override
-        public void onPageSelected(int currentTab) {
-            viewDelegate.updateBarStatus(mActivity,currentTab);
-
-        }
-    }
-    class NfNewsFragAdapter extends FragmentStatePagerAdapter {
-
-        public NfNewsFragAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int arg0) {
-            return viewDelegate.getFrags().get(arg0);
-        }
-
-        @Override
-        public int getCount() {
-            return viewDelegate.getFrags().size();
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-
-        }
-    }
 }

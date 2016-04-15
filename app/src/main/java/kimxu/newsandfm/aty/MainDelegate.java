@@ -17,16 +17,13 @@ import kimxu.newsandfm.R;
  * 视图View
  * Created by xuzhiguo on 15/11/23.
  */
-public class               MainDelegate extends AppAtyDelegate {
-    public ViewPager viewPager;
-    public FrameLayout mFrameLayout;
-    public ImageView mCursor;
-    public TextView[] mNavs;
+public class MainDelegate extends AppAtyDelegate {
     public final static int NAVS_LENGTH = 2;
     public final static int TAB_ID_MUSIC = 0;
     public final static int TAB_ID_FM = 1;
 
     ImageView iVcenter;
+
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.create(inflater, container, savedInstanceState);
@@ -40,16 +37,9 @@ public class               MainDelegate extends AppAtyDelegate {
     @Override
     public void initWidget() {
         initBar();
-        viewPager = get(R.id.vPager_atyMain_content);
-        mCursor = get(R.id.iVew_appMainToolBar_cursor);
-        mFrameLayout = get(R.id.fLyout_appMainToolBar);
-        iVcenter = (ImageView) getToolbar().findViewById(R.id.iView_appMainToolBar_center);
     }
 
     private void initBar() {
-        mNavs = new TextView[NAVS_LENGTH];
-        mNavs[TAB_ID_MUSIC] = get(R.id.tView_appMainToolBar_Music);
-        mNavs[TAB_ID_FM] = get(R.id.tView_appMainToolBar_fm);
     }
 
 

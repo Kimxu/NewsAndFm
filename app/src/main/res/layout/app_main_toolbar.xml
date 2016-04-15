@@ -11,7 +11,7 @@
         android:id="@+id/iView_appMainToolBar_center"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/nf_account_default" />
+        />
 
     <FrameLayout
         android:id="@+id/fLyout_appMainToolBar"
@@ -32,7 +32,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/nav_1"
                 android:textColor="@color/nf_white"
                 android:textSize="20sp" />
 
@@ -42,7 +41,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/nav_2"
                 android:textColor="@color/nf_white"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -53,7 +51,6 @@
             android:layout_height="3dp"
             android:scaleType="matrix"
             android:layout_gravity="bottom"
-            android:background="@null"
-            android:src="@drawable/nf_cursor" />
+            android:background="@null" />
     </FrameLayout>
 </android.support.v7.widget.Toolbar>

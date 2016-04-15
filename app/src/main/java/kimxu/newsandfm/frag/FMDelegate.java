@@ -1,6 +1,5 @@
 package kimxu.newsandfm.frag;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import kimxu.mvp.view.AppFragDelegate;
 import kimxu.newsandfm.R;
-import kimxu.newsandfm.frag.fm.FMIndexFragment;
 
 /**
  *
@@ -40,8 +38,8 @@ public class FMDelegate extends AppFragDelegate {
     }
     private void initFrag() {
         mFrags = new ArrayList<>();
-        mFrags.add(FMIndexFragment.newInstance("",""));
-        mFrags.add(FMIndexFragment.newInstance("",""));
+//        mFrags.add(FMIndexFragment.newInstance("",""));
+//        mFrags.add(FMIndexFragment.newInstance("",""));
         initBar();
     }
 
@@ -64,15 +62,4 @@ public class FMDelegate extends AppFragDelegate {
         return mFrags;
     }
 
-    public void updateBarStatus(Activity activity, int index) {
-        for (int i = 0; i < mNavs.length; i++) {
-            if (i == index) {
-                mNavs[i].setTextColor(activity.getResources().getColor(R.color.nf_toolbar_selected));
-                mNavs[i].invalidate();
-            } else {
-                mNavs[i].setTextColor(activity.getResources().getColor(R.color.nf_toolbar_unselected));
-                mNavs[i].invalidate();
-            }
-        }
-    }
 }

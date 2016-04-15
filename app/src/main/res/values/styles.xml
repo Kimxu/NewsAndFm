@@ -10,7 +10,7 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:homeAsUpIndicator">@drawable/nf_back</item>
+        <!--<item name="android:homeAsUpIndicator">@drawable/nf_back</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar.Translucent" parent="AppTheme.NoActionBar">
@@ -35,7 +35,7 @@
         <item name="android:layout_margin">@dimen/view_margin</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/nf_black</item>
-        <item name="android:background">@drawable/nf_selector_text_blue_round</item>
+        <!--<item name="android:background">@drawable/nf_selector_text_blue_round</item>-->
     </style>
 
     <style name="Text.BigText" parent="Text">
@@ -55,20 +55,20 @@
 
     <style name="Button.Blue" parent="Button">
 
-        <item name="android:background">@drawable/nf_selector_button_blue</item>
+        <!--<item name="android:background">@drawable/nf_selector_button_blue</item>-->
         <item name="android:textColor">@color/selector_button</item>
     </style>
     <style name="Button.Red" parent="Button">
-        <item name="android:background">@drawable/nf_selector_button_red</item>
+        <!--<item name="android:background">@drawable/nf_selector_button_red</item>-->
         <item name="android:textColor">@color/selector_button</item>
     </style>
     <style name="Button.Blue.Round" parent="Button">
-        <item name="android:background">@drawable/nf_selector_button_blue_round</item>
+        <!--<item name="android:background">@drawable/nf_selector_button_blue_round</item>-->
         <item name="android:textColor">@color/selector_button</item>
     </style>
 
     <style name="Button.Blue.Round.Stroke" parent="Button">
-        <item name="android:background">@drawable/nf_selector_button_blue_round_stroke</item>
+        <!--<item name="android:background">@drawable/nf_selector_button_blue_round_stroke</item>-->
         <item name="android:textColor">@color/selector_button_blue_stroke</item>
     </style>
 

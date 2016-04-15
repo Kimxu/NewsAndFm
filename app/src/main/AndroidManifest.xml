@@ -33,60 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".aty.WebActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity
-            android:name=".aty.LocalMusicActivity"
-            android:label="本地音乐"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity
-            android:name=".aty.MusicPlayerActivity"
-            android:label="音乐播放"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-
-        <service
-            android:name=".service.PlayMusicService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <receiver
-            android:name=".broadcast.NotificationReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="play" /> <!-- 定制play广播 -->
-                <action android:name="next" /> <!-- ...... -->
-                <action android:name="pause" />
-                <action android:name="cancel" />
-            </intent-filter>
-        </receiver>
-
-        <activity
-            android:name=".aty.NetMusicActivity"
-            android:label="网络音乐"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity
-            android:name=".aty.LoginActivity"
-            android:label="网络音乐"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity
-            android:name=".aty.UserManagerActivity"
-            android:label="网络音乐"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity
-            android:name=".aty.RegisterActivity"
-            android:label="网络音乐"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity
-            android:name=".aty.SearchActivity"
-            android:label="网络音乐"
-            android:theme="@style/AppTheme.NoActionBar.Translucent" />
-        <activity android:name=".aty.ReactNativeActivity">
-
-
-        </activity>
     </application>
 
 </manifest>

@@ -32,7 +32,7 @@
         </list>
     -->
     <list>
-        <mapping class="kimxu.newsandfm.db.model.Album"/>
-        <mapping class="kimxu.newsandfm.db.model.Song"/>
+        <!--<mapping class="kimxu.newsandfm.db.model.Album"/>-->
+        <!--<mapping class="kimxu.newsandfm.db.model.Song"/>-->
     </list>
 </litepal>

@@ -54,8 +54,6 @@ public class LocalMusicFactory extends AssemblyItemFactory<LocalMusicFactory.Loc
 
        @Override
        protected void onSetData(int position, Audio audio) {
-           name.setText(TextUtils.isEmpty(audio.getAlbum())?"":audio.getTitle());
-           path.setText(TextUtils.isEmpty(audio.getPath())?"":audio.getPath());
        }
    }
 

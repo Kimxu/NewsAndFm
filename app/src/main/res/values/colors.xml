@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#32ACFC</color>
+    <color name="colorPrimaryDark">#23ACFC</color>
+    <color name="colorAccent">#13ACFC</color>
 
     <color name="nf_white">#fff</color>
     <color name="nf_black">#000</color>
     <color name="nf_gray">#CCCCCC</color>
-
-    <color name="nf_toolbar_selected">@color/nf_white</color>
-    <color name="nf_toolbar_unselected">@color/nf_gray</color>
-    <color name="nf_light_gray">#ebebeb</color>
-    <color name="nf_lrc_main">#Fc2381</color>
-
 
     <color name="nf_text_disable">#cccccc</color>
     <color name="nf_text_blue_normal">#0099ff</color>
