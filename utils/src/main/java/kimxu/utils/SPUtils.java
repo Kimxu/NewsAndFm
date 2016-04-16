@@ -32,6 +32,19 @@ public class SPUtils {
     public static long getCurrentSongId(long defValue) {
         return (long)get(MUSIC_ID, defValue);
     }
+    public static void savePlayMode(int mode) {
+        put(PLAY_MODE, mode);
+    }
+
+    public static boolean enableMobileNetworkDownload(boolean defValue) {
+        return (boolean)get(mContext.getString(R.string.setting_key_mobile_network_download), defValue);
+    }
+    public static boolean enableMobileNetworkPlay(boolean defValue) {
+        return (boolean)get(mContext.getString(R.string.setting_key_mobile_network_play), defValue);
+    }
+    public static void saveMobileNetworkPlay(boolean enable) {
+        put(mContext.getString(R.string.setting_key_mobile_network_play), enable);
+    }
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      *
@@ -135,6 +148,8 @@ public class SPUtils {
                 Context.MODE_PRIVATE);
         return sp.getAll();
     }
+
+
 
     /**
      * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类

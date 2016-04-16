@@ -31,7 +31,7 @@ public class KBaseApplication extends LitePalApplication {
         SPUtils.init(mApplication);
         Ts.init(mApplication);
         L.isDebug = BuildConfig.LOG_DEBUG;
-        CrashHandler.getInstance().init();
+        //CrashHandler.getInstance().init();
         Bmob.initialize(mApplication, "5d5332afc7a109703f3fbf77ae0c729b");
 
 
@@ -46,5 +46,9 @@ public class KBaseApplication extends LitePalApplication {
         boolean isDebugMode = (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         L.e(isDebugMode + "");
         return isDebugMode;
+    }
+
+    public LongSparseArray<String> getDownloadList() {
+        return mDownloadList;
     }
 }

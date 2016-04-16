@@ -1,5 +1,6 @@
 package kimxu.mvp.view;
 
+import android.content.Context;
 import android.support.v7.widget.Toolbar;
 
 /**
@@ -8,7 +9,10 @@ import android.support.v7.widget.Toolbar;
  */
 public abstract class AppFragDelegate extends AppAtyDelegate {
 
+    @Override
+    public void setContext(Context context) {
 
+    }
     @Override
     public Toolbar getToolbar() {
         return null;

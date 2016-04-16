@@ -15,11 +15,7 @@ import me.kimxu.R;
  * Created by xuzhiguo on 15/11/23.
  */
 public class MainDelegate extends AppAtyDelegate {
-    public final static int NAVS_LENGTH = 2;
-    public final static int TAB_ID_MUSIC = 0;
-    public final static int TAB_ID_FM = 1;
 
-    ImageView iVcenter;
 
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

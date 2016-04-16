@@ -56,6 +56,7 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment {
             savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         viewDelegate.create(inflater, container, savedInstanceState);
+        viewDelegate.setContext(FragmentPresenter.this.getActivity());
         return viewDelegate.getRootView();
     }
 

@@ -1,5 +1,6 @@
 package kimxu.mvp.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -51,7 +52,10 @@ public abstract class AppAtyDelegate implements IDelegate{
     public void initWidget() {
 
     }
+    @Override
+    public void setContext(Context context) {
 
+    }
     /** 绑定View上的view Id*/
     public <T extends View> T bindView(int id) {
         T view = (T) mViews.get(id);

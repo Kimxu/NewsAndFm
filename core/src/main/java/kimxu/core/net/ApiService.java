@@ -1,10 +1,20 @@
 package kimxu.core.net;
 
+import java.util.Map;
+
+import kimxu.core.bean.JDownloadInfo;
+import kimxu.core.bean.JOnlineMusicList;
 import kimxu.core.bean.JSplash;
-import retrofit2.GsonConverterFactory;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 import rx.Observable;
 
 public class ApiService {
@@ -38,6 +48,26 @@ public class ApiService {
          */
         @GET("http://news-at.zhihu.com/api/4/start-image/720*1184")
         Observable<JSplash> updateSplashAd();
+
+        @GET("ting?method=baidu.ting.billboard.billList")
+        Observable<JOnlineMusicList> getSongList(@QueryMap Map<String, String> map);
+
+        /**
+         * 获取歌曲播放链接
+         * @param songid 歌曲id
+         * @return
+         */
+        @GET("ting?method=baidu.ting.song.play")
+        Observable<JDownloadInfo> getSongDownloadInfo(@Query("songid")String songid);
+
+        /**
+         * 获取歌曲的lrc
+         * @param url 连接地址
+         * @return
+         */
+        @Streaming
+        @GET
+        Observable<Response<ResponseBody>> getSongLrc(@Url String url);
     }
 
 

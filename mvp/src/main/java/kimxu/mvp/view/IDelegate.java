@@ -1,5 +1,6 @@
 package kimxu.mvp.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -24,4 +25,6 @@ public interface IDelegate {
     void initWidget();
     /** 设置toolbar*/
     void setSupportActionBar(ActionBar actionBar);
+    /** 设置Context*/
+    void setContext(Context context);
 }

@@ -3,6 +3,7 @@ package me.kimxu;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -17,11 +18,13 @@ public abstract class KBaseActivity<T extends IDelegate> extends DataBindActivit
     protected KBaseActivity mActivity;
     protected KBaseApplication mApplication;
     protected ApiService mApiService;
+    protected Handler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mActivity = this;
         mApiService=ApiService.getInstance();
         mApplication= (KBaseApplication) getApplication();
+        mHandler = new Handler();
         setStatusBar();
         super.onCreate(savedInstanceState);
 

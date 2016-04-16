@@ -33,6 +33,7 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
+        viewDelegate.setContext(ActivityPresenter.this);
         setContentView(viewDelegate.getRootView());
         viewDelegate.initWidget();
         initToolbar();

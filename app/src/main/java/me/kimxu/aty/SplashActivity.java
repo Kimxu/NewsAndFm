@@ -4,16 +4,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
 
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 
 import kimxu.core.net.ApiService;
 import kimxu.utils.Constants;
@@ -51,7 +47,7 @@ public class SplashActivity extends KBaseActivity<SplashDelegate> {
 
     private void parseIntent() {
         if (SystemUtils.isStackResumed(this)) {
-            //startMusicActivity();
+            startMusicActivity();
             finish();
             return;
         }
@@ -109,13 +105,19 @@ public class SplashActivity extends KBaseActivity<SplashDelegate> {
         public void onServiceConnected(ComponentName name, IBinder service) {
             PlayService playService = ((PlayService.PlayBinder) service).getService();
             playService.updateMusicList();
-            //startMusicActivity();
+            startMusicActivity();
             finish();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+
         }
     }
-
+    private void startMusicActivity() {
+        Intent intent = new Intent();
+        intent.setClass(this, MusicActivity.class);
+        intent.putExtras(getIntent());
+        startActivity(intent);
+    }
 }

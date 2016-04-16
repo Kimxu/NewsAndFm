@@ -7,9 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
 import java.util.List;
 
+import kimxu.utils.L;
 import me.kimxu.KBaseActivity;
 import me.kimxu.R;
 import me.kimxu.aty.SplashActivity;

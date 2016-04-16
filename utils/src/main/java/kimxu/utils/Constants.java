@@ -12,4 +12,5 @@ public class Constants {
     public static final String SP_SPLASH_AD = "sp_splash_ad";
 
 
+    public static final int MUSIC_LIST_SIZE = 20;
 }

@@ -7,7 +7,17 @@
     <color name="nf_white">#fff</color>
     <color name="nf_black">#000</color>
     <color name="nf_grey">#9E9E9E</color>
+    <color name="nf_grey_300">#E0E0E0</color>
+    <color name="nf_grey_400">#BDBDBD</color>
+    <color name="nf_grey_600">#757575</color>
     <color name="nf_text_disable">#cccccc</color>
     <color name="nf_text_blue_normal">#0099ff</color>
     <color name="nf_text_blue_pressed">#0178c7</color>
+    <color name="translucent_white">#80FFFFFF</color>
+    <color name="translucent_black">#80000000</color>
+    <color name="translucent_white_8p">#14FFFFFF</color>
+    <color name="translucent_white_16p">#29FFFFFF</color>
+    <color name="translucent_white_24p">#3DFFFFFF</color>
+    <color name="translucent_white_96p">#F5FFFFFF</color>
+    <color name="translucent_grey_300_96p">#F5E0E0E0</color>
 </resources>
